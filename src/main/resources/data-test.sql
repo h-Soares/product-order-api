@@ -1,0 +1,1 @@
+INSERT INTO tb_user VALUES (random_uuid(), 'test@gmail.com', 'Test', 'testpass123', '54982134')
