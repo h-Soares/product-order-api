@@ -17,11 +17,11 @@ public class UserService {
     }
 
     public List<UserDTO> findAll() {
-        return userRepository.findAll().stream().map(UserDTO::new).toList(); //page here...
+        return userRepository.findAll().stream().map(UserDTO::new).toList(); /* TODO: page */
     }
 
     public UserDTO findByUUID(String uuid) {
         Optional<User> optionalUser = userRepository.findById(UUID.fromString(uuid));
-        return new UserDTO(optionalUser.get()); //handle exception here...
+        return new UserDTO(optionalUser.get()); /* TODO: handle exception */
     }
 }

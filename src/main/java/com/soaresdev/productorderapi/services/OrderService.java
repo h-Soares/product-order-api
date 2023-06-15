@@ -17,11 +17,11 @@ public class OrderService {
     }
 
     public List<OrderDTO> findAll() {
-        return orderRepository.findAll().stream().map(OrderDTO::new).toList(); //page here...
+        return orderRepository.findAll().stream().map(OrderDTO::new).toList(); /* TODO: page */
     }
 
     public OrderDTO findByUUID(String uuid) {
         Optional<Order> optionalOrder = orderRepository.findById(UUID.fromString(uuid));
-        return new OrderDTO(optionalOrder.get()); //handle exception here...
+        return new OrderDTO(optionalOrder.get()); /* TODO: handle exception */
     }
 }
