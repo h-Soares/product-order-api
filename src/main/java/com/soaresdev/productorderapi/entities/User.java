@@ -1,13 +1,17 @@
 package com.soaresdev.productorderapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,6 +30,10 @@ public class User implements Serializable {
     private String phone;
     @Column(nullable = false)
     private String password;
+
+    @JsonIgnore //later, try to use to find a user's orders
+    @OneToMany(mappedBy = "client")
+    private final List<Order> orders = new ArrayList<>();
 
     public User() {
     }
@@ -75,5 +83,9 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }

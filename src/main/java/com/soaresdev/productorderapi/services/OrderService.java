@@ -1,0 +1,27 @@
+package com.soaresdev.productorderapi.services;
+
+import com.soaresdev.productorderapi.dtos.OrderDTO;
+import com.soaresdev.productorderapi.entities.Order;
+import com.soaresdev.productorderapi.repositories.OrderRepository;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+@Service
+public class OrderService {
+    private final OrderRepository orderRepository;
+
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
+    public List<OrderDTO> findAll() {
+        return orderRepository.findAll().stream().map(OrderDTO::new).toList(); //page here...
+    }
+
+    public OrderDTO findByUUID(String uuid) {
+        Optional<Order> optionalOrder = orderRepository.findById(UUID.fromString(uuid));
+        return new OrderDTO(optionalOrder.get()); //handle exception here...
+    }
+}
