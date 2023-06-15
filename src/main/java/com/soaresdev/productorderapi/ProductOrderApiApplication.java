@@ -2,6 +2,7 @@ package com.soaresdev.productorderapi;
 
 import com.soaresdev.productorderapi.entities.Order;
 import com.soaresdev.productorderapi.entities.User;
+import com.soaresdev.productorderapi.entities.enums.OrderStatus;
 import com.soaresdev.productorderapi.repositories.OrderRepository;
 import com.soaresdev.productorderapi.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -30,7 +31,7 @@ public class ProductOrderApiApplication implements CommandLineRunner {
     @Override //to test
     public void run(String... args) throws Exception {
         User user = new User("Test", "testing@gmail.com", "teste123phone", "test123");
-        Order order = new Order(Instant.now(), user);
+        Order order = new Order(Instant.now(), OrderStatus.SHIPPED, user);
         userRepository.save(user);
         orderRepository.save(order);
     }

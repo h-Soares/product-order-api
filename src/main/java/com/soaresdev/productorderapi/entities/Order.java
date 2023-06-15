@@ -1,5 +1,6 @@
 package com.soaresdev.productorderapi.entities;
 
+import com.soaresdev.productorderapi.entities.enums.OrderStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,6 +26,8 @@ public class Order implements Serializable {
     private UUID id;
     @Column(nullable = false)
     private Instant moment;
+    @Column(nullable = false)
+    private Integer orderStatus;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", nullable = false)
@@ -33,8 +36,9 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(Instant moment, User client) {
+    public Order(Instant moment, OrderStatus orderStatus, User client) {
         this.moment = moment;
+        this.orderStatus = orderStatus.getCode();
         this.client = client;
     }
 
@@ -52,6 +56,14 @@ public class Order implements Serializable {
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public Integer getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus.getCode();
     }
 
     public User getClient() {
