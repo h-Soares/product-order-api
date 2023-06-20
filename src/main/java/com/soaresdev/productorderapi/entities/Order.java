@@ -1,22 +1,16 @@
 package com.soaresdev.productorderapi.entities;
 
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_order") //id and client can be primary key?...
+@Table(name = "tb_order")
 public class Order implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -29,9 +23,12 @@ public class Order implements Serializable {
     @Column(nullable = false)
     private Integer orderStatus;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
     private User client;
+
+    @OneToMany(mappedBy = "id.order", cascade = CascadeType.MERGE) //pega os order items associados a this.id
+    private final Set<OrderItem> items = new HashSet<>();
 
     public Order() {
     }
@@ -72,5 +69,9 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 }

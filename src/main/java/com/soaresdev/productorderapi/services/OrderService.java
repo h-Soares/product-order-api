@@ -24,4 +24,10 @@ public class OrderService {
         Optional<Order> optionalOrder = orderRepository.findById(UUID.fromString(uuid));
         return new OrderDTO(optionalOrder.get()); /* TODO: handle exception */
     }
+
+                           //VER AS ABAS ABERTAS!
+    /* TODO: PEGAR A LISTA DE ITENS E ADICIONAR UM ITEM (PRODUTO),
+             CRIAR SERVICE PARA OrderItem,
+             VERIFICAR SE JÁ EXISTE COM OrderItemRepository boolean existsByOrderAndProduct
+    */
 }

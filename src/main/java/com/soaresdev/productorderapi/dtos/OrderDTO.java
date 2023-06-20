@@ -5,7 +5,10 @@ import com.soaresdev.productorderapi.entities.enums.OrderStatus;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class OrderDTO implements Serializable {
     @Serial
@@ -16,6 +19,7 @@ public class OrderDTO implements Serializable {
     private OrderStatus orderStatus;
 
     private UserDTO client;
+    private Set<OrderItemDTO> items = new HashSet<>();
 
     public OrderDTO() {
     }
@@ -32,6 +36,7 @@ public class OrderDTO implements Serializable {
         this.moment = order.getMoment();
         this.orderStatus = OrderStatus.valueOf(order.getOrderStatus());
         this.client = new UserDTO(order.getClient());
+        this.items = order.getItems().stream().map(OrderItemDTO::new).collect(Collectors.toSet());
     }
 
     public UUID getId() {
@@ -64,5 +69,9 @@ public class OrderDTO implements Serializable {
 
     public void setClient(UserDTO client) {
         this.client = client;
+    }
+
+    public Set<OrderItemDTO> getItems() {
+        return items;
     }
 }
