@@ -19,6 +19,13 @@ public class OrderItemDTO implements Serializable {
     public OrderItemDTO() {
     }
 
+    public OrderItemDTO(Integer quantity, BigDecimal productPriceRecord, BigDecimal subTotal, ProductDTO productDTO) {
+        this.quantity = quantity;
+        this.productPriceRecord = productPriceRecord;
+        this.subTotal = subTotal;
+        this.productDTO = productDTO;
+    }
+
     public OrderItemDTO(OrderItem orderItem) {
         this.quantity = orderItem.getQuantity();
         this.productPriceRecord = orderItem.getProductPriceRecord();

@@ -75,17 +75,27 @@ public class ProductOrderApiApplication implements CommandLineRunner {
         p5.getCategories().add(cat2);
         productRepository.saveAll(List.of(p0,p1,p2,p3,p4,p5));
 
-        OrderItem oi1 = new OrderItem(o1, p1, 2);
-        OrderItem oi2 = new OrderItem(o1, p3, 1);
-        OrderItem oi3 = new OrderItem(o2, p3, 2);
-        OrderItem oi4 = new OrderItem(o3, p5, 2);
-        OrderItem oi5 = new OrderItem(o4, p4, 1);
-        orderItemRepository.saveAll(List.of(oi1, oi2, oi3, oi4, oi5));
 
         p1.setPrice(BigDecimal.TEN);
         productRepository.save(p1);
 
         o0.getItems().add(new OrderItem(o0, p1, 5));
+        o0.getItems().add(new OrderItem(o0, p3, 14));
         orderRepository.save(o0);
+
+        OrderItem oi1 = new OrderItem(o3,p4, 6);
+        OrderItem oi2 = new OrderItem(o3,p5, 1);
+        o3.getItems().add(oi1);
+        o3.getItems().add(oi2);
+        orderRepository.save(o3);
+
+        //userRepository.delete(u1);
+
+//        o3.getItems().remove(oi1);
+//        orderItemRepository.delete(oi1);
+//        orderItemRepository.deleteByOrderAndProduct(o3,p4);
+
+        //userRepository.delete(u1);
+        //productRepository.delete(p4);
     }
 }

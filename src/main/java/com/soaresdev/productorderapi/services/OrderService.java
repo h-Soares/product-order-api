@@ -25,9 +25,9 @@ public class OrderService {
         return new OrderDTO(optionalOrder.get()); /* TODO: handle exception */
     }
 
-                           //VER AS ABAS ABERTAS!
+                           //REVISADO ! AGORA SÓ CONTINUAR O CURSO...
     /* TODO: PEGAR A LISTA DE ITENS E ADICIONAR UM ITEM (PRODUTO),
-             CRIAR SERVICE PARA OrderItem,
+             CRIAR SERVICE PARA OrderItem (??), USAR OrderItemRepository
              VERIFICAR SE JÁ EXISTE COM OrderItemRepository boolean existsByOrderAndProduct
     */
 }

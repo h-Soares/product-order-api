@@ -1,6 +1,8 @@
 package com.soaresdev.productorderapi.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,8 +27,8 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    //VER SOBRE O cascade = CascadeType.REMOVE
-    @OneToMany(mappedBy = "client") //later, try to use to find a user's orders
+    @OneToMany(mappedBy = "client")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private final List<Order> orders = new ArrayList<>();
 
     public User() {

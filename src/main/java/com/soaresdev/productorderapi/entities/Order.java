@@ -2,10 +2,13 @@ package com.soaresdev.productorderapi.entities;
 
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,11 +26,12 @@ public class Order implements Serializable {
     @Column(nullable = false)
     private Integer orderStatus;
 
-    @ManyToOne()
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User client;
 
     @OneToMany(mappedBy = "id.order", cascade = CascadeType.MERGE) //pega os order items associados a this.id
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private final Set<OrderItem> items = new HashSet<>();
 
     public Order() {
@@ -73,5 +77,18 @@ public class Order implements Serializable {
 
     public Set<OrderItem> getItems() {
         return items;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
