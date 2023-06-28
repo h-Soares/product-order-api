@@ -89,6 +89,20 @@ public class ProductOrderApiApplication implements CommandLineRunner {
         o3.getItems().add(oi2);
         orderRepository.save(o3);
 
+        Order orderTest = new Order(Instant.now(), OrderStatus.PAID, u0);
+        Payment payment = new Payment(Instant.now(), orderTest);
+        orderTest.setPayment(payment);
+        orderRepository.save(orderTest);
+        System.out.println(orderTest.getId());
+        System.out.println(payment.getId());
+
+        Payment p = new Payment(Instant.now(), o3);
+        o3.setPayment(p);
+        orderRepository.save(o3);
+        System.out.println(o3.getId());
+        System.out.println(p.getId());
+        System.out.println(p.getId());
+
         //userRepository.delete(u1);
 
 //        o3.getItems().remove(oi1);
