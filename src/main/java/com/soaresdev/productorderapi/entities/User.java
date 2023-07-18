@@ -27,8 +27,8 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "client")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE)
+    //@OnDelete(action = OnDeleteAction.CASCADE)
     private final List<Order> orders = new ArrayList<>();
 
     public User() {

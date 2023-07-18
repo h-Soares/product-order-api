@@ -1,6 +1,9 @@
 package com.soaresdev.productorderapi.entities;
 
+import com.soaresdev.productorderapi.entities.enums.PaymentType;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
@@ -14,21 +17,27 @@ public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    //@GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false)
     private Instant moment;
+    @Column(nullable = false)
+    private Integer paymentType; //Maybe remove to make it more automatic
 
     @OneToOne
     @MapsId
+    //@OnDelete(action = OnDeleteAction.CASCADE)
+    //@JoinColumn(name = "order_id")
     private Order order;
 
     public Payment() {
     }
 
-    public Payment(Instant moment, Order order) {
+    public Payment(Instant moment, PaymentType paymentType, Order order) {
         this.moment = moment;
+        this.paymentType = paymentType.getCode();
         this.order = order;
-        this.id = order.getId();
+        this.id = order.getId(); //To have the same id as its associated order.
     }
 
     public UUID getId() {
@@ -45,6 +54,14 @@ public class Payment implements Serializable {
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public Integer getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(PaymentType paymentType) {
+        this.paymentType = paymentType.getCode();
     }
 
     public Order getOrder() {

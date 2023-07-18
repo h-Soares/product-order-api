@@ -31,11 +31,12 @@ public class Order implements Serializable {
     @JoinColumn(name = "user_id")
     private User client;
 
-    @OneToMany(mappedBy = "id.order", cascade = CascadeType.MERGE) //pega os order items associados a this.id
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "id.order", cascade = CascadeType.ALL) //pega os order items associados a this.id
+    //@OnDelete(action = OnDeleteAction.CASCADE)
     private final Set<OrderItem> items = new HashSet<>();
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    //@OnDelete(action = OnDeleteAction.CASCADE)
     private Payment payment;
 
     public Order() {

@@ -2,6 +2,7 @@ package com.soaresdev.productorderapi;
 
 import com.soaresdev.productorderapi.entities.*;
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
+import com.soaresdev.productorderapi.entities.enums.PaymentType;
 import com.soaresdev.productorderapi.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -52,7 +53,7 @@ public class ProductOrderApiApplication implements CommandLineRunner {
         Order o0 = new Order(Instant.now(), OrderStatus.SHIPPED, u0);
         Order o1 = new Order(Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.CANCELED,u1);
         Order o2 = new Order(Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.DELIVERED,u2);
-        Order o3 = new Order(Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT,u1);
+        Order o3 = new Order(Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.PAID,u1);
         Order o4 = new Order(Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.DELIVERED,u1);
         orderRepository.saveAll(List.of(o0, o1, o2, o3,o4));
 
@@ -90,13 +91,13 @@ public class ProductOrderApiApplication implements CommandLineRunner {
         orderRepository.save(o3);
 
         Order orderTest = new Order(Instant.now(), OrderStatus.PAID, u0);
-        Payment payment = new Payment(Instant.now(), orderTest);
+        Payment payment = new Payment(Instant.now(), PaymentType.CREDIT_CARD, orderTest);
         orderTest.setPayment(payment);
         orderRepository.save(orderTest);
         System.out.println(orderTest.getId());
         System.out.println(payment.getId());
 
-        Payment p = new Payment(Instant.now(), o3);
+        Payment p = new Payment(Instant.now(), PaymentType.PIX, o3);
         o3.setPayment(p);
         orderRepository.save(o3);
         System.out.println(o3.getId());

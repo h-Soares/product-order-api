@@ -20,6 +20,6 @@ public enum OrderStatus {
             if(code.equals(orderStatus.getCode()))
                 return orderStatus;
         }
-        return null; /* TODO: throw exception */
+        throw new IllegalArgumentException("Invalid order status code");
     }
 }

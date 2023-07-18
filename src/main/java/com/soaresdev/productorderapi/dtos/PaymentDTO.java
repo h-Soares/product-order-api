@@ -1,6 +1,7 @@
 package com.soaresdev.productorderapi.dtos;
 
 import com.soaresdev.productorderapi.entities.Payment;
+import com.soaresdev.productorderapi.entities.enums.PaymentType;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
@@ -12,18 +13,21 @@ public class PaymentDTO implements Serializable {
 
     private UUID id;
     private Instant moment;
+    private PaymentType paymentType;
 
     public PaymentDTO() {
     }
 
-    public PaymentDTO(UUID id, Instant moment) {
+    public PaymentDTO(UUID id, Instant moment, PaymentType paymentType) {
         this.id = id;
         this.moment = moment;
+        this.paymentType = paymentType;
     }
 
     public PaymentDTO(Payment payment) {
         this.id = payment.getId();
         this.moment = payment.getMoment();
+        this.paymentType = PaymentType.valueOf(payment.getPaymentType());
     }
 
     public UUID getId() {
@@ -40,5 +44,13 @@ public class PaymentDTO implements Serializable {
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public PaymentType getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(PaymentType paymentType) {
+        this.paymentType = paymentType;
     }
 }
