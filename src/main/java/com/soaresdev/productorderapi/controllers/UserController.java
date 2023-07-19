@@ -3,7 +3,6 @@ package com.soaresdev.productorderapi.controllers;
 import com.soaresdev.productorderapi.dtos.UserDTO;
 import com.soaresdev.productorderapi.dtos.UserInsertDTO;
 import com.soaresdev.productorderapi.services.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -33,7 +32,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO userInsertDTO) {
         UserDTO userDTO = userService.insert(userInsertDTO);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
                   .buildAndExpand(userDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(userDTO);
     }

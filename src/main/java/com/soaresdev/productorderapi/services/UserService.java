@@ -54,6 +54,7 @@ public class UserService {
             throw new EntityExistsException("Email already exists");
 
         modelMapper.map(userInsertDTO, user);
+        user = userRepository.save(user);
         return new UserDTO(user);
     }
 

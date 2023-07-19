@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
@@ -23,6 +24,8 @@ public class Payment implements Serializable {
     private Instant moment;
     @Column(nullable = false)
     private Integer paymentType; //Maybe remove to make it more automatic
+    @Column(nullable = false)
+    private BigDecimal amount; //There may be a discount.
 
     @OneToOne
     @MapsId
@@ -36,6 +39,7 @@ public class Payment implements Serializable {
     public Payment(Instant moment, PaymentType paymentType, Order order) {
         this.moment = moment;
         this.paymentType = paymentType.getCode();
+        this.amount = order.getTotal();
         this.order = order;
         this.id = order.getId(); //To have the same id as its associated order.
     }
@@ -62,6 +66,14 @@ public class Payment implements Serializable {
 
     public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType.getCode();
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public Order getOrder() {

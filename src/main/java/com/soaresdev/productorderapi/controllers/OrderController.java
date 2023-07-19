@@ -1,12 +1,14 @@
 package com.soaresdev.productorderapi.controllers;
 
 import com.soaresdev.productorderapi.dtos.OrderDTO;
+import com.soaresdev.productorderapi.dtos.OrderInsertDTO;
+import com.soaresdev.productorderapi.dtos.UserDTO;
 import com.soaresdev.productorderapi.services.OrderService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -26,5 +28,24 @@ public class OrderController {
     @GetMapping("/{uuid}")
     public ResponseEntity<OrderDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(orderService.findByUUID(uuid));
+    }
+
+    @PostMapping
+    public ResponseEntity<OrderDTO> insert(@RequestBody OrderInsertDTO orderInsertDTO) {
+        OrderDTO orderDTO = orderService.insert(orderInsertDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
+                .buildAndExpand(orderDTO.getId()).toUri();
+        return ResponseEntity.created(uri).body(orderDTO);
+    }
+
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> deleteByUUID(@PathVariable String uuid) {
+        orderService.deleteByUUID(uuid);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{uuid}")
+    public ResponseEntity<OrderDTO> updateByUUID(@PathVariable String uuid, @RequestBody OrderInsertDTO orderInsertDTO) {
+        return ResponseEntity.ok().body(orderService.updateByUUID(uuid, orderInsertDTO));
     }
 }
