@@ -1,6 +1,6 @@
 package com.soaresdev.productorderapi.configs;
 
-import com.soaresdev.productorderapi.dtos.OrderInsertDTO;
+import com.soaresdev.productorderapi.dtos.insertDTOs.OrderInsertDTO;
 import com.soaresdev.productorderapi.entities.Order;
 import com.soaresdev.productorderapi.repositories.UserRepository;
 import org.modelmapper.AbstractConverter;

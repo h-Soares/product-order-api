@@ -1,4 +1,4 @@
-package com.soaresdev.productorderapi.dtos;
+package com.soaresdev.productorderapi.dtos.insertDTOs;
 
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
 import java.io.Serial;

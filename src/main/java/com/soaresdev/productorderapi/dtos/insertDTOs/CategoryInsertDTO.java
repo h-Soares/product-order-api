@@ -1,4 +1,4 @@
-package com.soaresdev.productorderapi.dtos;
+package com.soaresdev.productorderapi.dtos.insertDTOs;
 
 import java.io.Serial;
 import java.io.Serializable;

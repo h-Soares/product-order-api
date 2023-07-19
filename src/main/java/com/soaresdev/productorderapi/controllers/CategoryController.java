@@ -1,12 +1,11 @@
 package com.soaresdev.productorderapi.controllers;
 
 import com.soaresdev.productorderapi.dtos.CategoryDTO;
-import com.soaresdev.productorderapi.dtos.CategoryInsertDTO;
+import com.soaresdev.productorderapi.dtos.insertDTOs.CategoryInsertDTO;
 import com.soaresdev.productorderapi.services.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class CategoryController {
         return ResponseEntity.created(uri).body(categoryDTO);
     }
 
-    @DeleteMapping("/{uuid}") //TODO: fix JdbcSQLIntegrityConstraintViolationException
+    @DeleteMapping("/{uuid}") //TODO: fix JdbcSQLIntegrityConstraintViolationException  .. with SQL?
     public ResponseEntity<Void> deleteByUUID(@PathVariable String uuid) {
         categoryService.deleteByUUID(uuid);
         return ResponseEntity.noContent().build();

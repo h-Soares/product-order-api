@@ -1,8 +1,7 @@
 package com.soaresdev.productorderapi.controllers;
 
 import com.soaresdev.productorderapi.dtos.OrderDTO;
-import com.soaresdev.productorderapi.dtos.OrderInsertDTO;
-import com.soaresdev.productorderapi.dtos.UserDTO;
+import com.soaresdev.productorderapi.dtos.insertDTOs.OrderInsertDTO;
 import com.soaresdev.productorderapi.services.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

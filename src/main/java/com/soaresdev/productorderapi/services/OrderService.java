@@ -1,7 +1,7 @@
 package com.soaresdev.productorderapi.services;
 
 import com.soaresdev.productorderapi.dtos.OrderDTO;
-import com.soaresdev.productorderapi.dtos.OrderInsertDTO;
+import com.soaresdev.productorderapi.dtos.insertDTOs.OrderInsertDTO;
 import com.soaresdev.productorderapi.entities.Order;
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
 import com.soaresdev.productorderapi.repositories.OrderRepository;

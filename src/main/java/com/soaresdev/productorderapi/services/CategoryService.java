@@ -1,7 +1,7 @@
 package com.soaresdev.productorderapi.services;
 
 import com.soaresdev.productorderapi.dtos.CategoryDTO;
-import com.soaresdev.productorderapi.dtos.CategoryInsertDTO;
+import com.soaresdev.productorderapi.dtos.insertDTOs.CategoryInsertDTO;
 import com.soaresdev.productorderapi.entities.Category;
 import com.soaresdev.productorderapi.repositories.CategoryRepository;
 import jakarta.persistence.EntityExistsException;
