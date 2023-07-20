@@ -1,5 +1,6 @@
 package com.soaresdev.productorderapi.dtos;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.soaresdev.productorderapi.entities.Payment;
 import com.soaresdev.productorderapi.entities.enums.PaymentType;
 import java.io.Serial;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
+@JsonPropertyOrder({"id", "order_id", "moment", "paymentType", "amount"})
 public class PaymentDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -17,11 +19,12 @@ public class PaymentDTO implements Serializable {
     private PaymentType paymentType;
     private BigDecimal amount;
 
+    private UUID order_id; //order_id is payment_id, if @MapsId
+
     public PaymentDTO() {
     }
 
-    public PaymentDTO(UUID id, Instant moment, PaymentType paymentType, BigDecimal amount) {
-        this.id = id;
+    public PaymentDTO(Instant moment, PaymentType paymentType, BigDecimal amount) {
         this.moment = moment;
         this.paymentType = paymentType;
         this.amount = amount;
@@ -32,14 +35,7 @@ public class PaymentDTO implements Serializable {
         this.moment = payment.getMoment();
         this.paymentType = PaymentType.valueOf(payment.getPaymentType());
         this.amount = payment.getAmount();
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+        this.order_id = payment.getOrder().getId();
     }
 
     public Instant getMoment() {
@@ -65,4 +61,21 @@ public class PaymentDTO implements Serializable {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(UUID order_id) {
+        this.order_id = order_id;
+    }
+
 }

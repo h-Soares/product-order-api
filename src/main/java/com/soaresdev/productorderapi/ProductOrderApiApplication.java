@@ -29,14 +29,18 @@ public class ProductOrderApiApplication implements CommandLineRunner {
     final
     OrderItemRepository orderItemRepository;
 
+    final
+    PaymentRepository paymentRepository;
+
     public ProductOrderApiApplication(UserRepository userRepository, OrderRepository orderRepository,
                                       CategoryRepository categoryRepository, ProductRepository productRepository,
-                                      OrderItemRepository orderItemRepository) {
+                                      OrderItemRepository orderItemRepository, PaymentRepository paymentRepository) {
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
         this.orderItemRepository = orderItemRepository;
+        this.paymentRepository = paymentRepository;
     }
 
     public static void main(String[] args) {

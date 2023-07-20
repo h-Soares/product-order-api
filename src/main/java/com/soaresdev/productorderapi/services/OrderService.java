@@ -37,6 +37,8 @@ public class OrderService {
     public OrderDTO insert(OrderInsertDTO orderInsertDTO) {
         if (!userRepository.existsById(UUID.fromString(orderInsertDTO.getClient_id())))
             throw new EntityNotFoundException("Client not found");
+        if(orderInsertDTO.getOrderStatus() == OrderStatus.PAID)
+            throw new IllegalArgumentException("Not paid yet");
 
         Order order = modelMapper.map(orderInsertDTO, Order.class);
         order = orderRepository.save(order);
@@ -56,6 +58,7 @@ public class OrderService {
         return new OrderDTO(order);
     }
 
+    //TODO: try to make it with modelMapper
     private void updateOrder(Order order, OrderInsertDTO orderInsertDTO) {
         if (!userRepository.existsById(UUID.fromString(orderInsertDTO.getClient_id())))
             throw new EntityNotFoundException("Client not found");

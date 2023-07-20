@@ -18,17 +18,17 @@ public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(nullable = false)
     private Instant moment;
     @Column(nullable = false)
-    private Integer paymentType; //Maybe remove to make it more automatic
+    private Integer paymentType;
     @Column(nullable = false)
     private BigDecimal amount; //There may be a discount.
 
     @OneToOne
-    @MapsId
+    //@MapsId
     //@OnDelete(action = OnDeleteAction.CASCADE)
     //@JoinColumn(name = "order_id")
     private Order order;
@@ -41,7 +41,7 @@ public class Payment implements Serializable {
         this.paymentType = paymentType.getCode();
         this.amount = order.getTotal();
         this.order = order;
-        this.id = order.getId(); //To have the same id as its associated order.
+        //this.id = order.getId(); //To have the same id as its associated order.
     }
 
     public UUID getId() {

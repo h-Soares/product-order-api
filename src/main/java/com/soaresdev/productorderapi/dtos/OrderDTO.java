@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@JsonPropertyOrder({"id","moment", "orderStatus", "total", "payment", "client", "items"})
+@JsonPropertyOrder({"id","moment", "orderStatus", "total", "client", "payment", "items"})
 public class OrderDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -48,7 +48,7 @@ public class OrderDTO implements Serializable {
         this.client = new UserDTO(order.getClient());
         this.items = order.getItems().stream().map(OrderItemDTO::new).collect(Collectors.toSet());
         this.total = order.getTotal();
-        if(order.getPayment() != null) //quando inserir ou editar um Order, verificar se PAID, e instanciar payment.
+        if(order.getPayment() != null)
             this.paymentDTO = new PaymentDTO(order.getPayment());
     }
 
