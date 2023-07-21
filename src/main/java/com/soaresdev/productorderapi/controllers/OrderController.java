@@ -2,6 +2,8 @@ package com.soaresdev.productorderapi.controllers;
 
 import com.soaresdev.productorderapi.dtos.OrderDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.OrderInsertDTO;
+import com.soaresdev.productorderapi.dtos.insertDTOs.OrderItemDeleteDTO;
+import com.soaresdev.productorderapi.dtos.insertDTOs.OrderItemInsertDTO;
 import com.soaresdev.productorderapi.services.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,5 +48,20 @@ public class OrderController {
     @PutMapping("/{uuid}")
     public ResponseEntity<OrderDTO> updateByUUID(@PathVariable String uuid, @RequestBody OrderInsertDTO orderInsertDTO) {
         return ResponseEntity.ok().body(orderService.updateByUUID(uuid, orderInsertDTO));
+    }
+
+    @PostMapping("/{order_uuid}/items")
+    public ResponseEntity<OrderDTO> addItemByUUID(@PathVariable String order_uuid, @RequestBody OrderItemInsertDTO orderItemInsertDTO) {
+        return ResponseEntity.ok(orderService.addItem(order_uuid, orderItemInsertDTO));
+    }
+
+    @DeleteMapping("/{order_uuid}/items")
+    public ResponseEntity<OrderDTO> deleteItemByUUID(@PathVariable String order_uuid, @RequestBody OrderItemDeleteDTO orderItemDeleteDTO) {
+        return ResponseEntity.ok(orderService.deleteItem(order_uuid, orderItemDeleteDTO));
+    }
+
+    @PutMapping("/{order_uuid}/items")
+    public ResponseEntity<OrderDTO> updateItemByUUID(@PathVariable String order_uuid, @RequestBody OrderItemInsertDTO orderItemInsertDTO) {
+        return ResponseEntity.ok(orderService.updateItem(order_uuid, orderItemInsertDTO));
     }
 }

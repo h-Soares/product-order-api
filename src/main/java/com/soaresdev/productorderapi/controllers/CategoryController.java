@@ -36,7 +36,7 @@ public class CategoryController {
         return ResponseEntity.created(uri).body(categoryDTO);
     }
 
-    @DeleteMapping("/{uuid}") //TODO: fix JdbcSQLIntegrityConstraintViolationException  .. with SQL?
+    @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> deleteByUUID(@PathVariable String uuid) {
         categoryService.deleteByUUID(uuid);
         return ResponseEntity.noContent().build();
