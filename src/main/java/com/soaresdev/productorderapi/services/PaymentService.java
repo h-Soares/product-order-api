@@ -59,12 +59,12 @@ public class PaymentService {
     @Transactional
     public PaymentDTO updateByUUID(String uuid, PaymentInsertDTO paymentInsertDTO) {
         Payment payment = getPayment(uuid);
-        //modelMapper.map(paymentInsertDTO, payment); //maybe this doesn't work
         updatePayment(payment, paymentInsertDTO);
         payment = paymentRepository.save(payment);
         return new PaymentDTO(payment);
     }
 
+    //modelmapper?
     private void updatePayment(Payment payment, PaymentInsertDTO paymentInsertDTO) {
         if(!orderRepository.existsById(UUID.fromString(paymentInsertDTO.getOrder_id())))
             throw new EntityNotFoundException("Order not found");

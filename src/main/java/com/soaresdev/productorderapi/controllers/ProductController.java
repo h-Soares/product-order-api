@@ -4,10 +4,10 @@ import com.soaresdev.productorderapi.dtos.ProductDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.ProductCategoryInsertDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.ProductInsertDTO;
 import com.soaresdev.productorderapi.services.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
 
@@ -30,8 +30,8 @@ public class ProductController {
         return ResponseEntity.ok(productService.findByUUID(uuid));
     }
 
-    @PostMapping()
-    public ResponseEntity<ProductDTO> insert(@RequestBody ProductInsertDTO productInsertDTO) {
+    @PostMapping
+    public ResponseEntity<ProductDTO> insert(@RequestBody @Valid ProductInsertDTO productInsertDTO) {
         ProductDTO productDTO = productService.insert(productInsertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
                 .buildAndExpand(productDTO.getId()).toUri();
@@ -45,17 +45,17 @@ public class ProductController {
     }
 
     @PutMapping("/{uuid}")
-    public ResponseEntity<ProductDTO> updateByUUID(@PathVariable String uuid, @RequestBody ProductInsertDTO productInsertDTO) {
+    public ResponseEntity<ProductDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid ProductInsertDTO productInsertDTO) {
         return ResponseEntity.ok(productService.updateByUUID(uuid, productInsertDTO));
     }
 
     @PostMapping("/{product_uuid}/categories")
-    public ResponseEntity<ProductDTO> addCategoryByUUID(@PathVariable String product_uuid, @RequestBody ProductCategoryInsertDTO productCategoryInsertDTO) {
+    public ResponseEntity<ProductDTO> addCategoryByUUID(@PathVariable String product_uuid, @RequestBody @Valid ProductCategoryInsertDTO productCategoryInsertDTO) {
         return ResponseEntity.ok(productService.addCategoryByUUID(product_uuid, productCategoryInsertDTO));
     }
 
     @DeleteMapping("/{product_uuid}/categories")
-    public ResponseEntity<ProductDTO> removeCategoryByUUID(@PathVariable String product_uuid, @RequestBody ProductCategoryInsertDTO productCategoryInsertDTO) {
+    public ResponseEntity<ProductDTO> removeCategoryByUUID(@PathVariable String product_uuid, @RequestBody @Valid ProductCategoryInsertDTO productCategoryInsertDTO) {
         return ResponseEntity.ok(productService.removeCategoryByUUID(product_uuid, productCategoryInsertDTO));
     }
 }

@@ -3,6 +3,7 @@ package com.soaresdev.productorderapi.controllers;
 import com.soaresdev.productorderapi.dtos.PaymentDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.PaymentInsertDTO;
 import com.soaresdev.productorderapi.services.PaymentService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -29,7 +30,7 @@ public class PaymentController {
     }
 
     @PostMapping
-    public ResponseEntity<PaymentDTO> insert(@RequestBody PaymentInsertDTO paymentInsertDTO) {
+    public ResponseEntity<PaymentDTO> insert(@RequestBody @Valid PaymentInsertDTO paymentInsertDTO) {
         PaymentDTO paymentDTO = paymentService.insert(paymentInsertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
                 .buildAndExpand(paymentDTO.getOrder_id()).toUri();
@@ -43,7 +44,7 @@ public class PaymentController {
     }
 
     @PutMapping("/{uuid}")
-    public ResponseEntity<PaymentDTO> updateByUUID(@PathVariable String uuid, @RequestBody PaymentInsertDTO paymentInsertDTO) {
+    public ResponseEntity<PaymentDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid PaymentInsertDTO paymentInsertDTO) {
         return ResponseEntity.ok(paymentService.updateByUUID(uuid, paymentInsertDTO));
     }
 }

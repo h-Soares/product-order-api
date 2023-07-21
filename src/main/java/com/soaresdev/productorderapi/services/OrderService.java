@@ -140,4 +140,6 @@ public class OrderService {
         return orderRepository.findById(UUID.fromString(uuid))
                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
     }
+
+    //TODO: pages in findAll() methods, change database,   remove comments.
 }

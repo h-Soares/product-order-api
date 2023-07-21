@@ -3,6 +3,7 @@ package com.soaresdev.productorderapi.controllers;
 import com.soaresdev.productorderapi.dtos.CategoryDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.CategoryInsertDTO;
 import com.soaresdev.productorderapi.services.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -29,7 +30,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryInsertDTO categoryInsertDTO) {
+    public ResponseEntity<CategoryDTO> insert(@RequestBody @Valid CategoryInsertDTO categoryInsertDTO) {
         CategoryDTO categoryDTO = categoryService.insert(categoryInsertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
                 .buildAndExpand(categoryDTO.getId()).toUri();
@@ -43,7 +44,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{uuid}")
-    public ResponseEntity<CategoryDTO> updateByUUID(@PathVariable String uuid, @RequestBody CategoryInsertDTO categoryInsertDTO) {
+    public ResponseEntity<CategoryDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid CategoryInsertDTO categoryInsertDTO) {
         return ResponseEntity.ok(categoryService.updateByUUID(uuid, categoryInsertDTO));
     }
 }

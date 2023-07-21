@@ -3,10 +3,10 @@ package com.soaresdev.productorderapi.controllers;
 import com.soaresdev.productorderapi.dtos.UserDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.UserInsertDTO;
 import com.soaresdev.productorderapi.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO userInsertDTO) {
+    public ResponseEntity<UserDTO> insert(@RequestBody @Valid UserInsertDTO userInsertDTO) {
         UserDTO userDTO = userService.insert(userInsertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
                   .buildAndExpand(userDTO.getId()).toUri();
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @PutMapping("/{uuid}")
-    public ResponseEntity<UserDTO> updateByUUID(@PathVariable String uuid, @RequestBody UserInsertDTO userInsertDTO) {
+    public ResponseEntity<UserDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid UserInsertDTO userInsertDTO) {
         return ResponseEntity.ok(userService.updateByUUID(uuid, userInsertDTO));
     }
 }
