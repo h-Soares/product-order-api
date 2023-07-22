@@ -4,11 +4,13 @@ import com.soaresdev.productorderapi.dtos.CategoryDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.CategoryInsertDTO;
 import com.soaresdev.productorderapi.services.CategoryService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
@@ -20,8 +22,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryDTO>> findAll() {
-        return ResponseEntity.ok(categoryService.findAll());
+    public ResponseEntity<Page<CategoryDTO>> findAll(@PageableDefault(sort = "name") Pageable pageable) {
+        return ResponseEntity.ok(categoryService.findAll(pageable));
     }
 
     @GetMapping("/{uuid}")

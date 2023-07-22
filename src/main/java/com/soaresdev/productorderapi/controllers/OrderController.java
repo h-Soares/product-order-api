@@ -6,11 +6,13 @@ import com.soaresdev.productorderapi.dtos.insertDTOs.OrderItemDeleteDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.OrderItemInsertDTO;
 import com.soaresdev.productorderapi.services.OrderService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
@@ -22,8 +24,8 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderDTO>> findAll() {
-        return ResponseEntity.ok(orderService.findAll());
+    public ResponseEntity<Page<OrderDTO>> findAll(@PageableDefault(sort = "client.name") Pageable pageable) {
+        return ResponseEntity.ok(orderService.findAll(pageable));
     }
 
     @GetMapping("/{uuid}")

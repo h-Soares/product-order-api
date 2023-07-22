@@ -1,6 +1,8 @@
 package com.soaresdev.productorderapi.repositories;
 
 import com.soaresdev.productorderapi.entities.Category;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +20,6 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
             "DELETE FROM tb_product_category " +  "WHERE category_id IN (SELECT id FROM tb_category WHERE id = :uuid); " +
                     "DELETE FROM tb_category WHERE id = :uuid")
     void deleteByUUID(UUID uuid);
+
+    Page<Category> findAll(Pageable pageable);
 }

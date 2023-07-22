@@ -10,9 +10,10 @@ import com.soaresdev.productorderapi.repositories.PaymentRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -27,8 +28,8 @@ public class PaymentService {
         this.modelMapper = modelMapper;
     }
 
-    public List<PaymentDTO> findAll() {
-        return paymentRepository.findAll().stream().map(PaymentDTO::new).toList();
+    public Page<PaymentDTO> findAll(Pageable pageable) {
+        return paymentRepository.findAll(pageable).map(PaymentDTO::new);
     }
 
     public PaymentDTO findByUUID(String uuid) {

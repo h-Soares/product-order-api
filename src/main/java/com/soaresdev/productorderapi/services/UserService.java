@@ -7,9 +7,10 @@ import com.soaresdev.productorderapi.repositories.UserRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,8 +23,8 @@ public class UserService {
         this.modelMapper = modelMapper;
     }
 
-    public List<UserDTO> findAll() {
-        return userRepository.findAll().stream().map(UserDTO::new).toList(); // TODO: page
+    public Page<UserDTO> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable).map(UserDTO::new);
     }
 
     public UserDTO findByUUID(String uuid) {

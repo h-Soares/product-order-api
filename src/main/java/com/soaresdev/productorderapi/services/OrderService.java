@@ -13,9 +13,10 @@ import com.soaresdev.productorderapi.repositories.ProductRepository;
 import com.soaresdev.productorderapi.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 import java.util.UUID;
 
 // 20/07/2023  21:09 !
@@ -36,8 +37,8 @@ public class OrderService {
         this.modelMapper = modelMapper;
     }
 
-    public List<OrderDTO> findAll() {
-        return orderRepository.findAll().stream().map(OrderDTO::new).toList(); /* TODO: page */
+    public Page<OrderDTO> findAll(Pageable pageable) {
+        return orderRepository.findAll(pageable).map(OrderDTO::new);
     }
 
     public OrderDTO findByUUID(String uuid) {
@@ -141,5 +142,5 @@ public class OrderService {
                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
     }
 
-    //TODO: pages in findAll() methods, change database,   remove comments.
+    //TODO: Encrypt user password before save in database, change database,   remove comments,  DEPLOY.
 }

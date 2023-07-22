@@ -10,9 +10,10 @@ import com.soaresdev.productorderapi.repositories.ProductRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -27,8 +28,8 @@ public class ProductService {
         this.modelMapper = modelMapper;
     }
 
-    public List<ProductDTO> findAll() {
-        return productRepository.findAll().stream().map(ProductDTO::new).toList(); /* TODO: page */
+    public Page<ProductDTO> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable).map(ProductDTO::new);
     }
 
     public ProductDTO findByUUID(String uuid) {
@@ -47,7 +48,7 @@ public class ProductService {
         productRepository.delete(getProduct(uuid));
     }
 
-    @Transactional //TODO: price validation in ProductInsertDTO
+    @Transactional
     public ProductDTO updateByUUID(String uuid, ProductInsertDTO productInsertDTO) {
         Product product = getProduct(uuid);
         modelMapper.map(productInsertDTO, product);

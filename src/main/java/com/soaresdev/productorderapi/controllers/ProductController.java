@@ -5,11 +5,13 @@ import com.soaresdev.productorderapi.dtos.insertDTOs.ProductCategoryInsertDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.ProductInsertDTO;
 import com.soaresdev.productorderapi.services.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -21,8 +23,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> findAll() {
-        return ResponseEntity.ok(productService.findAll());
+    public ResponseEntity<Page<ProductDTO>> findAll(@PageableDefault(sort = "name") Pageable pageable) {
+        return ResponseEntity.ok(productService.findAll(pageable));
     }
 
     @GetMapping("/{uuid}")

@@ -4,11 +4,13 @@ import com.soaresdev.productorderapi.dtos.UserDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.UserInsertDTO;
 import com.soaresdev.productorderapi.services.UserService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -20,8 +22,8 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> findAll() {
-        return ResponseEntity.ok(userService.findAll());
+    public ResponseEntity<Page<UserDTO>> findAll(@PageableDefault(sort = "name") Pageable pageable) {
+        return ResponseEntity.ok(userService.findAll(pageable));
     }
 
     @GetMapping("/{uuid}")
