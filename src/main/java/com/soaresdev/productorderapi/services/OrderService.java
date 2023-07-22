@@ -142,5 +142,5 @@ public class OrderService {
                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
     }
 
-    //TODO: Encrypt user password before save in database, change database,   remove comments,  DEPLOY.
+    //TODO: change database,   remove comments,  DEPLOY.
 }
