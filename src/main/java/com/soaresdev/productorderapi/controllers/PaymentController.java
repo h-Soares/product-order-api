@@ -3,6 +3,10 @@ package com.soaresdev.productorderapi.controllers;
 import com.soaresdev.productorderapi.dtos.PaymentDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.PaymentInsertDTO;
 import com.soaresdev.productorderapi.services.PaymentService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +19,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/payments")
+@Tag(name = "Payment")
 public class PaymentController {
     private final PaymentService paymentService;
 
@@ -22,16 +27,33 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
+    @Operation(description = "Get a paginated list of all payments", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK")
+    })
     @GetMapping
     public ResponseEntity<Page<PaymentDTO>> findAll(@PageableDefault(sort = "amount", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(paymentService.findAll(pageable));
     }
 
+    @Operation(description = "Get a payment by UUID", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Illegal argument"),
+            @ApiResponse(responseCode = "404", description = "Entity not found")
+    })
     @GetMapping("/{uuid}")
     public ResponseEntity<PaymentDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(paymentService.findByUUID(uuid));
     }
 
+    @Operation(description = "Insert a new payment", method = "POST", summary = "Payment type: CREDIT_CARD, PIX")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments"),
+            @ApiResponse(responseCode = "404", description = "Entity not found"),
+            @ApiResponse(responseCode = "403", description = "Already paid"),
+    })
     @PostMapping
     public ResponseEntity<PaymentDTO> insert(@RequestBody @Valid PaymentInsertDTO paymentInsertDTO) {
         PaymentDTO paymentDTO = paymentService.insert(paymentInsertDTO);
@@ -40,12 +62,25 @@ public class PaymentController {
         return ResponseEntity.created(uri).body(paymentDTO);
     }
 
+    @Operation(description = "Delete a payment by UUID", method = "DELETE")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Success. No content"),
+            @ApiResponse(responseCode = "400", description = "Invalid argument"),
+            @ApiResponse(responseCode = "404", description = "Entity not found")
+    })
     @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> deleteByUUID(@PathVariable String uuid) {
         paymentService.deleteByUUID(uuid);
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(description = "Update a payment by UUID", method = "PUT", summary = "Payment type: CREDIT_CARD, PIX")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments"),
+            @ApiResponse(responseCode = "403", description = "Already paid"),
+            @ApiResponse(responseCode = "404", description = "Entity not found")
+    })
     @PutMapping("/{uuid}")
     public ResponseEntity<PaymentDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid PaymentInsertDTO paymentInsertDTO) {
         return ResponseEntity.ok(paymentService.updateByUUID(uuid, paymentInsertDTO));

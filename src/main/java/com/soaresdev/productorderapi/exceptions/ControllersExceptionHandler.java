@@ -41,6 +41,18 @@ public class ControllersExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(insertDTOError);
     }
 
+    @ExceptionHandler(NotPaidException.class)
+    public ResponseEntity<StandardError> notPaid(NotPaidException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).
+                body(getStandardError(HttpStatus.PAYMENT_REQUIRED, e, request));
+    }
+
+    @ExceptionHandler(AlreadyPaidException.class)
+    public ResponseEntity<StandardError> alreadyPaid(AlreadyPaidException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(getStandardError(HttpStatus.FORBIDDEN, e, request));
+    }
+
     private StandardError getStandardError(HttpStatus hs, Exception e, HttpServletRequest request) {
         StandardError standardError = new StandardError();
         standardError.setTimestamp(Instant.now());
@@ -49,18 +61,6 @@ public class ControllersExceptionHandler {
         standardError.setMessage(e.getMessage());
         standardError.setPath(request.getRequestURI());
         return standardError;
-    }
-
-    @ExceptionHandler(NotPaidException.class)
-    public ResponseEntity<StandardError> notPaid(NotPaidException e, HttpServletRequest request) {
-        return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).
-               body(getStandardError(HttpStatus.PAYMENT_REQUIRED, e, request));
-    }
-
-    @ExceptionHandler(AlreadyPaidException.class)
-    public ResponseEntity<StandardError> alreadyPaid(AlreadyPaidException e, HttpServletRequest request) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN)
-               .body(getStandardError(HttpStatus.FORBIDDEN, e, request));
     }
 
     private StandardInsertDTOError getStandardInsertDTOError(HttpStatus httpStatus, Exception e,

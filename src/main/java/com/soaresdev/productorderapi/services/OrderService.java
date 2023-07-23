@@ -134,6 +134,8 @@ public class OrderService {
             throw new EntityNotFoundException("Client not found");
         if(orderInsertDTO.getOrderStatus() == OrderStatus.PAID && order.getPayment() == null)
             throw new NotPaidException("Not paid yet");
+        if(order.getPayment() != null && orderInsertDTO.getOrderStatus() == OrderStatus.WAITING_PAYMENT)
+            throw new AlreadyPaidException("Already paid, unable to update order status to WAITING_PAYMENT");
 
         order.setOrderStatus(orderInsertDTO.getOrderStatus());
         order.setClient(userRepository.getReferenceById(UUID.fromString(orderInsertDTO.getClient_id())));
@@ -144,5 +146,5 @@ public class OrderService {
                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
     }
 
-    //TODO: swagger, remove comments,  DEPLOY (done).
+    //TODO: remove comments, create github pages, DEPLOY (done).
 }
