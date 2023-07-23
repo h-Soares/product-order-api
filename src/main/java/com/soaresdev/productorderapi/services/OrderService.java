@@ -7,6 +7,8 @@ import com.soaresdev.productorderapi.dtos.insertDTOs.OrderItemInsertDTO;
 import com.soaresdev.productorderapi.entities.Order;
 import com.soaresdev.productorderapi.entities.OrderItem;
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
+import com.soaresdev.productorderapi.exceptions.AlreadyPaidException;
+import com.soaresdev.productorderapi.exceptions.NotPaidException;
 import com.soaresdev.productorderapi.repositories.OrderItemRepository;
 import com.soaresdev.productorderapi.repositories.OrderRepository;
 import com.soaresdev.productorderapi.repositories.ProductRepository;
@@ -50,7 +52,7 @@ public class OrderService {
         if (!userRepository.existsById(UUID.fromString(orderInsertDTO.getClient_id())))
             throw new EntityNotFoundException("Client not found");
         if(orderInsertDTO.getOrderStatus() == OrderStatus.PAID)
-            throw new IllegalArgumentException("Not paid yet");
+            throw new NotPaidException("Not paid yet");
 
         Order order = modelMapper.map(orderInsertDTO, Order.class);
         order = orderRepository.save(order);
@@ -78,7 +80,7 @@ public class OrderService {
         //try to make it with modelmapper...?
         Order order = getOrder(uuid);
         if(order.getPayment() != null)
-            throw new IllegalArgumentException("Already paid, unable to add order item");
+            throw new AlreadyPaidException("Already paid, unable to add order item");
 
         if(orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), UUID.fromString(orderItemInsertDTO.getProduct_id()))) {
             OrderItem orderItem = orderItemRepository.findById_OrderIdAndId_ProductId(order.getId(), UUID.fromString(orderItemInsertDTO.getProduct_id()));
@@ -99,7 +101,7 @@ public class OrderService {
 
         Order order = getOrder(uuid);
         if(order.getPayment() != null)
-            throw new IllegalArgumentException("Already paid, unable to delete order item");
+            throw new AlreadyPaidException("Already paid, unable to delete order item");
         if(!orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), UUID.fromString(orderItemDeleteDTO.getProduct_id())))
             throw new EntityNotFoundException("Order item not found");
 
@@ -116,7 +118,7 @@ public class OrderService {
 
         Order order = getOrder(uuid);
         if(order.getPayment() != null)
-            throw new IllegalArgumentException("Already paid, unable to update order item");
+            throw new AlreadyPaidException("Already paid, unable to update order item");
         if(!orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), UUID.fromString(orderItemInsertDTO.getProduct_id())))
             throw new EntityNotFoundException("Order item not found");
 
@@ -131,7 +133,7 @@ public class OrderService {
         if (!userRepository.existsById(UUID.fromString(orderInsertDTO.getClient_id())))
             throw new EntityNotFoundException("Client not found");
         if(orderInsertDTO.getOrderStatus() == OrderStatus.PAID && order.getPayment() == null)
-            throw new IllegalArgumentException("Not paid yet");
+            throw new NotPaidException("Not paid yet");
 
         order.setOrderStatus(orderInsertDTO.getOrderStatus());
         order.setClient(userRepository.getReferenceById(UUID.fromString(orderInsertDTO.getClient_id())));
@@ -142,5 +144,5 @@ public class OrderService {
                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
     }
 
-    //TODO: swagger, remove comments,  DEPLOY.
+    //TODO: swagger, remove comments,  DEPLOY (done).
 }

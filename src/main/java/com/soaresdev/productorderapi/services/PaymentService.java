@@ -5,9 +5,9 @@ import com.soaresdev.productorderapi.dtos.insertDTOs.PaymentInsertDTO;
 import com.soaresdev.productorderapi.entities.Order;
 import com.soaresdev.productorderapi.entities.Payment;
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
+import com.soaresdev.productorderapi.exceptions.AlreadyPaidException;
 import com.soaresdev.productorderapi.repositories.OrderRepository;
 import com.soaresdev.productorderapi.repositories.PaymentRepository;
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -42,7 +42,7 @@ public class PaymentService {
             throw new EntityNotFoundException("Order not found");
 
         if(paymentRepository.existsByOrderId(UUID.fromString(paymentInsertDTO.getOrder_id())))
-            throw new EntityExistsException("Order already paid");
+            throw new AlreadyPaidException("Order already paid");
 
         Payment payment = modelMapper.map(paymentInsertDTO, Payment.class);
         payment = paymentRepository.save(payment);
@@ -70,7 +70,7 @@ public class PaymentService {
         if(!orderRepository.existsById(UUID.fromString(paymentInsertDTO.getOrder_id())))
             throw new EntityNotFoundException("Order not found");
         if(!UUID.fromString(paymentInsertDTO.getOrder_id()).equals(payment.getOrder().getId()) && paymentRepository.existsByOrderId(UUID.fromString(paymentInsertDTO.getOrder_id())))
-            throw new EntityExistsException("Order already paid");
+            throw new AlreadyPaidException("Order already paid");
         if(UUID.fromString(paymentInsertDTO.getOrder_id()) != payment.getOrder().getId())
             payment.getOrder().setOrderStatus(OrderStatus.WAITING_PAYMENT);
         Order order = orderRepository.getReferenceById(UUID.fromString(paymentInsertDTO.getOrder_id()));

@@ -51,6 +51,18 @@ public class ControllersExceptionHandler {
         return standardError;
     }
 
+    @ExceptionHandler(NotPaidException.class)
+    public ResponseEntity<StandardError> notPaid(NotPaidException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).
+               body(getStandardError(HttpStatus.PAYMENT_REQUIRED, e, request));
+    }
+
+    @ExceptionHandler(AlreadyPaidException.class)
+    public ResponseEntity<StandardError> alreadyPaid(AlreadyPaidException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+               .body(getStandardError(HttpStatus.FORBIDDEN, e, request));
+    }
+
     private StandardInsertDTOError getStandardInsertDTOError(HttpStatus httpStatus, Exception e,
                                                              HttpServletRequest request, List<String> errors) {
         StandardInsertDTOError insertDTOError = new StandardInsertDTOError();
