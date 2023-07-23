@@ -142,5 +142,5 @@ public class OrderService {
                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
     }
 
-    //TODO: change database,   remove comments,  DEPLOY.
+    //TODO: swagger, remove comments,  DEPLOY.
 }
