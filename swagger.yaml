@@ -1,4 +1,3 @@
----
 openapi: 3.0.1
 info:
   title: Orders and Products API Restful
@@ -8,8 +7,6 @@ info:
     url: https://www.linkedin.com/in/hiago-soares-de-araujo-96840a271
   version: '1.0'
 servers:
-- url: http://localhost:8080/
-  description: Localhost server
 - url: https://product-order-api.onrender.com
   description: Deploy server
 paths:
