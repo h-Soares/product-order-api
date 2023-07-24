@@ -1,5 +1,6 @@
 package com.soaresdev.productorderapi.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.soaresdev.productorderapi.entities.Payment;
 import com.soaresdev.productorderapi.entities.enums.PaymentType;
@@ -15,6 +16,7 @@ public class PaymentDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private UUID id;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'", timezone = "UTC")
     private Instant moment;
     private PaymentType paymentType;
     private BigDecimal amount;

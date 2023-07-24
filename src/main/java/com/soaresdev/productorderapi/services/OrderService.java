@@ -19,6 +19,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
 import java.util.UUID;
 
 // 20/07/2023  21:09 !
@@ -56,6 +58,7 @@ public class OrderService {
 
         Order order = modelMapper.map(orderInsertDTO, Order.class);
         order = orderRepository.save(order);
+        System.out.println(Instant.now());
         return new OrderDTO(order);
     }
 
@@ -146,5 +149,5 @@ public class OrderService {
                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
     }
 
-    //TODO: remove comments, create github pages, DEPLOY (done).
+    //TODO: remove comments, README, DEPLOY (done).
 }
