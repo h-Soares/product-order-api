@@ -23,3 +23,7 @@ O **desenvolvimento inicial** da API se deu tomando como base o o workshop do cu
 
 ## Documentação e uso
 * https://h-soares.github.io/product-order-api/
+
+### Autor
+Hiago Soares                        
+https://www.linkedin.com/in/hiago-soares-de-araujo-96840a271/
