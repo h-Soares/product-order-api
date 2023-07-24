@@ -9,17 +9,16 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Embeddable //primary key class
+@Embeddable
 public class OrderItemPK implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    //Representação do N para M
-    @ManyToOne //chave vem para cá
+    @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @ManyToOne //chave vem para cá
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 

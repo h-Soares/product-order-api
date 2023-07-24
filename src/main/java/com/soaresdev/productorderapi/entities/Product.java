@@ -1,8 +1,6 @@
 package com.soaresdev.productorderapi.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -29,12 +27,6 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private String imgUrl;
 
-    /*
-        Ao excluir um produto, primeiro exclui em tb_product_category e depois na tabela do produto.
-        Isso acontece automaticamente porque o lado Product é o lado proprietário do relacionamento, e o
-        Hibernate é capaz de gerenciar as operações de exclusão em cascata.
-     */
-
     @ManyToMany
     @JoinTable(
             name = "tb_product_category",
@@ -43,7 +35,6 @@ public class Product implements Serializable {
     private final Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "id.product", cascade = CascadeType.ALL)
-    //@OnDelete(action = OnDeleteAction.CASCADE)
     private final Set<OrderItem> items = new HashSet<>();
 
     public Product() {

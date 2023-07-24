@@ -2,8 +2,6 @@ package com.soaresdev.productorderapi.entities;
 
 import com.soaresdev.productorderapi.entities.enums.PaymentType;
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -25,12 +23,9 @@ public class Payment implements Serializable {
     @Column(nullable = false)
     private Integer paymentType;
     @Column(nullable = false)
-    private BigDecimal amount; //There may be a discount.
+    private BigDecimal amount;
 
     @OneToOne
-    //@MapsId
-    //@OnDelete(action = OnDeleteAction.CASCADE)
-    //@JoinColumn(name = "order_id")
     private Order order;
 
     public Payment() {
@@ -41,7 +36,6 @@ public class Payment implements Serializable {
         this.paymentType = paymentType.getCode();
         this.amount = order.getTotal();
         this.order = order;
-        //this.id = order.getId(); //To have the same id as its associated order.
     }
 
     public UUID getId() {

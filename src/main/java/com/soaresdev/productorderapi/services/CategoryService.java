@@ -44,7 +44,6 @@ public class CategoryService {
     @Transactional
     public void deleteByUUID(String uuid) {
         categoryRepository.deleteByUUID(getCategory(uuid).getId());
-        //categoryRepository.delete(getCategory(uuid));
     }
 
     @Transactional

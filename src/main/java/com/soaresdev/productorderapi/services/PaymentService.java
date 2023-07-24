@@ -51,7 +51,6 @@ public class PaymentService {
 
     @Transactional
     public void deleteByUUID(String uuid) {
-        //paymentRepository.delete(getPayment(uuid)); //don't work ... WHY?
         Payment payment = getPayment(uuid);
         payment.getOrder().setOrderStatus(OrderStatus.WAITING_PAYMENT);
         paymentRepository.deleteByUUID(getPayment(uuid).getId());
@@ -65,7 +64,6 @@ public class PaymentService {
         return new PaymentDTO(payment);
     }
 
-    //modelmapper?
     private void updatePayment(Payment payment, PaymentInsertDTO paymentInsertDTO) {
         if(!orderRepository.existsById(UUID.fromString(paymentInsertDTO.getOrder_id())))
             throw new EntityNotFoundException("Order not found");
@@ -73,11 +71,12 @@ public class PaymentService {
             throw new AlreadyPaidException("Order already paid");
         if(UUID.fromString(paymentInsertDTO.getOrder_id()) != payment.getOrder().getId())
             payment.getOrder().setOrderStatus(OrderStatus.WAITING_PAYMENT);
+
         Order order = orderRepository.getReferenceById(UUID.fromString(paymentInsertDTO.getOrder_id()));
         order.setOrderStatus(OrderStatus.PAID);
         payment.setPaymentType(paymentInsertDTO.getPaymentType());
         payment.setOrder(order);
-        payment.setAmount(order.getTotal()); //discount?
+        payment.setAmount(order.getTotal());
     }
 
     private Payment getPayment(String uuid) {

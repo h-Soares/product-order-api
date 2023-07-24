@@ -29,7 +29,6 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
-        //TESTAR SEM:
         Converter<PaymentInsertDTO, Payment> paymentConverter = new AbstractConverter<>() {
             protected Payment convert(PaymentInsertDTO paymentInsertDTO) {
                 Order order = orderRepository.getReferenceById(UUID.fromString(paymentInsertDTO.getOrder_id()));

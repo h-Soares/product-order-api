@@ -21,7 +21,7 @@ public class PaymentDTO implements Serializable {
     private PaymentType paymentType;
     private BigDecimal amount;
 
-    private UUID order_id; //order_id is payment_id, if @MapsId
+    private UUID order_id;
 
     public PaymentDTO() {
     }
@@ -79,5 +79,4 @@ public class PaymentDTO implements Serializable {
     public void setOrder_id(UUID order_id) {
         this.order_id = order_id;
     }
-
 }

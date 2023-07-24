@@ -19,7 +19,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.Instant;
 import java.util.UUID;
 
@@ -80,7 +79,6 @@ public class OrderService {
         if(!productRepository.existsById(UUID.fromString(orderItemInsertDTO.getProduct_id())))
             throw new EntityNotFoundException("Product not found");
 
-        //try to make it with modelmapper...?
         Order order = getOrder(uuid);
         if(order.getPayment() != null)
             throw new AlreadyPaidException("Already paid, unable to add order item");
@@ -131,7 +129,6 @@ public class OrderService {
         return new OrderDTO(order);
     }
 
-    //TODO: try to make it with modelMapper
     private void updateOrder(Order order, OrderInsertDTO orderInsertDTO) {
         if (!userRepository.existsById(UUID.fromString(orderInsertDTO.getClient_id())))
             throw new EntityNotFoundException("Client not found");
@@ -148,6 +145,4 @@ public class OrderService {
         return orderRepository.findById(UUID.fromString(uuid))
                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
     }
-
-    //TODO: remove comments, README, DEPLOY (done).
 }

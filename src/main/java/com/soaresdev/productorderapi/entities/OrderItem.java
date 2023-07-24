@@ -10,15 +10,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity // N para M entre order e product para mostrar no order, COM ATRIBUTOS EXTRAS
+@Entity
 @Table(name = "tb_order_product")
 public class OrderItem implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    //id_order , id_product, quantity, productPriceRecord
-
-    //como não é autoincrementado, é necessário instanciar.
     @EmbeddedId
     private final OrderItemPK id = new OrderItemPK();
     @Column(nullable = false)
