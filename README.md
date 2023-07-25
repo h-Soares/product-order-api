@@ -22,7 +22,7 @@ O **desenvolvimento inicial** da API se deu tomando como base o o workshop do cu
 * Swagger
 
 ## Documentação e uso
-* https://h-soares.github.io/product-order-api/
+* https://product-order-api.onrender.com/swagger-ui/index.html
 
 ### Autor
 Hiago Soares                        
