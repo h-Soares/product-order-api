@@ -1,4 +1,4 @@
-package com.soaresdev.productorderapi.controllers;
+package com.soaresdev.productorderapi.controllers.v1;
 
 import com.soaresdev.productorderapi.dtos.ProductDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.ProductCategoryInsertDTO;
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/v1/products")
 @Tag(name = "Product")
 public class ProductController {
     private final ProductService productService;

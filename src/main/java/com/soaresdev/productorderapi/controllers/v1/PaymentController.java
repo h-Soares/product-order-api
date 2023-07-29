@@ -1,4 +1,4 @@
-package com.soaresdev.productorderapi.controllers;
+package com.soaresdev.productorderapi.controllers.v1;
 
 import com.soaresdev.productorderapi.dtos.PaymentDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.PaymentInsertDTO;
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("/v1/payments")
 @Tag(name = "Payment")
 public class PaymentController {
     private final PaymentService paymentService;

@@ -1,4 +1,4 @@
-package com.soaresdev.productorderapi.controllers;
+package com.soaresdev.productorderapi.controllers.v1;
 
 import com.soaresdev.productorderapi.dtos.UserDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.UserInsertDTO;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/v1/users")
 @Tag(name = "User")
 public class UserController {
     private final UserService userService;

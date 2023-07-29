@@ -1,4 +1,4 @@
-package com.soaresdev.productorderapi.controllers;
+package com.soaresdev.productorderapi.controllers.v1;
 
 import com.soaresdev.productorderapi.dtos.CategoryDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.CategoryInsertDTO;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/v1/categories")
 @Tag(name = "Category")
 public class CategoryController {
     private final CategoryService categoryService;
