@@ -30,7 +30,7 @@ public class CategoryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK")
     })
-    @GetMapping
+    @GetMapping(produces = {"application/json", "application/xml"})
     public ResponseEntity<Page<CategoryDTO>> findAll(@PageableDefault(sort = "name") Pageable pageable) {
         return ResponseEntity.ok(categoryService.findAll(pageable));
     }
@@ -41,7 +41,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "400", description = "Illegal argument"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @GetMapping("/{uuid}")
+    @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<CategoryDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(categoryService.findByUUID(uuid));
     }
@@ -52,7 +52,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "400", description = "Invalid arguments"),
             @ApiResponse(responseCode = "409", description = "Entity already exists")
     })
-    @PostMapping
+    @PostMapping(consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<CategoryDTO> insert(@RequestBody @Valid CategoryInsertDTO categoryInsertDTO) {
         CategoryDTO categoryDTO = categoryService.insert(categoryInsertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
@@ -79,7 +79,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "404", description = "Entity not found"),
             @ApiResponse(responseCode = "409", description = "Entity already exists")
     })
-    @PutMapping("/{uuid}")
+    @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<CategoryDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid CategoryInsertDTO categoryInsertDTO) {
         return ResponseEntity.ok(categoryService.updateByUUID(uuid, categoryInsertDTO));
     }

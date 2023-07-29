@@ -31,7 +31,7 @@ public class PaymentController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK")
     })
-    @GetMapping
+    @GetMapping(produces = {"application/json", "application/xml"})
     public ResponseEntity<Page<PaymentDTO>> findAll(@PageableDefault(sort = "amount", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(paymentService.findAll(pageable));
     }
@@ -42,7 +42,7 @@ public class PaymentController {
             @ApiResponse(responseCode = "400", description = "Illegal argument"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @GetMapping("/{uuid}")
+    @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<PaymentDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(paymentService.findByUUID(uuid));
     }
@@ -54,7 +54,7 @@ public class PaymentController {
             @ApiResponse(responseCode = "404", description = "Entity not found"),
             @ApiResponse(responseCode = "403", description = "Already paid"),
     })
-    @PostMapping
+    @PostMapping(consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<PaymentDTO> insert(@RequestBody @Valid PaymentInsertDTO paymentInsertDTO) {
         PaymentDTO paymentDTO = paymentService.insert(paymentInsertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
@@ -81,7 +81,7 @@ public class PaymentController {
             @ApiResponse(responseCode = "403", description = "Already paid"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @PutMapping("/{uuid}")
+    @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<PaymentDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid PaymentInsertDTO paymentInsertDTO) {
         return ResponseEntity.ok(paymentService.updateByUUID(uuid, paymentInsertDTO));
     }

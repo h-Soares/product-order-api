@@ -32,7 +32,7 @@ public class OrderController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK")
     })
-    @GetMapping
+    @GetMapping(produces = {"application/json", "application/xml"})
     public ResponseEntity<Page<OrderDTO>> findAll(@PageableDefault(sort = "client.name") Pageable pageable) {
         return ResponseEntity.ok(orderService.findAll(pageable));
     }
@@ -43,7 +43,7 @@ public class OrderController {
             @ApiResponse(responseCode = "400", description = "Illegal argument"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @GetMapping("/{uuid}")
+    @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<OrderDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(orderService.findByUUID(uuid));
     }
@@ -55,7 +55,7 @@ public class OrderController {
             @ApiResponse(responseCode = "402", description = "Payment required"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @PostMapping
+    @PostMapping(consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<OrderDTO> insert(@RequestBody @Valid OrderInsertDTO orderInsertDTO) {
         OrderDTO orderDTO = orderService.insert(orderInsertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
@@ -83,7 +83,7 @@ public class OrderController {
             @ApiResponse(responseCode = "403", description = "Already paid"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @PutMapping("/{uuid}")
+    @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<OrderDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid OrderInsertDTO orderInsertDTO) {
         return ResponseEntity.ok().body(orderService.updateByUUID(uuid, orderInsertDTO));
     }
@@ -95,7 +95,7 @@ public class OrderController {
             @ApiResponse(responseCode = "403", description = "Already paid"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @PostMapping("/{order_uuid}/items")
+    @PostMapping(value = "/{order_uuid}/items", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<OrderDTO> addItemByUUID(@PathVariable String order_uuid, @RequestBody @Valid OrderItemInsertDTO orderItemInsertDTO) {
         return ResponseEntity.ok(orderService.addItem(order_uuid, orderItemInsertDTO));
     }
@@ -119,7 +119,7 @@ public class OrderController {
             @ApiResponse(responseCode = "403", description = "Already paid"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @PutMapping("/{order_uuid}/items")
+    @PutMapping(value = "/{order_uuid}/items", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<OrderDTO> updateItemByUUID(@PathVariable String order_uuid, @RequestBody @Valid OrderItemInsertDTO orderItemInsertDTO) {
         return ResponseEntity.ok(orderService.updateItem(order_uuid, orderItemInsertDTO));
     }

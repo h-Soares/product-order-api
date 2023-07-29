@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                     name = "Linkedin",
                     url = "https://www.linkedin.com/in/hiago-soares-de-araujo-96840a271"
             ),
-            description = "Documentation for orders and products API Restful",
+            description = "Documentation for orders and products API Restful.\n\nThe API supports JSON and XML.",
             title = "Orders and Products API Restful",
             version = "1.0"
     ),

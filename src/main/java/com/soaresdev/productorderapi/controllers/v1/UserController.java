@@ -30,7 +30,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK")
     })
-    @GetMapping
+    @GetMapping(produces = {"application/json", "application/xml"})
     public ResponseEntity<Page<UserDTO>> findAll(@PageableDefault(sort = "name") Pageable pageable) {
         return ResponseEntity.ok(userService.findAll(pageable));
     }
@@ -41,7 +41,7 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Illegal argument"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @GetMapping("/{uuid}")
+    @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<UserDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(userService.findByUUID(uuid));
     }
@@ -52,7 +52,7 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Invalid arguments"),
             @ApiResponse(responseCode = "409", description = "Entity already exists")
     })
-    @PostMapping
+    @PostMapping(consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<UserDTO> insert(@RequestBody @Valid UserInsertDTO userInsertDTO) {
         UserDTO userDTO = userService.insert(userInsertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
@@ -79,7 +79,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Entity not found"),
             @ApiResponse(responseCode = "409", description = "Entity already exists")
     })
-    @PutMapping("/{uuid}")
+    @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<UserDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid UserInsertDTO userInsertDTO) {
         return ResponseEntity.ok(userService.updateByUUID(uuid, userInsertDTO));
     }

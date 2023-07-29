@@ -31,7 +31,7 @@ public class ProductController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK")
     })
-    @GetMapping
+    @GetMapping(produces = {"application/json", "application/xml"})
     public ResponseEntity<Page<ProductDTO>> findAll(@PageableDefault(sort = "name") Pageable pageable) {
         return ResponseEntity.ok(productService.findAll(pageable));
     }
@@ -42,7 +42,7 @@ public class ProductController {
             @ApiResponse(responseCode = "400", description = "Illegal argument"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @GetMapping("/{uuid}")
+    @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<ProductDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(productService.findByUUID(uuid));
     }
@@ -52,7 +52,7 @@ public class ProductController {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Invalid arguments")
     })
-    @PostMapping
+    @PostMapping(consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<ProductDTO> insert(@RequestBody @Valid ProductInsertDTO productInsertDTO) {
         ProductDTO productDTO = productService.insert(productInsertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{uuid}")
@@ -78,7 +78,7 @@ public class ProductController {
             @ApiResponse(responseCode = "400", description = "Invalid arguments"),
             @ApiResponse(responseCode = "404", description = "Entity not found")
     })
-    @PutMapping("/{uuid}")
+    @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<ProductDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid ProductInsertDTO productInsertDTO) {
         return ResponseEntity.ok(productService.updateByUUID(uuid, productInsertDTO));
     }
@@ -90,7 +90,7 @@ public class ProductController {
             @ApiResponse(responseCode = "404", description = "Entity not found"),
             @ApiResponse(responseCode = "409", description = "Entity already exists")
     })
-    @PostMapping("/{product_uuid}/categories")
+    @PostMapping(value = "/{product_uuid}/categories", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<ProductDTO> addCategoryByUUID(@PathVariable String product_uuid, @RequestBody @Valid ProductCategoryInsertDTO productCategoryInsertDTO) {
         return ResponseEntity.ok(productService.addCategoryByUUID(product_uuid, productCategoryInsertDTO));
     }
