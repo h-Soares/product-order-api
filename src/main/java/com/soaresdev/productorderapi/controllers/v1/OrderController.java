@@ -4,8 +4,12 @@ import com.soaresdev.productorderapi.dtos.OrderDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.OrderInsertDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.OrderItemDeleteDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.OrderItemInsertDTO;
+import com.soaresdev.productorderapi.exceptions.StandardError;
+import com.soaresdev.productorderapi.exceptions.StandardInsertDTOError;
 import com.soaresdev.productorderapi.services.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,9 +43,9 @@ public class OrderController {
 
     @Operation(description = "Get a order by UUID", method = "GET")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Illegal argument"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OrderDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Illegal argument", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<OrderDTO> findByUUID(@PathVariable String uuid) {
@@ -50,10 +54,10 @@ public class OrderController {
 
     @Operation(description = "Insert a new order", method = "POST", summary = "Order status: WAITING_PAYMENT, PAID, SHIPPED, DELIVERED, CANCELED")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created"),
-            @ApiResponse(responseCode = "400", description = "Invalid arguments"),
-            @ApiResponse(responseCode = "402", description = "Payment required"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "201", description = "Created", content = @Content(schema = @Schema(implementation = OrderDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments", content = @Content(schema = @Schema(implementation = StandardInsertDTOError.class))),
+            @ApiResponse(responseCode = "402", description = "Payment required", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @PostMapping(consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<OrderDTO> insert(@RequestBody @Valid OrderInsertDTO orderInsertDTO) {
@@ -65,9 +69,9 @@ public class OrderController {
 
     @Operation(description = "Delete an order by UUID", method = "DELETE")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success. No content"),
-            @ApiResponse(responseCode = "400", description = "Invalid argument"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "204", description = "Success. No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Invalid argument", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> deleteByUUID(@PathVariable String uuid) {
@@ -77,11 +81,11 @@ public class OrderController {
 
     @Operation(description = "Update an order by UUID", method = "PUT", summary = "Order status: WAITING_PAYMENT, PAID, SHIPPED, DELIVERED, CANCELED")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Invalid arguments"),
-            @ApiResponse(responseCode = "402", description = "Payment required"),
-            @ApiResponse(responseCode = "403", description = "Already paid"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OrderDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments", content = @Content(schema = @Schema(implementation = StandardInsertDTOError.class))),
+            @ApiResponse(responseCode = "402", description = "Payment required", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "403", description = "Already paid", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<OrderDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid OrderInsertDTO orderInsertDTO) {
@@ -90,10 +94,10 @@ public class OrderController {
 
     @Operation(description = "Insert a new order item by order UUID", method = "POST")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Invalid arguments"),
-            @ApiResponse(responseCode = "403", description = "Already paid"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OrderDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments", content = @Content(schema = @Schema(implementation = StandardInsertDTOError.class))),
+            @ApiResponse(responseCode = "403", description = "Already paid", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @PostMapping(value = "/{order_uuid}/items", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<OrderDTO> addItemByUUID(@PathVariable String order_uuid, @RequestBody @Valid OrderItemInsertDTO orderItemInsertDTO) {
@@ -102,10 +106,10 @@ public class OrderController {
 
     @Operation(description = "Delete an order item by order UUID", method = "DELETE")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Invalid argument"),
-            @ApiResponse(responseCode = "403", description = "Already paid"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OrderDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid argument", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "403", description = "Already paid", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @DeleteMapping("/{order_uuid}/items")
     public ResponseEntity<OrderDTO> deleteItemByUUID(@PathVariable String order_uuid, @RequestBody @Valid OrderItemDeleteDTO orderItemDeleteDTO) {
@@ -114,10 +118,10 @@ public class OrderController {
 
     @Operation(description = "Update an order item by order UUID", method = "PUT")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Invalid arguments"),
-            @ApiResponse(responseCode = "403", description = "Already paid"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OrderDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments", content = @Content(schema = @Schema(implementation = StandardInsertDTOError.class))),
+            @ApiResponse(responseCode = "403", description = "Already paid", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @PutMapping(value = "/{order_uuid}/items", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<OrderDTO> updateItemByUUID(@PathVariable String order_uuid, @RequestBody @Valid OrderItemInsertDTO orderItemInsertDTO) {

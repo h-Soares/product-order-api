@@ -3,8 +3,12 @@ package com.soaresdev.productorderapi.controllers.v1;
 import com.soaresdev.productorderapi.dtos.ProductDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.ProductCategoryInsertDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.ProductInsertDTO;
+import com.soaresdev.productorderapi.exceptions.StandardError;
+import com.soaresdev.productorderapi.exceptions.StandardInsertDTOError;
 import com.soaresdev.productorderapi.services.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -38,9 +42,9 @@ public class ProductController {
 
     @Operation(description = "Get a product by UUID", method = "GET")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Illegal argument"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = ProductDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Illegal argument", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<ProductDTO> findByUUID(@PathVariable String uuid) {
@@ -49,8 +53,8 @@ public class ProductController {
 
     @Operation(description = "Insert a new product", method = "POST")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created"),
-            @ApiResponse(responseCode = "400", description = "Invalid arguments")
+            @ApiResponse(responseCode = "201", description = "Created", content = @Content(schema = @Schema(implementation = ProductDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments", content = @Content(schema = @Schema(implementation = StandardInsertDTOError.class)))
     })
     @PostMapping(consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<ProductDTO> insert(@RequestBody @Valid ProductInsertDTO productInsertDTO) {
@@ -62,9 +66,9 @@ public class ProductController {
 
     @Operation(description = "Delete a product by UUID", method = "DELETE")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Success. No content"),
-            @ApiResponse(responseCode = "400", description = "Invalid argument"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "204", description = "Success. No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Invalid argument", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> deleteByUUID(@PathVariable String uuid) {
@@ -74,9 +78,9 @@ public class ProductController {
 
     @Operation(description = "Update a product by UUID", method = "PUT")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Invalid arguments"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = ProductDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments", content = @Content(schema = @Schema(implementation = StandardInsertDTOError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<ProductDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid ProductInsertDTO productInsertDTO) {
@@ -85,10 +89,10 @@ public class ProductController {
 
     @Operation(description = "Insert a category into a product by product UUID", method = "POST")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Invalid arguments"),
-            @ApiResponse(responseCode = "404", description = "Entity not found"),
-            @ApiResponse(responseCode = "409", description = "Entity already exists")
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = ProductDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments", content = @Content(schema = @Schema(implementation = StandardInsertDTOError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "409", description = "Entity already exists", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @PostMapping(value = "/{product_uuid}/categories", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<ProductDTO> addCategoryByUUID(@PathVariable String product_uuid, @RequestBody @Valid ProductCategoryInsertDTO productCategoryInsertDTO) {
@@ -97,9 +101,9 @@ public class ProductController {
 
     @Operation(description = "Delete a category from a product by product UUID", method = "DELETE")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Invalid arguments"),
-            @ApiResponse(responseCode = "404", description = "Entity not found")
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = ProductDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments", content = @Content(schema = @Schema(implementation = StandardInsertDTOError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @DeleteMapping("/{product_uuid}/categories")
     public ResponseEntity<ProductDTO> removeCategoryByUUID(@PathVariable String product_uuid, @RequestBody @Valid ProductCategoryInsertDTO productCategoryInsertDTO) {
