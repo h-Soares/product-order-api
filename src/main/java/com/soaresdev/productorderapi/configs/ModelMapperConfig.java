@@ -2,8 +2,10 @@ package com.soaresdev.productorderapi.configs;
 
 import com.soaresdev.productorderapi.dtos.insertDTOs.OrderInsertDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.PaymentInsertDTO;
+import com.soaresdev.productorderapi.dtos.insertDTOs.UserInsertDTO;
 import com.soaresdev.productorderapi.entities.Order;
 import com.soaresdev.productorderapi.entities.Payment;
+import com.soaresdev.productorderapi.entities.User;
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
 import com.soaresdev.productorderapi.repositories.OrderRepository;
 import com.soaresdev.productorderapi.repositories.UserRepository;
@@ -13,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -24,6 +27,9 @@ public class ModelMapperConfig {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
     public ModelMapper modelMapper() {
@@ -47,6 +53,32 @@ public class ModelMapperConfig {
             }
         };
 
+        Converter<UserInsertDTO, User> createUserConverter = new AbstractConverter<>() {
+            protected User convert(UserInsertDTO source) {
+                User user = new User();
+                user.setName(source.getName());
+                user.setEmail(source.getEmail());
+                user.setPhone(source.getPhone());
+                source.setPassword(bCryptPasswordEncoder.encode(source.getPassword()));
+                user.setPassword(source.getPassword());
+                return user;
+            }
+        };
+
+        Converter<UserInsertDTO, User> updateUserConverter = context -> {
+            UserInsertDTO userInsertDTO = context.getSource();
+            User user = context.getDestination();
+
+            user.setName(userInsertDTO.getName());
+            user.setEmail(userInsertDTO.getEmail());
+            user.setPhone(userInsertDTO.getPhone());
+            userInsertDTO.setPassword(bCryptPasswordEncoder.encode(userInsertDTO.getPassword()));
+            user.setPassword(userInsertDTO.getPassword());
+            return user;
+        };
+
+        modelMapper.createTypeMap(UserInsertDTO.class, User.class, "createUserConverter").setConverter(createUserConverter);
+        modelMapper.createTypeMap(UserInsertDTO.class, User.class, "updateUserConverter").setConverter(updateUserConverter);
         modelMapper.addConverter(paymentConverter);
         modelMapper.addConverter(orderConverter);
         return modelMapper;

@@ -9,7 +9,6 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
@@ -18,12 +17,10 @@ import java.util.UUID;
 public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public Page<UserDTO> findAll(Pageable pageable) {
@@ -39,8 +36,7 @@ public class UserService {
         if(userRepository.existsByEmail(userInsertDTO.getEmail()))
             throw new EntityExistsException("Email already exists");
 
-        userInsertDTO.setPassword(encryptPassword(userInsertDTO.getPassword()));
-        User user = modelMapper.map(userInsertDTO, User.class);
+        User user = modelMapper.map(userInsertDTO, User.class, "createUserConverter");
         user = userRepository.save(user);
         return new UserDTO(user);
     }
@@ -57,8 +53,7 @@ public class UserService {
                 userRepository.existsByEmail(userInsertDTO.getEmail()))
             throw new EntityExistsException("Email already exists");
 
-        userInsertDTO.setPassword(encryptPassword(userInsertDTO.getPassword()));
-        modelMapper.map(userInsertDTO, user);
+        modelMapper.map(userInsertDTO, user, "updateUserConverter");
         user = userRepository.save(user);
         return new UserDTO(user);
     }
@@ -66,9 +61,5 @@ public class UserService {
     private User getUser(String uuid) {
         return userRepository.findById(UUID.fromString(uuid))
                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-    }
-
-    private String encryptPassword(String password) {
-        return bCryptPasswordEncoder.encode(password);
     }
 }
