@@ -9,18 +9,26 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
     public UserService(UserRepository userRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) {
+        return userRepository.findByEmailWithEagerRoles(email).
+               orElseThrow(() -> new EntityNotFoundException("Email not exists"));
     }
 
     public Page<UserDTO> findAll(Pageable pageable) {

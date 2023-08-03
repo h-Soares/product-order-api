@@ -1,15 +1,18 @@
 package com.soaresdev.productorderapi.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "tb_user")
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -28,6 +31,13 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE)
     private final List<Order> orders = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(
+        name = "tb_user_role",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    List<Role> roles = new ArrayList<>();
+
     public User() {
     }
 
@@ -36,6 +46,41 @@ public class User implements Serializable {
         this.email = email;
         this.phone = phone;
         this.password = password;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public UUID getId() {
@@ -70,15 +115,15 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
     public List<Order> getOrders() {
         return orders;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
     }
 }

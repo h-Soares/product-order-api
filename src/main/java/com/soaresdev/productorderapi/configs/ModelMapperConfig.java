@@ -8,6 +8,7 @@ import com.soaresdev.productorderapi.entities.Payment;
 import com.soaresdev.productorderapi.entities.User;
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
 import com.soaresdev.productorderapi.repositories.OrderRepository;
+import com.soaresdev.productorderapi.repositories.RoleRepository;
 import com.soaresdev.productorderapi.repositories.UserRepository;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
@@ -21,12 +22,16 @@ import java.util.UUID;
 
 @Configuration
 public class ModelMapperConfig {
+    private static final Integer ROLE_USER_CODE = 1;
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -61,6 +66,7 @@ public class ModelMapperConfig {
                 user.setPhone(source.getPhone());
                 source.setPassword(bCryptPasswordEncoder.encode(source.getPassword()));
                 user.setPassword(source.getPassword());
+                user.getRoles().add(roleRepository.findByRoleNameCode(ROLE_USER_CODE));
                 return user;
             }
         };
