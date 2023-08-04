@@ -1,5 +1,6 @@
 package com.soaresdev.productorderapi.exceptions;
 
+import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -58,6 +59,12 @@ public class ControllersExceptionHandler {
     public ResponseEntity<StandardError> jwtDecode(JWTDecodeException e, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(getStandardError(HttpStatus.UNAUTHORIZED, e, request));
+    }
+
+    @ExceptionHandler(JWTCreationException.class)
+    public ResponseEntity<StandardError> jwtCreation(JWTCreationException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(getStandardError(HttpStatus.INTERNAL_SERVER_ERROR, e, request));
     }
 
     private StandardError getStandardError(HttpStatus hs, Exception e, HttpServletRequest request) {

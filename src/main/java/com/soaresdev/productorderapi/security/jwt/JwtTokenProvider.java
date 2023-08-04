@@ -3,6 +3,7 @@ package com.soaresdev.productorderapi.security.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -45,26 +46,34 @@ public class JwtTokenProvider {
     }
 
     private String getAccessToken(String email, List<String> roles, Instant creation, Instant expiration) {
-        String issuerUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-        return JWT.create()
-                .withClaim("roles", roles)
-                .withIssuedAt(creation)
-                .withExpiresAt(expiration)
-                .withSubject(email)
-                .withIssuer(issuerUrl)
-                .sign(algorithm)
-                .strip();
+        try {
+            String issuerUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+            return JWT.create()
+                    .withClaim("roles", roles)
+                    .withIssuedAt(creation)
+                    .withExpiresAt(expiration)
+                    .withSubject(email)
+                    .withIssuer(issuerUrl)
+                    .sign(algorithm)
+                    .strip();
+        }catch(JWTVerificationException e) {
+            throw new JWTCreationException("Error generating access token", new Throwable("Algorithm error"));
+        }
     }
 
     private String getRefreshToken(String email, List<String> roles, Instant creation) {
-        Instant refreshTokenExpiration = creation.plus(Duration.ofHours(3)); //mudar para 1min para TESTAR
-        return JWT.create()
-                .withClaim("roles", roles)
-                .withIssuedAt(creation)
-                .withExpiresAt(refreshTokenExpiration)
-                .withSubject(email)
-                .sign(algorithm)
-                .strip();
+        try {
+            Instant refreshTokenExpiration = creation.plus(Duration.ofHours(3)); //mudar para 1min para TESTAR
+            return JWT.create()
+                    .withClaim("roles", roles)
+                    .withIssuedAt(creation)
+                    .withExpiresAt(refreshTokenExpiration)
+                    .withSubject(email)
+                    .sign(algorithm)
+                    .strip();
+        }catch(JWTVerificationException e) {
+            throw new JWTCreationException("Error generating refresh token", new Throwable("Algorithm error"));
+        }
     }
 
     public Authentication getAuthentication(String token) {
@@ -89,7 +98,7 @@ public class JwtTokenProvider {
         return decodedJWT.getExpiresAtAsInstant().isAfter(Instant.now());
     }
 
-    public String fixTokenFormat(HttpServletRequest request) {
+    public String fixRequestTokenFormat(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer "))
             return bearerToken.replace("Bearer ", "");
