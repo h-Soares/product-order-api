@@ -9,8 +9,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration //TODO: verify if is correct
 public class JwtConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-    @Autowired
+    //@Autowired //TODO: verify
     private JwtTokenProvider jwtTokenProvider;
+
+    public JwtConfigurer(JwtTokenProvider tokenProvider) {
+    }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {

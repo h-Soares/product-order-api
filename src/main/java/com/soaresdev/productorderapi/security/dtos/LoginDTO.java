@@ -1,4 +1,4 @@
-package com.soaresdev.productorderapi.dtos.security;
+package com.soaresdev.productorderapi.security.dtos;
 
 import jakarta.validation.constraints.NotNull;
 import java.io.Serial;

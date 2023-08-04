@@ -7,7 +7,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.soaresdev.productorderapi.dtos.security.TokenDTO;
+import com.soaresdev.productorderapi.security.dtos.TokenDTO;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class JwtTokenProvider {
     @Autowired
     UserDetailsService userDetailsService;
 
-    private Algorithm algorithm = null; //TODO: testar deixar sem null: Algorithm algorithm;
+    private Algorithm algorithm = null; //TODO: try without null: Algorithm algorithm;
 
     @PostConstruct
     protected void init() {
