@@ -1,5 +1,6 @@
-package com.soaresdev.productorderapi.dtos.insertDTOs.security;
+package com.soaresdev.productorderapi.dtos.security;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
@@ -11,7 +12,9 @@ public class TokenDTO implements Serializable {
 
     private String email;
     private Boolean authenticated;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'", timezone = "UTC")
     private Instant creation;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'", timezone = "UTC")
     private Instant expiration;
     private String accessToken;
     private String refreshToken;

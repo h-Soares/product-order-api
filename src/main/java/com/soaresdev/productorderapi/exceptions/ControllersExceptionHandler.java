@@ -1,5 +1,6 @@
 package com.soaresdev.productorderapi.exceptions;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,6 +52,12 @@ public class ControllersExceptionHandler {
     public ResponseEntity<StandardError> alreadyPaid(AlreadyPaidException e, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(getStandardError(HttpStatus.FORBIDDEN, e, request));
+    }
+
+    @ExceptionHandler(JWTDecodeException.class)
+    public ResponseEntity<StandardError> jwtDecode(JWTDecodeException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(getStandardError(HttpStatus.UNAUTHORIZED, e, request));
     }
 
     private StandardError getStandardError(HttpStatus hs, Exception e, HttpServletRequest request) {

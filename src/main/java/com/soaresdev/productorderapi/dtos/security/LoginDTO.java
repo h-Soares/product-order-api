@@ -1,7 +1,6 @@
-package com.soaresdev.productorderapi.dtos.insertDTOs.security;
+package com.soaresdev.productorderapi.dtos.security;
 
 import jakarta.validation.constraints.NotNull;
-
 import java.io.Serial;
 import java.io.Serializable;
 
