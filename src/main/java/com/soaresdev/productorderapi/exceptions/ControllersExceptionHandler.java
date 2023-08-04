@@ -7,6 +7,8 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -65,6 +67,18 @@ public class ControllersExceptionHandler {
     public ResponseEntity<StandardError> jwtCreation(JWTCreationException e, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(getStandardError(HttpStatus.INTERNAL_SERVER_ERROR, e, request));
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<StandardError> badCredentials(BadCredentialsException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(getStandardError(HttpStatus.UNAUTHORIZED, e, request));
+    }
+
+    @ExceptionHandler(AuthenticationServiceException.class)
+    public ResponseEntity<StandardError> authenticationService(AuthenticationServiceException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+               .body(getStandardError(HttpStatus.INTERNAL_SERVER_ERROR, e, request));
     }
 
     private StandardError getStandardError(HttpStatus hs, Exception e, HttpServletRequest request) {

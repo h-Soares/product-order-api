@@ -1,5 +1,6 @@
 package com.soaresdev.productorderapi.entities;
 
+import com.soaresdev.productorderapi.entities.enums.RoleName;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tb_user")
@@ -125,5 +127,10 @@ public class User implements Serializable, UserDetails {
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public List<String> getRoleNames() {
+        return roles.stream().map(role -> RoleName.valueOf(role.getRoleNameCode()).toString())
+               .collect(Collectors.toList());
     }
 }

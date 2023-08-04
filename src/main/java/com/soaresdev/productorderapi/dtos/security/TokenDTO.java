@@ -1,4 +1,4 @@
-package com.soaresdev.productorderapi.security.dtos;
+package com.soaresdev.productorderapi.dtos.security;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serial;
