@@ -29,7 +29,7 @@ public class JwtTokenProvider {
     @Autowired
     UserDetailsService userDetailsService;
 
-    private Algorithm algorithm = null; //TODO: try without null: Algorithm algorithm;
+    private Algorithm algorithm;
 
     @PostConstruct
     protected void init() {
@@ -37,9 +37,9 @@ public class JwtTokenProvider {
         algorithm = Algorithm.HMAC256(SECRET_KEY.getBytes());
     }
 
-    public TokenDTO createToken(String email, List<String> roles) { //TODO: getRoleNames em User
+    public TokenDTO createToken(String email, List<String> roles) {
         Instant creation = Instant.now();
-        Instant expiration = creation.plus(Duration.ofHours(1)); //mudar para 30s para TESTAR
+        Instant expiration = creation.plus(Duration.ofHours(1)); //TODO: mudar para 30s para TESTAR
         String accessToken = getAccessToken(email, roles, creation, expiration);
         String refreshToken = getRefreshToken(email, roles, creation);
         return new TokenDTO(email, true, creation, expiration, accessToken, refreshToken);
@@ -63,7 +63,7 @@ public class JwtTokenProvider {
 
     private String getRefreshToken(String email, List<String> roles, Instant creation) {
         try {
-            Instant refreshTokenExpiration = creation.plus(Duration.ofHours(3)); //mudar para 1min para TESTAR
+            Instant refreshTokenExpiration = creation.plus(Duration.ofHours(3)); //TODO: mudar para 1min para TESTAR
             return JWT.create()
                     .withClaim("roles", roles)
                     .withIssuedAt(creation)

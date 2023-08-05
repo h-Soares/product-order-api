@@ -8,7 +8,6 @@ import com.soaresdev.productorderapi.security.jwt.JwtTokenProvider;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -37,11 +36,8 @@ public class AuthService {
 
             TokenDTO tokenResponse = jwtTokenProvider.createToken(email, user.getRoleNames());
             return tokenResponse;
-        }catch(BadCredentialsException e) {
+        }catch(Exception e) {
             throw new BadCredentialsException("Invalid email address or password");
-        }
-        catch(AuthenticationServiceException e) {
-            throw new AuthenticationServiceException("Error in authentication service");
         }
     }
 }
