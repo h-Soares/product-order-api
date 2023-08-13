@@ -29,7 +29,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String token = jwtTokenProvider.fixRequestTokenFormat(request);
-            if(token != null && jwtTokenProvider.isValidToken(token)) {
+            if(token != null && jwtTokenProvider.isValidToken(token) && jwtTokenProvider.isAccessToken(token)) {
                 Authentication authentication = jwtTokenProvider.getAuthentication(token);
                 if(authentication != null)
                     SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -37,8 +37,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         }catch(Exception e) {
             handleException(request, response, e);
-            //response.setStatus(HttpStatus.UNAUTHORIZED.value()); //works
-
         }
     }
     private void handleException(HttpServletRequest request, HttpServletResponse response, Exception e) throws IOException {

@@ -3,6 +3,7 @@ package com.soaresdev.productorderapi.security.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.IncorrectClaimException;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
@@ -50,6 +51,7 @@ public class JwtTokenProvider {
             String issuerUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
             return JWT.create()
                     .withClaim("roles", roles)
+                    .withClaim("purpose", "access")
                     .withIssuedAt(creation)
                     .withExpiresAt(expiration)
                     .withSubject(email)
@@ -66,6 +68,7 @@ public class JwtTokenProvider {
             Instant refreshTokenExpiration = creation.plus(Duration.ofHours(3));
             return JWT.create()
                     .withClaim("roles", roles)
+                    .withClaim("purpose", "refresh")
                     .withIssuedAt(creation)
                     .withExpiresAt(refreshTokenExpiration)
                     .withSubject(email)
@@ -102,5 +105,13 @@ public class JwtTokenProvider {
         if (bearerToken != null && bearerToken.startsWith("Bearer "))
             return bearerToken.replace("Bearer ", "");
         return null;
+    }
+
+    public boolean isAccessToken(String token) {
+        DecodedJWT decodedJWT = verifyAndDecodeToken(token);
+        if(decodedJWT.getClaims().containsKey("purpose") &&
+           decodedJWT.getClaims().get("purpose").asString().equals("access"))
+            return true;
+        throw new IncorrectClaimException("Invalid or expired token", "purpose", decodedJWT.getClaim("purpose"));
     }
 }
