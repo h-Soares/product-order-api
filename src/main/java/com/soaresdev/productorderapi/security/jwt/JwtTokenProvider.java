@@ -3,10 +3,7 @@ package com.soaresdev.productorderapi.security.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.IncorrectClaimException;
-import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.*;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.soaresdev.productorderapi.dtos.security.TokenDTO;
 import jakarta.annotation.PostConstruct;
@@ -44,6 +41,13 @@ public class JwtTokenProvider {
         String accessToken = getAccessToken(email, roles, creation, expiration);
         String refreshToken = getRefreshToken(email, roles, creation);
         return new TokenDTO(email, true, creation, expiration, accessToken, refreshToken);
+    }
+
+    public TokenDTO createTokenWithRefreshToken(String refreshToken) {
+            DecodedJWT decodedJWT = verifyAndDecodeToken(refreshToken);
+            String email = decodedJWT.getSubject();
+            List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
+            return createToken(email,roles);
     }
 
     private String getAccessToken(String email, List<String> roles, Instant creation, Instant expiration) {
@@ -109,9 +113,18 @@ public class JwtTokenProvider {
 
     public boolean isAccessToken(String token) {
         DecodedJWT decodedJWT = verifyAndDecodeToken(token);
-        if(decodedJWT.getClaims().containsKey("purpose") &&
-           decodedJWT.getClaims().get("purpose").asString().equals("access"))
-            return true;
-        throw new IncorrectClaimException("Invalid or expired token", "purpose", decodedJWT.getClaim("purpose"));
+        return decodedJWT.getClaims().containsKey("purpose") &&
+               decodedJWT.getClaims().get("purpose").asString().equals("access");
+    }
+
+    public boolean isRefreshToken(String token) {
+        DecodedJWT decodedJWT = verifyAndDecodeToken(token);
+        return decodedJWT.getClaims().containsKey("purpose") &&
+               decodedJWT.getClaims().get("purpose").asString().equals("refresh");
+    }
+
+    public String getEmailByToken(String token) {
+        DecodedJWT decodedJWT = verifyAndDecodeToken(token);
+        return decodedJWT.getSubject();
     }
 }

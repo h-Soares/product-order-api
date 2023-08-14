@@ -1,6 +1,7 @@
 package com.soaresdev.productorderapi.controllers;
 
 import com.soaresdev.productorderapi.dtos.security.LoginDTO;
+import com.soaresdev.productorderapi.dtos.security.RefreshDTO;
 import com.soaresdev.productorderapi.dtos.security.TokenDTO;
 import com.soaresdev.productorderapi.exceptions.StandardError;
 import com.soaresdev.productorderapi.exceptions.StandardInsertDTOError;
@@ -14,10 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -37,5 +35,18 @@ public class AuthController {
     public ResponseEntity<TokenDTO> login(@RequestBody @Valid LoginDTO loginDTO) {
         TokenDTO tokenDTO = authService.login(loginDTO);
         return ResponseEntity.ok(tokenDTO);
+    }
+
+    @Operation(description = "Refresh access token with refresh token", method = "PUT")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = TokenDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments", content = @Content(schema = @Schema(implementation = StandardInsertDTOError.class))),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema(implementation = StandardError.class))),
+    })
+    @PutMapping(value = "/refresh",consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
+    public ResponseEntity<TokenDTO> refreshToken(@RequestBody @Valid RefreshDTO refreshDTO) {
+        return ResponseEntity.ok(authService.refreshToken(refreshDTO));
     }
 }

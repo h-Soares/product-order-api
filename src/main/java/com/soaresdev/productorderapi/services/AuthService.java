@@ -1,6 +1,8 @@
 package com.soaresdev.productorderapi.services;
 
+import com.auth0.jwt.exceptions.InvalidClaimException;
 import com.soaresdev.productorderapi.dtos.security.LoginDTO;
+import com.soaresdev.productorderapi.dtos.security.RefreshDTO;
 import com.soaresdev.productorderapi.dtos.security.TokenDTO;
 import com.soaresdev.productorderapi.entities.User;
 import com.soaresdev.productorderapi.repositories.UserRepository;
@@ -8,6 +10,7 @@ import com.soaresdev.productorderapi.security.jwt.JwtTokenProvider;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -39,5 +42,20 @@ public class AuthService {
         }catch(Exception e) {
             throw new BadCredentialsException("Invalid email address or password");
         }
+    }
+
+    public TokenDTO refreshToken(RefreshDTO refreshDTO) {
+        String email = refreshDTO.getEmail();
+        String refreshToken = refreshDTO.getRefreshToken();
+
+        if(!jwtTokenProvider.isRefreshToken(refreshToken))
+            throw new InvalidClaimException("Invalid or expired token");
+        if(!userRepository.existsByEmail(email))
+            throw new EntityNotFoundException("User not found");
+        if(!jwtTokenProvider.getEmailByToken(refreshToken).equals(email))
+            throw new AuthenticationServiceException("Email not matching");
+
+        TokenDTO tokenResponse = jwtTokenProvider.createTokenWithRefreshToken(refreshToken);
+        return tokenResponse;
     }
 }

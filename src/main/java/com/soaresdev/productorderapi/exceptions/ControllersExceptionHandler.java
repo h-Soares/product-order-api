@@ -1,10 +1,13 @@
 package com.soaresdev.productorderapi.exceptions;
 
+import com.auth0.jwt.exceptions.InvalidClaimException;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -59,6 +62,24 @@ public class ControllersExceptionHandler {
     public ResponseEntity<StandardError> badCredentials(BadCredentialsException e, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(getStandardError(HttpStatus.UNAUTHORIZED, e, request));
+    }
+
+    @ExceptionHandler(JWTDecodeException.class)
+    public ResponseEntity<StandardError> jwtDecode(JWTDecodeException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+               .body(getStandardError(HttpStatus.INTERNAL_SERVER_ERROR, e, request));
+    }
+
+    @ExceptionHandler(AuthenticationServiceException.class)
+    public ResponseEntity<StandardError> authenticationService(AuthenticationServiceException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+               .body(getStandardError(HttpStatus.FORBIDDEN, e, request));
+    }
+
+    @ExceptionHandler(InvalidClaimException.class)
+    public ResponseEntity<StandardError> invalidClaim(InvalidClaimException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+               .body(getStandardError(HttpStatus.FORBIDDEN, e, request));
     }
 
     private StandardError getStandardError(HttpStatus hs, Exception e, HttpServletRequest request) {

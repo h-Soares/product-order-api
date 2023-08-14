@@ -1,5 +1,6 @@
 package com.soaresdev.productorderapi.security.jwt;
 
+import com.auth0.jwt.exceptions.InvalidClaimException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.soaresdev.productorderapi.exceptions.StandardError;
@@ -29,7 +30,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String token = jwtTokenProvider.fixRequestTokenFormat(request);
-            if(token != null && jwtTokenProvider.isValidToken(token) && jwtTokenProvider.isAccessToken(token)) {
+            if(token != null && jwtTokenProvider.isValidToken(token)) {
+                if(!jwtTokenProvider.isAccessToken(token))
+                    throw new InvalidClaimException("Invalid or expired token");
+
                 Authentication authentication = jwtTokenProvider.getAuthentication(token);
                 if(authentication != null)
                     SecurityContextHolder.getContext().setAuthentication(authentication);
