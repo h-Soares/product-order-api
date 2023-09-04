@@ -2,6 +2,7 @@ package com.soaresdev.productorderapi.controllers.v1;
 
 import com.soaresdev.productorderapi.dtos.UserDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.UserInsertDTO;
+import com.soaresdev.productorderapi.dtos.insertDTOs.UserRoleInsertDTO;
 import com.soaresdev.productorderapi.exceptions.StandardError;
 import com.soaresdev.productorderapi.exceptions.StandardInsertDTOError;
 import com.soaresdev.productorderapi.services.UserService;
@@ -25,7 +26,6 @@ import java.net.URI;
 @RestController
 @RequestMapping("/v1/users")
 @Tag(name = "User")
-//TODO: add Role, delete Role -> Create Role Controller?
 public class UserController {
     private final UserService userService;
 
@@ -35,7 +35,8 @@ public class UserController {
 
     @Operation(description = "Get a paginated list of all users", method = "GET")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK")
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
@@ -48,6 +49,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = UserDTO.class))),
             @ApiResponse(responseCode = "400", description = "Illegal argument", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @SecurityRequirement(name = "bearerAuth")
@@ -75,6 +77,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Success. No content", content = @Content),
             @ApiResponse(responseCode = "400", description = "Invalid argument", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @SecurityRequirement(name = "bearerAuth")
@@ -89,6 +92,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = UserDTO.class))),
             @ApiResponse(responseCode = "400", description = "Invalid arguments", content = @Content(schema = @Schema(implementation = StandardInsertDTOError.class))),
+            @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "409", description = "Entity already exists", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
@@ -97,5 +101,36 @@ public class UserController {
     @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<UserDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid UserInsertDTO userInsertDTO) {
         return ResponseEntity.ok(userService.updateByUUID(uuid, userInsertDTO));
+    }
+
+    @Operation(description = "Add a role to a user by UUID", method = "POST", summary = "Role type: ROLE_USER, ROLE_ADMIN, ROLE_MANAGER")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Success. No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Invalid argument", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "409", description = "Entity already exists", content = @Content(schema = @Schema(implementation = StandardError.class)))
+    })
+    @SecurityRequirement(name = "bearerAuth")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/{uuid}/roles")
+    public ResponseEntity<Void> addRole(@PathVariable String uuid, @RequestBody @Valid UserRoleInsertDTO userRoleInsertDTO) {
+        userService.addRole(uuid, userRoleInsertDTO);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(description = "Delete a role from a user by UUID", method = "DELETE", summary = "Role type: ROLE_USER, ROLE_ADMIN, ROLE_MANAGER")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Success. No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Invalid argument", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class))),
+            @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
+    })
+    @SecurityRequirement(name = "bearerAuth")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/{uuid}/roles")
+    public ResponseEntity<Void> deleteRole(@PathVariable String uuid, @RequestBody @Valid UserRoleInsertDTO userRoleInsertDTO) {
+        userService.deleteRole(uuid, userRoleInsertDTO);
+        return ResponseEntity.noContent().build();
     }
 }

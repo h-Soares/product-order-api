@@ -2,7 +2,9 @@ package com.soaresdev.productorderapi.services;
 
 import com.soaresdev.productorderapi.dtos.UserDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.UserInsertDTO;
+import com.soaresdev.productorderapi.dtos.insertDTOs.UserRoleInsertDTO;
 import com.soaresdev.productorderapi.entities.User;
+import com.soaresdev.productorderapi.repositories.RoleRepository;
 import com.soaresdev.productorderapi.repositories.UserRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,10 +22,12 @@ import java.util.UUID;
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, ModelMapper modelMapper) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -79,6 +83,26 @@ public class UserService implements UserDetailsService {
         modelMapper.map(userInsertDTO, user, "updateUserConverter");
         user = userRepository.save(user);
         return new UserDTO(user);
+    }
+
+    @Transactional
+    public void addRole(String uuid, UserRoleInsertDTO userRoleInsertDTO) {
+        User user = getUser(uuid);
+        if(user.getRoleNames().contains(userRoleInsertDTO.getRoleName().toString().toUpperCase()))
+            throw new EntityExistsException("Role already exists in this user");
+
+        user.getRoles().add(roleRepository.findByRoleNameCode(userRoleInsertDTO.getRoleName().getCode()));
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void deleteRole(String uuid, UserRoleInsertDTO userRoleInsertDTO) {
+        User user = getUser(uuid);
+        if(!user.getRoleNames().contains(userRoleInsertDTO.getRoleName().toString().toUpperCase()))
+            throw new EntityNotFoundException("Role not found in this user");
+
+        user.getRoles().remove(roleRepository.findByRoleNameCode(userRoleInsertDTO.getRoleName().getCode()));
+        userRepository.save(user);
     }
 
     private User getUser(String uuid) {
