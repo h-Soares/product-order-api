@@ -4,7 +4,7 @@ Esta é uma API Restful de pedidos e produtos que disponibiliza endpoints para r
 
 O sistema permite realizar ações sobre usuários e pedidos, adicionar categorias a produtos, adicionar items de produtos a um pedido, realizar pagamentos de pedidos, entre outros...
 
-Utiliza validação de objetos e dos casos de uso, paginação, criptografia de senhas, otimização de consultas SQL para evitar o problema N + 1, versionamento da API e Content Negotiation para os formatos JSON e XML.
+Utiliza validação de objetos e dos casos de uso, paginação, criptografia de senhas, otimização de consultas SQL para evitar o problema N + 1, versionamento da API, Content Negotiation para os formatos JSON e XML, autenticação com token JWT e verificação de roles.
 
 
 O **desenvolvimento inicial** da API se deu tomando como base o o workshop do curso de Java - Programação Orientada a Objetos (UDEMY) do professor Nélio Alves.
@@ -15,7 +15,7 @@ O **desenvolvimento inicial** da API se deu tomando como base o o workshop do cu
 * Java 17
 * Spring Boot 3.0.6
 * Spring Web
-* Spring Security
+* Spring Security: autenticação com Token JWT
 * Spring Data JPA / Hibernate
 * Java Bean Validation
 * PostgreSQL
