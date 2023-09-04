@@ -16,6 +16,7 @@ import java.time.Instant;
 import java.util.List;
 
 @RestControllerAdvice
+//TODO: Handle AccessDeniedException
 public class ControllersExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<StandardError> illegalArgument(IllegalArgumentException e, HttpServletRequest request) {

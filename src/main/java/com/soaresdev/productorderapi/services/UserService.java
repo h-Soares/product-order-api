@@ -9,6 +9,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -51,7 +53,14 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void deleteByUUID(String uuid) {
-        userRepository.delete(getUser(uuid));
+        User user = getUser(uuid);
+        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+            if(!user.getEmail().equals(email))
+                throw new AccessDeniedException("You do not have permission to delete this user");
+        }
+
+        userRepository.delete(user);
     }
 
     @Transactional
@@ -60,6 +69,12 @@ public class UserService implements UserDetailsService {
         if(!userInsertDTO.getEmail().equals(user.getEmail()) &&
                 userRepository.existsByEmail(userInsertDTO.getEmail()))
             throw new EntityExistsException("Email already exists");
+
+        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+            if(!user.getEmail().equals(email))
+                throw new AccessDeniedException("You do not have permission to update this user");
+        }
 
         modelMapper.map(userInsertDTO, user, "updateUserConverter");
         user = userRepository.save(user);
