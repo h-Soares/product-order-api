@@ -37,7 +37,7 @@ public class CategoryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK")
     })
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping(produces = {"application/json", "application/xml"})
     public ResponseEntity<Page<CategoryDTO>> findAll(@PageableDefault(sort = "name") Pageable pageable) {
         return ResponseEntity.ok(categoryService.findAll(pageable));
@@ -49,7 +49,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "400", description = "Illegal argument", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<CategoryDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(categoryService.findByUUID(uuid));
