@@ -10,12 +10,14 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
@@ -23,6 +25,8 @@ import java.net.URI;
 @RestController
 @RequestMapping("/v1/categories")
 @Tag(name = "Category")
+@SecurityRequirement(name = "bearerAuth")
+@PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
 public class CategoryController {
     private final CategoryService categoryService;
 
