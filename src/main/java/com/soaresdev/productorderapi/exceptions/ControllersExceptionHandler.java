@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,7 +17,6 @@ import java.time.Instant;
 import java.util.List;
 
 @RestControllerAdvice
-//TODO: Handle AccessDeniedException
 public class ControllersExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<StandardError> illegalArgument(IllegalArgumentException e, HttpServletRequest request) {
@@ -79,6 +79,12 @@ public class ControllersExceptionHandler {
 
     @ExceptionHandler(InvalidClaimException.class)
     public ResponseEntity<StandardError> invalidClaim(InvalidClaimException e, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+               .body(getStandardError(HttpStatus.FORBIDDEN, e, request));
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<StandardError> accessDenied(AccessDeniedException e, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                .body(getStandardError(HttpStatus.FORBIDDEN, e, request));
     }
