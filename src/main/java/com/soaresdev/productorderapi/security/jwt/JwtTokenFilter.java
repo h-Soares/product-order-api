@@ -31,7 +31,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         try {
             String token = jwtTokenProvider.fixRequestTokenFormat(request);
             if(token != null && jwtTokenProvider.isValidToken(token)) {
-                if(!jwtTokenProvider.isAccessToken(token)) //TODO: CHANGE TO ABOVE?
+                if(!jwtTokenProvider.isAccessToken(token))
                     throw new InvalidClaimException("Invalid or expired token");
 
                 Authentication authentication = jwtTokenProvider.getAuthentication(token);
