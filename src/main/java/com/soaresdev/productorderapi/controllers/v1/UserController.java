@@ -25,7 +25,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/v1/users")
 @Tag(name = "User")
-//TODO: add Role, delete Role, modify Role -> Create Role Controller?
+//TODO: add Role, delete Role -> Create Role Controller?
 public class UserController {
     private final UserService userService;
 
