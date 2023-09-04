@@ -6,6 +6,7 @@ import com.soaresdev.productorderapi.dtos.insertDTOs.OrderItemDeleteDTO;
 import com.soaresdev.productorderapi.dtos.insertDTOs.OrderItemInsertDTO;
 import com.soaresdev.productorderapi.entities.Order;
 import com.soaresdev.productorderapi.entities.OrderItem;
+import com.soaresdev.productorderapi.entities.User;
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
 import com.soaresdev.productorderapi.exceptions.AlreadyPaidException;
 import com.soaresdev.productorderapi.exceptions.NotPaidException;
@@ -17,6 +18,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
@@ -45,15 +48,29 @@ public class OrderService {
     }
 
     public OrderDTO findByUUID(String uuid) {
-        return new OrderDTO(getOrder(uuid));
+        Order order = getOrder(uuid);
+        User user = order.getClient();
+        if(user.getRoleNames().stream().noneMatch(r -> r.equals("ROLE_MANAGER") || r.equals("ROLE_ADMIN"))) {
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+            if(!user.getEmail().equals(email))
+                throw new AccessDeniedException("You do not have permission to see this order");
+        }
+
+        return new OrderDTO(order);
     }
 
     @Transactional
     public OrderDTO insert(OrderInsertDTO orderInsertDTO) {
-        if (!userRepository.existsById(UUID.fromString(orderInsertDTO.getClient_id())))
+        if(!userRepository.existsById(UUID.fromString(orderInsertDTO.getClient_id())))
             throw new EntityNotFoundException("Client not found");
         if(orderInsertDTO.getOrderStatus() == OrderStatus.PAID)
             throw new NotPaidException("Not paid yet");
+        User user = userRepository.getReferenceById(UUID.fromString(orderInsertDTO.getClient_id()));
+        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+            if(!user.getEmail().equals(email))
+                throw new AccessDeniedException("You do not have permission to add an order to this client");
+        }
 
         Order order = modelMapper.map(orderInsertDTO, Order.class);
         order = orderRepository.save(order);
@@ -80,6 +97,12 @@ public class OrderService {
             throw new EntityNotFoundException("Product not found");
 
         Order order = getOrder(uuid);
+        User user = order.getClient();
+        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+            if(!user.getEmail().equals(email))
+                throw new AccessDeniedException("You do not have permission to add an item to this order");
+        }
         if(order.getPayment() != null)
             throw new AlreadyPaidException("Already paid, unable to add order item");
 
@@ -101,6 +124,12 @@ public class OrderService {
             throw new EntityNotFoundException("Product not found");
 
         Order order = getOrder(uuid);
+        User user = order.getClient();
+        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+            if(!user.getEmail().equals(email))
+                throw new AccessDeniedException("You do not have permission to delete an item from this order");
+        }
         if(order.getPayment() != null)
             throw new AlreadyPaidException("Already paid, unable to delete order item");
         if(!orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), UUID.fromString(orderItemDeleteDTO.getProduct_id())))
@@ -118,6 +147,12 @@ public class OrderService {
             throw new EntityNotFoundException("Product not found");
 
         Order order = getOrder(uuid);
+        User user = order.getClient();
+        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+            if(!user.getEmail().equals(email))
+                throw new AccessDeniedException("You do not have permission to update an item from this order");
+        }
         if(order.getPayment() != null)
             throw new AlreadyPaidException("Already paid, unable to update order item");
         if(!orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), UUID.fromString(orderItemInsertDTO.getProduct_id())))
