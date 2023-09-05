@@ -37,11 +37,11 @@ public class PaymentService {
 
     public PaymentDTO findByUUID(String uuid) {
         Payment payment = getPayment(uuid);
-        User user = payment.getOrder().getClient();
-
-        if(user.getRoleNames().stream().noneMatch(r -> r.equals("ROLE_MANAGER") || r.equals("ROLE_ADMIN"))) {
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            if(!user.getEmail().equals(email))
+        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(contextUser.getRoleNames().stream().noneMatch(r -> r.equals("ROLE_MANAGER") || r.equals("ROLE_ADMIN"))) {
+            String clientEmail = payment.getOrder().getClient().getEmail();
+            String contextUserEmail = contextUser.getEmail();
+            if(!clientEmail.equals(contextUserEmail))
                 throw new AccessDeniedException("You do not have permission to see this payment");
         }
 
@@ -56,10 +56,11 @@ public class PaymentService {
         if(paymentRepository.existsByOrderId(UUID.fromString(paymentInsertDTO.getOrder_id())))
             throw new AlreadyPaidException("Order already paid");
 
-        User user = orderRepository.getReferenceById(UUID.fromString(paymentInsertDTO.getOrder_id())).getClient();
-        if(user.getRoleNames().stream().noneMatch(r -> r.equals("ROLE_MANAGER") || r.equals("ROLE_ADMIN"))) {
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            if(!user.getEmail().equals(email))
+        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(contextUser.getRoleNames().stream().noneMatch(r -> r.equals("ROLE_MANAGER") || r.equals("ROLE_ADMIN"))) {
+            String clientEmail = orderRepository.getReferenceById(UUID.fromString(paymentInsertDTO.getOrder_id())).getClient().getEmail();
+            String contextUserEmail = contextUser.getEmail();
+            if(!clientEmail.equals(contextUserEmail))
                 throw new AccessDeniedException("You do not have permission to pay this order");
         }
 

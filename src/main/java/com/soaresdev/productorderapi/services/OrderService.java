@@ -49,10 +49,11 @@ public class OrderService {
 
     public OrderDTO findByUUID(String uuid) {
         Order order = getOrder(uuid);
-        User user = order.getClient();
-        if(user.getRoleNames().stream().noneMatch(r -> r.equals("ROLE_MANAGER") || r.equals("ROLE_ADMIN"))) {
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            if(!user.getEmail().equals(email))
+        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(contextUser.getRoleNames().stream().noneMatch(r -> r.equals("ROLE_MANAGER") || r.equals("ROLE_ADMIN"))) {
+            String clientEmail = order.getClient().getEmail();
+            String contextUserEmail = contextUser.getEmail();
+            if(!clientEmail.equals(contextUserEmail))
                 throw new AccessDeniedException("You do not have permission to see this order");
         }
 
@@ -63,14 +64,15 @@ public class OrderService {
     public OrderDTO insert(OrderInsertDTO orderInsertDTO) {
         if(!userRepository.existsById(UUID.fromString(orderInsertDTO.getClient_id())))
             throw new EntityNotFoundException("Client not found");
-        if(orderInsertDTO.getOrderStatus() == OrderStatus.PAID)
-            throw new NotPaidException("Not paid yet");
-        User user = userRepository.getReferenceById(UUID.fromString(orderInsertDTO.getClient_id()));
-        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            if(!user.getEmail().equals(email))
+        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!contextUser.getRoleNames().contains("ROLE_ADMIN")) {
+            String clientEmail = userRepository.getReferenceById(UUID.fromString(orderInsertDTO.getClient_id())).getEmail();
+            String contextUserEmail = contextUser.getEmail();
+            if(!clientEmail.equals(contextUserEmail))
                 throw new AccessDeniedException("You do not have permission to add an order to this client");
         }
+        if(orderInsertDTO.getOrderStatus() == OrderStatus.PAID)
+            throw new NotPaidException("Not paid yet");
 
         Order order = modelMapper.map(orderInsertDTO, Order.class);
         order = orderRepository.save(order);
@@ -97,10 +99,11 @@ public class OrderService {
             throw new EntityNotFoundException("Product not found");
 
         Order order = getOrder(uuid);
-        User user = order.getClient();
-        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            if(!user.getEmail().equals(email))
+        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!contextUser.getRoleNames().contains("ROLE_ADMIN")) {
+            String clientEmail = order.getClient().getEmail();
+            String contextUserEmail = contextUser.getEmail();
+            if(!clientEmail.equals(contextUserEmail))
                 throw new AccessDeniedException("You do not have permission to add an item to this order");
         }
         if(order.getPayment() != null)
@@ -124,10 +127,11 @@ public class OrderService {
             throw new EntityNotFoundException("Product not found");
 
         Order order = getOrder(uuid);
-        User user = order.getClient();
-        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            if(!user.getEmail().equals(email))
+        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!contextUser.getRoleNames().contains("ROLE_ADMIN")) {
+            String clientEmail = order.getClient().getEmail();
+            String contextUserEmail = contextUser.getEmail();
+            if(!clientEmail.equals(contextUserEmail))
                 throw new AccessDeniedException("You do not have permission to delete an item from this order");
         }
         if(order.getPayment() != null)
@@ -147,10 +151,11 @@ public class OrderService {
             throw new EntityNotFoundException("Product not found");
 
         Order order = getOrder(uuid);
-        User user = order.getClient();
-        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            if(!user.getEmail().equals(email))
+        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!contextUser.getRoleNames().contains("ROLE_ADMIN")) {
+            String clientEmail = order.getClient().getEmail();
+            String contextEmail = contextUser.getEmail();
+            if(!clientEmail.equals(contextEmail))
                 throw new AccessDeniedException("You do not have permission to update an item from this order");
         }
         if(order.getPayment() != null)

@@ -58,9 +58,10 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void deleteByUUID(String uuid) {
         User user = getUser(uuid);
-        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            if(!user.getEmail().equals(email))
+        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!contextUser.getRoleNames().contains("ROLE_ADMIN")) {
+            String contextUserEmail = contextUser.getEmail();
+            if(!user.getEmail().equals(contextUserEmail))
                 throw new AccessDeniedException("You do not have permission to delete this user");
         }
 
@@ -70,15 +71,15 @@ public class UserService implements UserDetailsService {
     @Transactional
     public UserDTO updateByUUID(String uuid, UserInsertDTO userInsertDTO) {
         User user = getUser(uuid);
+        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!contextUser.getRoleNames().contains("ROLE_ADMIN")) {
+            String contextUserEmail = contextUser.getEmail();
+            if(!user.getEmail().equals(contextUserEmail))
+                throw new AccessDeniedException("You do not have permission to update this user");
+        }
         if(!userInsertDTO.getEmail().equals(user.getEmail()) &&
                 userRepository.existsByEmail(userInsertDTO.getEmail()))
             throw new EntityExistsException("Email already exists");
-
-        if(!user.getRoleNames().contains("ROLE_ADMIN")) {
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            if(!user.getEmail().equals(email))
-                throw new AccessDeniedException("You do not have permission to update this user");
-        }
 
         modelMapper.map(userInsertDTO, user, "updateUserConverter");
         user = userRepository.save(user);
