@@ -19,10 +19,6 @@ import io.swagger.v3.oas.annotations.servers.Server;
         @Server(
             description = "Deploy server",
             url = "https://product-order-api.onrender.com"
-        ),
-        @Server(
-                description = "Localhost test server",
-                url = "http://localhost:8080/"
         )
     }
 )
