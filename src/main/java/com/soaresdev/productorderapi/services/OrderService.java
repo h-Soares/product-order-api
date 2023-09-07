@@ -61,8 +61,10 @@ public class OrderService {
     @Transactional
     public OrderDTO insert(OrderInsertDTO orderInsertDTO) {
         ifClientNotExistsThrowsException(orderInsertDTO.getClient_id());
-        User client = userRepository.getReferenceById(UUID.fromString(orderInsertDTO.getClient_id()));
-        ifIsNotAdminCheck(client);
+        if(!isContextUserAdmin()) {
+            User client = userRepository.getReferenceById(UUID.fromString(orderInsertDTO.getClient_id()));
+            ifUserIsNotSameThrowsException(client, getContextUser());
+        }
         if(orderInsertDTO.getOrderStatus() == OrderStatus.PAID)
             throw new NotPaidException("Not paid yet");
 
@@ -89,7 +91,8 @@ public class OrderService {
         ifProductNotExistsThrowsException(orderItemInsertDTO.getProduct_id());
 
         Order order = getOrder(uuid);
-        ifIsNotAdminCheck(order.getClient());
+        if(!isContextUserAdmin())
+            ifUserIsNotSameThrowsException(order.getClient(), getContextUser());
         ifOrderIsAlreadyPaidThrowsException(order);
 
         UUID productUuid = UUID.fromString(orderItemInsertDTO.getProduct_id());
@@ -110,7 +113,8 @@ public class OrderService {
         ifProductNotExistsThrowsException(orderItemDeleteDTO.getProduct_id());
 
         Order order = getOrder(uuid);
-        ifIsNotAdminCheck(order.getClient());
+        if(!isContextUserAdmin())
+            ifUserIsNotSameThrowsException(order.getClient(), getContextUser());
         ifOrderIsAlreadyPaidThrowsException(order);
         UUID productUuid = UUID.fromString(orderItemDeleteDTO.getProduct_id());
         ifOrderItemNotExistsThrowsException(order.getId(), productUuid);
@@ -126,8 +130,10 @@ public class OrderService {
         ifProductNotExistsThrowsException(orderItemInsertDTO.getProduct_id());
 
         Order order = getOrder(uuid);
-        ifIsNotAdminCheck(order.getClient());
+        if(!isContextUserAdmin())
+            ifUserIsNotSameThrowsException(order.getClient(), getContextUser());
         ifOrderIsAlreadyPaidThrowsException(order);
+
         UUID productUuid = UUID.fromString(orderItemInsertDTO.getProduct_id());
         ifOrderItemNotExistsThrowsException(order.getId(), productUuid);
 
@@ -177,16 +183,15 @@ public class OrderService {
             throw new EntityNotFoundException("Order item not found");
     }
 
-    private void ifIsNotAdminCheck(User client) {
+    private boolean isContextUserAdmin() {
         User contextUser = getContextUser();
-        if(!contextUser.getRoleNames().contains(RoleName.ROLE_ADMIN.toString()))
-            ifUserIsNotSameThrowsException(client, contextUser);
+        return contextUser.getRoleNames().contains(RoleName.ROLE_ADMIN.toString());
     }
 
-    private void ifUserIsNotSameThrowsException(User client, User contextUser) {
-        String clientEmail = client.getEmail();
-        String contextUserEmail = contextUser.getEmail();
-        if(!clientEmail.equals(contextUserEmail))
+    private void ifUserIsNotSameThrowsException(User userOne, User userTwo) {
+        String userOneEmail = userOne.getEmail();
+        String userTwoEmail = userTwo.getEmail();
+        if(!userOneEmail.equals(userTwoEmail))
             throw new AccessDeniedException("Access denied");
     }
 }
