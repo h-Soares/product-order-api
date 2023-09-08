@@ -11,13 +11,13 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
+
+import static com.soaresdev.productorderapi.utils.Utils.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -58,12 +58,8 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void deleteByUUID(String uuid) {
         User user = getUser(uuid);
-        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(!contextUser.getRoleNames().contains("ROLE_ADMIN")) {
-            String contextUserEmail = contextUser.getEmail();
-            if(!user.getEmail().equals(contextUserEmail))
-                throw new AccessDeniedException("You do not have permission to delete this user");
-        }
+        if(!isContextUserAdmin())
+            ifUserIsNotSameThrowsException(user, getContextUser());
 
         userRepository.delete(user);
     }
@@ -71,12 +67,8 @@ public class UserService implements UserDetailsService {
     @Transactional
     public UserDTO updateByUUID(String uuid, UserInsertDTO userInsertDTO) {
         User user = getUser(uuid);
-        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(!contextUser.getRoleNames().contains("ROLE_ADMIN")) {
-            String contextUserEmail = contextUser.getEmail();
-            if(!user.getEmail().equals(contextUserEmail))
-                throw new AccessDeniedException("You do not have permission to update this user");
-        }
+        if(!isContextUserAdmin())
+            ifUserIsNotSameThrowsException(user, getContextUser());
         if(!userInsertDTO.getEmail().equals(user.getEmail()) &&
                 userRepository.existsByEmail(userInsertDTO.getEmail()))
             throw new EntityExistsException("Email already exists");

@@ -58,10 +58,10 @@ public class ProductService {
 
     @Transactional
     public ProductDTO addCategoryByUUID(String product_uuid, ProductCategoryInsertDTO productCategoryInsertDTO) {
-        if(!categoryRepository.existsById(UUID.fromString(productCategoryInsertDTO.getCategory_uuid())))
-            throw new EntityNotFoundException("Category not found");
+        UUID insertDTOCategoryUuid = UUID.fromString(productCategoryInsertDTO.getCategory_uuid());
+        ifCategoryNotExistsThrowsException(insertDTOCategoryUuid);
 
-        Category category = categoryRepository.getReferenceById(UUID.fromString(productCategoryInsertDTO.getCategory_uuid()));
+        Category category = categoryRepository.getReferenceById(insertDTOCategoryUuid);
         Product product = getProduct(product_uuid);
 
         if(product.getCategories().contains(category))
@@ -74,14 +74,13 @@ public class ProductService {
 
     @Transactional
     public ProductDTO removeCategoryByUUID(String product_uuid, ProductCategoryInsertDTO productCategoryInsertDTO) {
-        if(!categoryRepository.existsById(UUID.fromString(productCategoryInsertDTO.getCategory_uuid())))
-            throw new EntityNotFoundException("Category not found");
+        UUID insertDTOCategoryUuid = UUID.fromString(productCategoryInsertDTO.getCategory_uuid());
+        ifCategoryNotExistsThrowsException(insertDTOCategoryUuid);
 
-        Category category = categoryRepository.getReferenceById(UUID.fromString(productCategoryInsertDTO.getCategory_uuid()));
+        Category category = categoryRepository.getReferenceById(insertDTOCategoryUuid);
         Product product = getProduct(product_uuid);
 
-        if(!product.getCategories().contains(category))
-            throw new EntityNotFoundException("Category not found in this product");
+        ifProductNotContainsCategoryThrowsException(product, category);
 
         product.getCategories().remove(category);
         product = productRepository.save(product);
@@ -91,5 +90,15 @@ public class ProductService {
     private Product getProduct(String uuid) {
         return productRepository.findById(UUID.fromString(uuid))
                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
+    }
+
+    private void ifCategoryNotExistsThrowsException(UUID categoryUuid) {
+        if(!categoryRepository.existsById(categoryUuid))
+            throw new EntityNotFoundException("Category not found");
+    }
+
+    private void ifProductNotContainsCategoryThrowsException(Product product, Category category) {
+        if(!product.getCategories().contains(category))
+            throw new EntityNotFoundException("Category not found in this product");
     }
 }

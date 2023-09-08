@@ -49,10 +49,11 @@ public class CategoryService {
     @Transactional
     public CategoryDTO updateByUUID(String uuid, CategoryInsertDTO categoryInsertDTO) {
         Category category = getCategory(uuid);
-        if(!category.getName().equals(categoryInsertDTO.getName()) && categoryRepository.existsByName(categoryInsertDTO.getName()))
+        String insertDTOCategoryName = categoryInsertDTO.getName();
+        if(!category.getName().equals(insertDTOCategoryName) && categoryRepository.existsByName(insertDTOCategoryName))
             throw new EntityExistsException("Category name already exists");
 
-        category.setName(categoryInsertDTO.getName());
+        category.setName(insertDTOCategoryName);
         category = categoryRepository.save(category);
         return new CategoryDTO(category);
     }

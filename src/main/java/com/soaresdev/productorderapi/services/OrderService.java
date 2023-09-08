@@ -19,12 +19,11 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
-import static com.soaresdev.productorderapi.utils.Utils.getContextUser;
+import static com.soaresdev.productorderapi.utils.Utils.*;
 
 // 20/07/2023  21:09 !
 @Service
@@ -60,9 +59,10 @@ public class OrderService {
 
     @Transactional
     public OrderDTO insert(OrderInsertDTO orderInsertDTO) {
-        ifClientNotExistsThrowsException(orderInsertDTO.getClient_id());
+        String insertDTOClientUuid = orderInsertDTO.getClient_id();
+        ifClientNotExistsThrowsException(insertDTOClientUuid);
         if(!isContextUserAdmin()) {
-            User client = userRepository.getReferenceById(UUID.fromString(orderInsertDTO.getClient_id()));
+            User client = userRepository.getReferenceById(UUID.fromString(insertDTOClientUuid));
             ifUserIsNotSameThrowsException(client, getContextUser());
         }
         if(orderInsertDTO.getOrderStatus() == OrderStatus.PAID)
@@ -95,13 +95,13 @@ public class OrderService {
             ifUserIsNotSameThrowsException(order.getClient(), getContextUser());
         ifOrderIsAlreadyPaidThrowsException(order);
 
-        UUID productUuid = UUID.fromString(orderItemInsertDTO.getProduct_id());
-        if(orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), productUuid)) {
-            OrderItem orderItem = getOrderItem(order.getId(), productUuid);
+        UUID insertDTOProductUuid = UUID.fromString(orderItemInsertDTO.getProduct_id());
+        if(orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), insertDTOProductUuid)) {
+            OrderItem orderItem = getOrderItem(order.getId(), insertDTOProductUuid);
             orderItem.setQuantity(orderItem.getQuantity() + orderItemInsertDTO.getQuantity());
         }
         else {
-            OrderItem orderItem = new OrderItem(order, productRepository.getReferenceById(productUuid), orderItemInsertDTO.getQuantity());
+            OrderItem orderItem = new OrderItem(order, productRepository.getReferenceById(insertDTOProductUuid), orderItemInsertDTO.getQuantity());
             order.getItems().add(orderItem);
         }
         order = orderRepository.save(order);
@@ -116,11 +116,11 @@ public class OrderService {
         if(!isContextUserAdmin())
             ifUserIsNotSameThrowsException(order.getClient(), getContextUser());
         ifOrderIsAlreadyPaidThrowsException(order);
-        UUID productUuid = UUID.fromString(orderItemDeleteDTO.getProduct_id());
-        ifOrderItemNotExistsThrowsException(order.getId(), productUuid);
+        UUID insertDTOProductUuid = UUID.fromString(orderItemDeleteDTO.getProduct_id());
+        ifOrderItemNotExistsThrowsException(order.getId(), insertDTOProductUuid);
 
-        order.getItems().remove(getOrderItem(order.getId(), productUuid));
-        orderItemRepository.deleteById_OrderIdAndId_ProductId(order.getId(), productUuid);
+        order.getItems().remove(getOrderItem(order.getId(), insertDTOProductUuid));
+        orderItemRepository.deleteById_OrderIdAndId_ProductId(order.getId(), insertDTOProductUuid);
         order = orderRepository.save(order);
         return new OrderDTO(order);
     }
@@ -134,10 +134,10 @@ public class OrderService {
             ifUserIsNotSameThrowsException(order.getClient(), getContextUser());
         ifOrderIsAlreadyPaidThrowsException(order);
 
-        UUID productUuid = UUID.fromString(orderItemInsertDTO.getProduct_id());
-        ifOrderItemNotExistsThrowsException(order.getId(), productUuid);
+        UUID insertDTOProductUuid = UUID.fromString(orderItemInsertDTO.getProduct_id());
+        ifOrderItemNotExistsThrowsException(order.getId(), insertDTOProductUuid);
 
-        OrderItem orderItem = getOrderItem(order.getId(), productUuid);
+        OrderItem orderItem = getOrderItem(order.getId(), insertDTOProductUuid);
         orderItem.setQuantity(orderItemInsertDTO.getQuantity());
         order = orderRepository.save(order);
         return new OrderDTO(order);
@@ -181,17 +181,5 @@ public class OrderService {
     private void ifOrderItemNotExistsThrowsException(UUID orderUuid, UUID productUuid) {
         if(!orderItemRepository.existsById_OrderIdAndId_ProductId(orderUuid, productUuid))
             throw new EntityNotFoundException("Order item not found");
-    }
-
-    private boolean isContextUserAdmin() {
-        User contextUser = getContextUser();
-        return contextUser.getRoleNames().contains(RoleName.ROLE_ADMIN.toString());
-    }
-
-    private void ifUserIsNotSameThrowsException(User userOne, User userTwo) {
-        String userOneEmail = userOne.getEmail();
-        String userTwoEmail = userTwo.getEmail();
-        if(!userOneEmail.equals(userTwoEmail))
-            throw new AccessDeniedException("Access denied");
     }
 }

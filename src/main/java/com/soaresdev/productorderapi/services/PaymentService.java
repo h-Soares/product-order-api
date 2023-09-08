@@ -13,11 +13,11 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
+
+import static com.soaresdev.productorderapi.utils.Utils.*;
 
 @Service
 public class PaymentService {
@@ -37,31 +37,25 @@ public class PaymentService {
 
     public PaymentDTO findByUUID(String uuid) {
         Payment payment = getPayment(uuid);
-        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(contextUser.getRoleNames().stream().noneMatch(r -> r.equals("ROLE_MANAGER") || r.equals("ROLE_ADMIN"))) {
-            String clientEmail = payment.getOrder().getClient().getEmail();
-            String contextUserEmail = contextUser.getEmail();
-            if(!clientEmail.equals(contextUserEmail))
-                throw new AccessDeniedException("You do not have permission to see this payment");
-        }
+        User contextUser = getContextUser();
+        if(contextUser.getRoleNames().stream().noneMatch(r -> r.equals("ROLE_MANAGER") || r.equals("ROLE_ADMIN")))
+            ifUserIsNotSameThrowsException(payment.getOrder().getClient(), contextUser);
 
         return new PaymentDTO(payment);
     }
 
     @Transactional
     public PaymentDTO insert(PaymentInsertDTO paymentInsertDTO) {
-        if(!orderRepository.existsById(UUID.fromString(paymentInsertDTO.getOrder_id())))
-            throw new EntityNotFoundException("Order not found");
+        UUID insertDTOOrderUuid = UUID.fromString(paymentInsertDTO.getOrder_id());
+        ifPaymentOrderNotExistsThrowsException(insertDTOOrderUuid);
 
-        if(paymentRepository.existsByOrderId(UUID.fromString(paymentInsertDTO.getOrder_id())))
+        if(paymentRepository.existsByOrderId(insertDTOOrderUuid))
             throw new AlreadyPaidException("Order already paid");
 
-        User contextUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User contextUser = getContextUser();
         if(contextUser.getRoleNames().stream().noneMatch(r -> r.equals("ROLE_MANAGER") || r.equals("ROLE_ADMIN"))) {
-            String clientEmail = orderRepository.getReferenceById(UUID.fromString(paymentInsertDTO.getOrder_id())).getClient().getEmail();
-            String contextUserEmail = contextUser.getEmail();
-            if(!clientEmail.equals(contextUserEmail))
-                throw new AccessDeniedException("You do not have permission to pay this order");
+            User orderClient = orderRepository.getReferenceById(insertDTOOrderUuid).getClient();
+            ifUserIsNotSameThrowsException(orderClient, contextUser);
         }
 
         Payment payment = modelMapper.map(paymentInsertDTO, Payment.class);
@@ -85,14 +79,14 @@ public class PaymentService {
     }
 
     private void updatePayment(Payment payment, PaymentInsertDTO paymentInsertDTO) {
-        if(!orderRepository.existsById(UUID.fromString(paymentInsertDTO.getOrder_id())))
-            throw new EntityNotFoundException("Order not found");
-        if(!UUID.fromString(paymentInsertDTO.getOrder_id()).equals(payment.getOrder().getId()) && paymentRepository.existsByOrderId(UUID.fromString(paymentInsertDTO.getOrder_id())))
+        UUID insertDTOOrderUuid = UUID.fromString(paymentInsertDTO.getOrder_id());
+        ifPaymentOrderNotExistsThrowsException(insertDTOOrderUuid);
+        if(!insertDTOOrderUuid.equals(payment.getOrder().getId()) && paymentRepository.existsByOrderId(insertDTOOrderUuid))
             throw new AlreadyPaidException("Order already paid");
-        if(UUID.fromString(paymentInsertDTO.getOrder_id()) != payment.getOrder().getId())
+        if(insertDTOOrderUuid != payment.getOrder().getId())
             payment.getOrder().setOrderStatus(OrderStatus.WAITING_PAYMENT);
 
-        Order order = orderRepository.getReferenceById(UUID.fromString(paymentInsertDTO.getOrder_id()));
+        Order order = orderRepository.getReferenceById(insertDTOOrderUuid);
         order.setOrderStatus(OrderStatus.PAID);
         payment.setPaymentType(paymentInsertDTO.getPaymentType());
         payment.setOrder(order);
@@ -102,5 +96,10 @@ public class PaymentService {
     private Payment getPayment(String uuid) {
         return paymentRepository.findById(UUID.fromString(uuid)).
                orElseThrow(() -> new EntityNotFoundException("Payment not found"));
+    }
+
+    private void ifPaymentOrderNotExistsThrowsException(UUID paymentOrderUuid) {
+        if(!orderRepository.existsById(paymentOrderUuid))
+            throw new EntityNotFoundException("Order not found");
     }
 }
