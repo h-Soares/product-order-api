@@ -15,7 +15,7 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
     boolean existsByName(String name);
 
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query(nativeQuery = true, value =
             "DELETE FROM tb_product_category " +  "WHERE category_id IN (SELECT id FROM tb_category WHERE id = :uuid); " +
                     "DELETE FROM tb_category WHERE id = :uuid")
