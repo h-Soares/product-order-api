@@ -38,7 +38,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping(produces = {"application/json", "application/xml"})
     public ResponseEntity<Page<CategoryDTO>> findAll(@PageableDefault(sort = "name") Pageable pageable) {
         return ResponseEntity.ok(categoryService.findAll(pageable));
@@ -51,7 +51,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<CategoryDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(categoryService.findByUUID(uuid));
@@ -64,7 +64,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "409", description = "Entity already exists", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')")
     @PostMapping(consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<CategoryDTO> insert(@RequestBody @Valid CategoryInsertDTO categoryInsertDTO) {
         CategoryDTO categoryDTO = categoryService.insert(categoryInsertDTO);
@@ -80,7 +80,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')")
     @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> deleteByUUID(@PathVariable String uuid) {
         categoryService.deleteByUUID(uuid);
@@ -95,7 +95,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "409", description = "Entity already exists", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')")
     @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<CategoryDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid CategoryInsertDTO categoryInsertDTO) {
         return ResponseEntity.ok(categoryService.updateByUUID(uuid, categoryInsertDTO));

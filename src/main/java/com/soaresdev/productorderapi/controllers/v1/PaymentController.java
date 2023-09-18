@@ -39,7 +39,7 @@ public class PaymentController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')")
     @GetMapping(produces = {"application/json", "application/xml"})
     public ResponseEntity<Page<PaymentDTO>> findAll(@PageableDefault(sort = "amount", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(paymentService.findAll(pageable));
@@ -52,7 +52,7 @@ public class PaymentController {
             @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN')")
     @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<PaymentDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(paymentService.findByUUID(uuid));
@@ -65,7 +65,7 @@ public class PaymentController {
             @ApiResponse(responseCode = "403", description = "Access denied or already paid", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN')")
     @PostMapping(consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<PaymentDTO> insert(@RequestBody @Valid PaymentInsertDTO paymentInsertDTO) {
         PaymentDTO paymentDTO = paymentService.insert(paymentInsertDTO);
@@ -81,7 +81,7 @@ public class PaymentController {
             @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')")
     @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> deleteByUUID(@PathVariable String uuid) {
         paymentService.deleteByUUID(uuid);
@@ -95,7 +95,7 @@ public class PaymentController {
             @ApiResponse(responseCode = "403", description = "Access denied or already paid", content = @Content(schema = @Schema(implementation = StandardError.class))),
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
-    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')")
     @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<PaymentDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid PaymentInsertDTO paymentInsertDTO) {
         return ResponseEntity.ok(paymentService.updateByUUID(uuid, paymentInsertDTO));

@@ -39,7 +39,7 @@ public class UserController {
             @ApiResponse(responseCode = "403", description = "Access denied", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @SecurityRequirement(name = "bearerAuth")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping(produces = {"application/json", "application/xml"})
     public ResponseEntity<Page<UserDTO>> findAll(@PageableDefault(sort = "name") Pageable pageable) {
         return ResponseEntity.ok(userService.findAll(pageable));
@@ -53,7 +53,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @SecurityRequirement(name = "bearerAuth")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<UserDTO> findByUUID(@PathVariable String uuid) {
         return ResponseEntity.ok(userService.findByUUID(uuid));
@@ -81,7 +81,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Entity not found", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @SecurityRequirement(name = "bearerAuth")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> deleteByUUID(@PathVariable String uuid) {
         userService.deleteByUUID(uuid);
@@ -97,7 +97,7 @@ public class UserController {
             @ApiResponse(responseCode = "409", description = "Entity already exists", content = @Content(schema = @Schema(implementation = StandardError.class)))
     })
     @SecurityRequirement(name = "bearerAuth")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PutMapping(value = "/{uuid}", consumes = {"application/json", "application/xml"}, produces = {"application/json", "application/xml"})
     public ResponseEntity<UserDTO> updateByUUID(@PathVariable String uuid, @RequestBody @Valid UserInsertDTO userInsertDTO) {
         return ResponseEntity.ok(userService.updateByUUID(uuid, userInsertDTO));
