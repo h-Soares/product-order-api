@@ -32,7 +32,6 @@ class OrderItemRepositoryTest {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-
     private Order order;
     private Product product;
 
