@@ -129,7 +129,7 @@ public class User implements Serializable, UserDetails {
         return roles;
     }
 
-    public List<String> getRoleNames() {
+    public List<String> getRoleNames() { //TODO: refactor with Role getAuthority
         return roles.stream().map(role -> RoleName.valueOf(role.getRoleNameCode()).toString())
                .collect(Collectors.toList());
     }
