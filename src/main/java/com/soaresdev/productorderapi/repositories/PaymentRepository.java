@@ -17,7 +17,7 @@ public interface PaymentRepository extends JpaRepository<Payment, UUID> {
     boolean existsByOrderId(UUID uuid);
 
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query("DELETE FROM Payment p WHERE p.id = :uuid")
     void deleteByUUID(UUID uuid);
 
