@@ -66,6 +66,7 @@ class OrderItemRepositoryTest {
         assertFalse(orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), product.getId()));
     }
 
+    @org.junit.jupiter.api.Order(3)
     @Test
     void shouldFindOrderItemByOrderIdAndProductId() {
         OrderItem orderItem = orderItemRepository.findById_OrderIdAndId_ProductId(order.getId(), product.getId());
@@ -74,6 +75,7 @@ class OrderItemRepositoryTest {
         assertEquals(product, orderItem.getProduct());
     }
 
+    @org.junit.jupiter.api.Order(4)
     @Test
     void shouldNotFindOrderItemByOrderIdAndProductId() {
         OrderItem orderItem = orderItemRepository.findById_OrderIdAndId_ProductId(UUID.randomUUID(), product.getId());
