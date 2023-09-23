@@ -50,24 +50,24 @@ class OrderItemRepositoryTest {
 
     @org.junit.jupiter.api.Order(1)
     @Test
-    void shouldExistsByOrderIdAndProductId() {
+    void shouldOrderItemExistsByOrderIdAndProductId() {
         assertTrue(orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(),product.getId()));
     }
 
     @org.junit.jupiter.api.Order(2)
     @Test
-    void shouldNotExistsByOrderIdAndProductId() {
+    void shouldOrderItemNotExistsByOrderIdAndProductId() {
         assertFalse(orderItemRepository.existsById_OrderIdAndId_ProductId(UUID.randomUUID(), product.getId()));
     }
 
     @Test
-    void shouldDeleteByOrderIdAndProductId() {
+    void shouldDeleteOrderItemByOrderIdAndProductId() {
         orderItemRepository.deleteById_OrderIdAndId_ProductId(order.getId(), product.getId());
         assertFalse(orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), product.getId()));
     }
 
     @Test
-    void shouldFindByOrderIdAndProductId() {
+    void shouldFindOrderItemByOrderIdAndProductId() {
         OrderItem orderItem = orderItemRepository.findById_OrderIdAndId_ProductId(order.getId(), product.getId());
         assertNotNull(orderItem);
         assertEquals(order, orderItem.getOrder());
@@ -75,7 +75,7 @@ class OrderItemRepositoryTest {
     }
 
     @Test
-    void shouldNotFindByOrderIdAndProductId() {
+    void shouldNotFindOrderItemByOrderIdAndProductId() {
         OrderItem orderItem = orderItemRepository.findById_OrderIdAndId_ProductId(UUID.randomUUID(), product.getId());
         assertNull(orderItem);
     }

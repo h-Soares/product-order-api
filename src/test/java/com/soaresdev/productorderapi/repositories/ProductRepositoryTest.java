@@ -19,7 +19,7 @@ class ProductRepositoryTest {
     private ProductRepository productRepository;
 
     @Test
-    void shouldFindAllWithPage() {
+    void shouldFindAllProductsWithPage() {
         Product product1 = new Product("t", "t", BigDecimal.ONE, "t");
         product1 = productRepository.save(product1);
         Product product2 = new Product("T", "T", BigDecimal.ONE, "T");

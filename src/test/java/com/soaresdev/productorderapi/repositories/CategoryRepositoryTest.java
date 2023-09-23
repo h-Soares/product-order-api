@@ -29,7 +29,7 @@ class CategoryRepositoryTest {
 
     @Order(1)
     @Test
-    void shouldExistsByNameBeTrue() {
+    void shouldCategoryExistsByNameBeTrue() {
         categoryRepository.save(new Category("Test"));
 
         assertTrue(categoryRepository.existsByName("Test"));
@@ -37,7 +37,7 @@ class CategoryRepositoryTest {
 
     @Order(2)
     @Test
-    void shouldExistsByNameBeFalse() {
+    void shouldCategoryExistsByNameBeFalse() {
         categoryRepository.save(new Category("TestTwo"));
 
         assertFalse(categoryRepository.existsByName("Test"));
@@ -45,7 +45,7 @@ class CategoryRepositoryTest {
 
     @Order(3)
     @Test
-    void shouldDeleteByUUID() {
+    void shouldDeleteCategoryByUUID() {
         Category category = new Category("TestDelete");
         category = categoryRepository.save(category);
         UUID uuid = category.getId();
@@ -62,7 +62,7 @@ class CategoryRepositoryTest {
 
     @Order(4)
     @Test
-    void shouldFindAllWithPage() {
+    void shouldFindAllCategoriesWithPage() {
         Category category1 = new Category("Category 1");
         Category category2 = new Category("Category 2");
 

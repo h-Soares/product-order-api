@@ -24,7 +24,7 @@ class OrderRepositoryTest {
     private OrderRepository orderRepository;
 
     @Test
-    void shouldFindAllWithPage() {
+    void shouldFindAllOrdersWithPage() {
         User user = new User("t", "t", "t", "t");
         user = userRepository.save(user);
 

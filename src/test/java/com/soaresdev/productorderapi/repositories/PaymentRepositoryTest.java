@@ -51,24 +51,24 @@ class PaymentRepositoryTest {
 
     @org.junit.jupiter.api.Order(1)
     @Test
-    void shouldExistsByOrderId() {
+    void shouldPaymentExistsByOrderId() {
         assertTrue(paymentRepository.existsByOrderId(order.getId()));
     }
 
     @org.junit.jupiter.api.Order(2)
     @Test
-    void shouldNotExistsByOrderId() {
+    void shouldPaymentNotExistsByOrderId() {
         assertFalse(paymentRepository.existsByOrderId(UUID.randomUUID()));
     }
 
     @Test
-    void shouldDeleteByUUID() {
+    void shouldDeletePaymentByUUID() {
         paymentRepository.deleteByUUID(payment.getId());
         assertFalse(paymentRepository.existsById(payment.getId()));
     }
 
     @Test
-    void shouldFindAllWithPage() {
+    void shouldFindAllPaymentsWithPage() {
         Order order1 = new Order(Instant.now(), OrderStatus.DELIVERED, user);
         order1 = orderRepository.save(order1);
 
