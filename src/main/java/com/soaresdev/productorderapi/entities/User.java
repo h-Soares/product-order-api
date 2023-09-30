@@ -1,13 +1,25 @@
 package com.soaresdev.productorderapi.entities;
 
-import com.soaresdev.productorderapi.entities.enums.RoleName;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_user")
@@ -126,9 +138,8 @@ public class User implements Serializable, UserDetails {
         return roles;
     }
 
-    public List<String> getRoleNames() { //TODO: refactor with Role getAuthority
-        return roles.stream().map(role -> RoleName.valueOf(role.getRoleNameCode()).toString())
-               .collect(Collectors.toList());
+    public List<String> getRoleNames() {
+        return roles.stream().map(Role::getAuthority).toList();
     }
 
     @Override

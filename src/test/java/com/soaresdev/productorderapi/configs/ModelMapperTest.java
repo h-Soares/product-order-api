@@ -13,10 +13,8 @@ import com.soaresdev.productorderapi.entities.enums.RoleName;
 import com.soaresdev.productorderapi.repositories.OrderRepository;
 import com.soaresdev.productorderapi.repositories.RoleRepository;
 import com.soaresdev.productorderapi.repositories.UserRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -28,7 +26,6 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ModelMapperTest {
     private ModelMapper modelMapper;
 
@@ -66,9 +63,9 @@ class ModelMapperTest {
         Payment payment = modelMapper.map(paymentInsertDTO, Payment.class);
 
         assertNotNull(payment);
-        assertEquals(PaymentType.PIX.getCode(), payment.getPaymentType());
+        assertEquals(paymentInsertDTO.getPaymentType().getCode(), payment.getPaymentType());
         assertNotNull(payment.getOrder());
-        assertEquals(OrderStatus.PAID.getCode(), payment.getOrder().getOrderStatus());
+        assertEquals(order.getOrderStatus(), payment.getOrder().getOrderStatus());
         verify(orderRepository, times(1)).getReferenceById(any(UUID.class));
         verifyNoMoreInteractions(orderRepository);
     }
@@ -84,7 +81,7 @@ class ModelMapperTest {
         Order order = modelMapper.map(orderInsertDTO, Order.class);
 
         assertNotNull(order);
-        assertEquals(OrderStatus.WAITING_PAYMENT.getCode(), order.getOrderStatus());
+        assertEquals(orderInsertDTO.getOrderStatus().getCode(), order.getOrderStatus());
         assertNotNull(order.getClient());
         verify(userRepository, times(1)).getReferenceById(any(UUID.class));
         verifyNoMoreInteractions(userRepository);
