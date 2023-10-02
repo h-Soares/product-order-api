@@ -268,8 +268,8 @@ class UserServiceTest {
         when(userRepository.findById(any(UUID.class))).thenReturn(Optional.ofNullable(user));
         mockGetPrincipalReturns(user);
         when(userRepository.existsByEmail(anyString())).thenReturn(true);
-
         userInsertDTO.setEmail("differentemail@gmail.com");
+
         Throwable e = assertThrows(EntityExistsException.class,
                 () -> userService.updateByUUID(RANDOM_UUID.toString(), userInsertDTO));
         assertEquals("Email already exists", e.getMessage());

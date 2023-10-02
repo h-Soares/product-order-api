@@ -58,8 +58,8 @@ class ModelMapperTest {
         paymentInsertDTO.setPaymentType(PaymentType.PIX);
         paymentInsertDTO.setOrder_id(UUID.randomUUID().toString());
         Order order = new Order(Instant.now(), OrderStatus.DELIVERED, new User());
-
         when(orderRepository.getReferenceById(any(UUID.class))).thenReturn(order);
+
         Payment payment = modelMapper.map(paymentInsertDTO, Payment.class);
 
         assertNotNull(payment);
@@ -76,8 +76,8 @@ class ModelMapperTest {
         orderInsertDTO.setOrderStatus(OrderStatus.WAITING_PAYMENT);
         orderInsertDTO.setClient_id(UUID.randomUUID().toString());
         User user = getTestUser();
-
         when(userRepository.getReferenceById(any(UUID.class))).thenReturn(user);
+
         Order order = modelMapper.map(orderInsertDTO, Order.class);
 
         assertNotNull(order);
@@ -91,9 +91,9 @@ class ModelMapperTest {
     void createUserConverter() {
         UserInsertDTO userInsertDTO = getTestUserInsertDTO();
         Role role = new Role(RoleName.ROLE_USER.getCode());
-
         when(bCryptPasswordEncoder.encode(anyString())).thenReturn(ENCRYPTED_PASSWORD);
         when(roleRepository.findByRoleNameCode(anyInt())).thenReturn(role);
+
         User user = modelMapper.map(userInsertDTO, User.class, "createUserConverter");
 
         assertNotNull(user);
@@ -114,8 +114,8 @@ class ModelMapperTest {
     void updateUserConverterTest() {
         User user = getTestUser();
         UserInsertDTO userInsertDTO = getTestUserInsertDTO();
-
         when(bCryptPasswordEncoder.encode(anyString())).thenReturn(ENCRYPTED_PASSWORD);
+
         modelMapper.map(userInsertDTO, user, "updateUserConverter");
 
         assertNotNull(user);

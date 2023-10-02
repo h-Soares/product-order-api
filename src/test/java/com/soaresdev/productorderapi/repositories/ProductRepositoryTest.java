@@ -24,8 +24,8 @@ class ProductRepositoryTest {
         product1 = productRepository.save(product1);
         Product product2 = new Product("T", "T", BigDecimal.ONE, "T");
         product2 = productRepository.save(product2);
-
         Pageable pageable = PageRequest.of(0, 10);
+
         Page<Product> result = productRepository.findAll(pageable);
 
         assertFalse(result.isEmpty());

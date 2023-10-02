@@ -28,6 +28,7 @@ class RoleRepositoryTest {
     @Test
     void shouldFindRoleByRoleNameCode() {
         Role roleFound = roleRepository.findByRoleNameCode(RoleName.ROLE_ADMIN.getCode());
+
         assertNotNull(roleFound);
         assertEquals(role, roleFound);
     }
@@ -36,6 +37,7 @@ class RoleRepositoryTest {
     @Test
     void shouldNotFindRoleByRoleNameCode() {
         Role roleFound = roleRepository.findByRoleNameCode(RoleName.ROLE_USER.getCode());
+
         assertNull(roleFound);
     }
 }

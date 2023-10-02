@@ -41,6 +41,7 @@ class UserRepositoryTest {
     @Test
     void shouldUserExistsByEmail() {
         boolean result = userRepository.existsByEmail("test@email.com");
+
         assertTrue(result);
     }
 
@@ -48,6 +49,7 @@ class UserRepositoryTest {
     @Test
     void shouldUserNotExistsByEmail() {
         boolean result = userRepository.existsByEmail("testingifnotexists@email.com");
+
         assertFalse(result);
     }
 
@@ -55,6 +57,7 @@ class UserRepositoryTest {
     @Test
     void shouldFindUserByEmailWithEagerRoles() {
         Optional<User> user = userRepository.findByEmailWithEagerRoles("test@email.com");
+
         assertTrue(user.isPresent());
         assertFalse(user.get().getRoles().isEmpty());
         assertEquals(1, user.get().getRoles().size());
@@ -65,6 +68,7 @@ class UserRepositoryTest {
     @Test
     void shouldNotFindUserByEmailWithEagerRoles() {
         Optional<User> user = userRepository.findByEmailWithEagerRoles("testingifnotexists@email.com");
+
         assertTrue(user.isEmpty());
     }
 
@@ -75,8 +79,8 @@ class UserRepositoryTest {
         User user2 = new User("test2", "test2@gmail.com", "test2", "test2");
         user2.getRoles().add(role);
         user2 = userRepository.save(user2);
-
         Pageable pageable = PageRequest.of(0, 10);
+
         Page<User> result = userRepository.findAll(pageable);
 
         assertFalse(result.isEmpty());

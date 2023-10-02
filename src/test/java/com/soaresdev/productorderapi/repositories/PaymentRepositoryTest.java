@@ -64,6 +64,7 @@ class PaymentRepositoryTest {
     @Test
     void shouldDeletePaymentByUUID() {
         paymentRepository.deleteByUUID(payment.getId());
+
         assertFalse(paymentRepository.existsById(payment.getId()));
     }
 
@@ -71,10 +72,10 @@ class PaymentRepositoryTest {
     void shouldFindAllPaymentsWithPage() {
         Order order1 = new Order(Instant.now(), OrderStatus.DELIVERED, user);
         order1 = orderRepository.save(order1);
-
         Payment payment2 = new Payment(Instant.now(), PaymentType.CREDIT_CARD, order1);
         payment2 = paymentRepository.save(payment2);
         Pageable pageable = PageRequest.of(0, 10);
+
         Page<Payment> result = paymentRepository.findAll(pageable);
 
         assertFalse(result.isEmpty());

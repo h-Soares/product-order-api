@@ -49,14 +49,13 @@ class CategoryRepositoryTest {
         Category category = new Category("TestDelete");
         category = categoryRepository.save(category);
         UUID uuid = category.getId();
-
         Product product = new Product("t", "t", BigDecimal.ZERO,"t");
         product.getCategories().add(category);
         product = productRepository.save(product);
 
         categoryRepository.deleteByUUID(uuid);
-
         boolean isPresent = categoryRepository.findById(uuid).isPresent();
+
         assertFalse(isPresent);
     }
 
@@ -65,10 +64,10 @@ class CategoryRepositoryTest {
     void shouldFindAllCategoriesWithPage() {
         Category category1 = new Category("Category 1");
         Category category2 = new Category("Category 2");
-
         category1 = categoryRepository.save(category1);
         category2 = categoryRepository.save(category2);
         Pageable pageable = PageRequest.of(0, 10);
+
         Page<Category> result = categoryRepository.findAll(pageable);
 
         assertFalse(result.isEmpty());

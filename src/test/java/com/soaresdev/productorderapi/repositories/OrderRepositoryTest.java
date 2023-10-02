@@ -27,12 +27,12 @@ class OrderRepositoryTest {
     void shouldFindAllOrdersWithPage() {
         User user = new User("t", "t", "t", "t");
         user = userRepository.save(user);
-
         Order order1 = new Order(Instant.now(), OrderStatus.WAITING_PAYMENT, user);
         Order order2 = new Order(Instant.now(), OrderStatus.DELIVERED, user);
         order1 = orderRepository.save(order1);
         order2 = orderRepository.save(order2);
         Pageable pageable = PageRequest.of(0, 10);
+
         Page<Order> result = orderRepository.findAll(pageable);
 
         assertFalse(result.isEmpty());

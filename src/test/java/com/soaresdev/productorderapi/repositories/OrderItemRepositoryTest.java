@@ -63,6 +63,7 @@ class OrderItemRepositoryTest {
     @Test
     void shouldDeleteOrderItemByOrderIdAndProductId() {
         orderItemRepository.deleteById_OrderIdAndId_ProductId(order.getId(), product.getId());
+
         assertFalse(orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), product.getId()));
     }
 
@@ -70,6 +71,7 @@ class OrderItemRepositoryTest {
     @Test
     void shouldFindOrderItemByOrderIdAndProductId() {
         OrderItem orderItem = orderItemRepository.findById_OrderIdAndId_ProductId(order.getId(), product.getId());
+
         assertNotNull(orderItem);
         assertEquals(order, orderItem.getOrder());
         assertEquals(product, orderItem.getProduct());
@@ -79,6 +81,7 @@ class OrderItemRepositoryTest {
     @Test
     void shouldNotFindOrderItemByOrderIdAndProductId() {
         OrderItem orderItem = orderItemRepository.findById_OrderIdAndId_ProductId(UUID.randomUUID(), product.getId());
+
         assertNull(orderItem);
     }
 }
