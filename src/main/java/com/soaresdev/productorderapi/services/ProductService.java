@@ -80,7 +80,8 @@ public class ProductService {
         Category category = categoryRepository.getReferenceById(insertDTOCategoryUuid);
         Product product = getProduct(product_uuid);
 
-        ifProductNotContainsCategoryThrowsException(product, category);
+        if(!product.getCategories().contains(category))
+            throw new EntityNotFoundException("Category not found in this product");
 
         product.getCategories().remove(category);
         product = productRepository.save(product);
@@ -95,10 +96,5 @@ public class ProductService {
     private void ifCategoryNotExistsThrowsException(UUID categoryUuid) {
         if(!categoryRepository.existsById(categoryUuid))
             throw new EntityNotFoundException("Category not found");
-    }
-
-    private void ifProductNotContainsCategoryThrowsException(Product product, Category category) {
-        if(!product.getCategories().contains(category))
-            throw new EntityNotFoundException("Category not found in this product");
     }
 }

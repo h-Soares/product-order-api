@@ -291,9 +291,9 @@ class UserServiceTest {
 
         verify(userRepository, times(1)).findById(any(UUID.class));
         verify(roleRepository, times(1)).findByRoleNameCode(anyInt());
-        verifyNoMoreInteractions(roleRepository);
         verify(userRepository, times(1)).save(any(User.class));
         verifyNoMoreInteractions(userRepository);
+        verifyNoMoreInteractions(roleRepository);
     }
 
     @Test
@@ -332,9 +332,9 @@ class UserServiceTest {
 
         verify(userRepository, times(1)).findById(any(UUID.class));
         verify(roleRepository, times(1)).findByRoleNameCode(anyInt());
-        verifyNoMoreInteractions(roleRepository);
         verify(userRepository, times(1)).save(any(User.class));
         verifyNoMoreInteractions(userRepository);
+        verifyNoMoreInteractions(roleRepository);
     }
 
     @Test
