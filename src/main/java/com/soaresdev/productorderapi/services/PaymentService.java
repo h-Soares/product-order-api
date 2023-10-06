@@ -67,7 +67,7 @@ public class PaymentService {
     public void deleteByUUID(String uuid) {
         Payment payment = getPayment(uuid);
         payment.getOrder().setOrderStatus(OrderStatus.WAITING_PAYMENT);
-        paymentRepository.deleteByUUID(getPayment(uuid).getId());
+        paymentRepository.deleteByUUID(payment.getId());
     }
 
     @Transactional

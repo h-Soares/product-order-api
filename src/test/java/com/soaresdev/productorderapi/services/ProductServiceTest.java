@@ -207,6 +207,7 @@ class ProductServiceTest {
         assertEquals(product.getImgUrl(), responseProduct.getImgUrl());
         assertFalse(responseProduct.getCategories().isEmpty());
         assertEquals(1, responseProduct.getCategories().size());
+        assertEquals(category.getId(), responseProduct.getCategories().iterator().next().getId());
         assertEquals(category.getName(), responseProduct.getCategories().iterator().next().getName());
         verify(categoryRepository, times(1)).existsById(any(UUID.class));
         verify(categoryRepository, times(1)).getReferenceById(any(UUID.class));
@@ -345,5 +346,6 @@ class ProductServiceTest {
         product = new Product("Test", "Test", BigDecimal.ONE, "www.test.org");
         productCategoryInsertDTO = new ProductCategoryInsertDTO(RANDOM_UUID.toString());
         category = new Category("Test");
+        category.setId(RANDOM_UUID);
     }
 }
