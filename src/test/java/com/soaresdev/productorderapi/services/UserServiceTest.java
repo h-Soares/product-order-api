@@ -289,6 +289,7 @@ class UserServiceTest {
 
         userService.addRole(RANDOM_UUID.toString(), userRoleInsertDTO);
 
+        assertTrue(user.getRoles().contains(role));
         verify(userRepository, times(1)).findById(any(UUID.class));
         verify(roleRepository, times(1)).findByRoleNameCode(anyInt());
         verify(userRepository, times(1)).save(any(User.class));
@@ -330,6 +331,7 @@ class UserServiceTest {
 
         userService.deleteRole(RANDOM_UUID.toString(), userRoleInsertDTO);
 
+        assertFalse(user.getRoles().contains(role));
         verify(userRepository, times(1)).findById(any(UUID.class));
         verify(roleRepository, times(1)).findByRoleNameCode(anyInt());
         verify(userRepository, times(1)).save(any(User.class));
