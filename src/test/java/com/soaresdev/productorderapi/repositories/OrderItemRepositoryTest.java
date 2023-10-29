@@ -5,6 +5,7 @@ import com.soaresdev.productorderapi.entities.OrderItem;
 import com.soaresdev.productorderapi.entities.Product;
 import com.soaresdev.productorderapi.entities.User;
 import com.soaresdev.productorderapi.entities.enums.OrderStatus;
+import com.soaresdev.productorderapi.entities.pk.OrderItemPK;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,6 @@ class OrderItemRepositoryTest {
     private ProductRepository productRepository;
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private OrderItemRepository orderItemRepository;
 
@@ -64,7 +64,11 @@ class OrderItemRepositoryTest {
     void shouldDeleteOrderItemByOrderIdAndProductId() {
         orderItemRepository.deleteById_OrderIdAndId_ProductId(order.getId(), product.getId());
 
-        assertFalse(orderItemRepository.existsById_OrderIdAndId_ProductId(order.getId(), product.getId()));
+        OrderItemPK orderItemPK = new OrderItemPK();
+        orderItemPK.setOrder(order);
+        orderItemPK.setProduct(product);
+
+        assertFalse(orderItemRepository.existsById(orderItemPK));
     }
 
     @org.junit.jupiter.api.Order(3)
