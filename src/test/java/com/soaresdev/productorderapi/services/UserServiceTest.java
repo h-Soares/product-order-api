@@ -65,10 +65,10 @@ class UserServiceTest {
         when(userRepository.findByEmailWithEagerRoles(anyString()))
                 .thenReturn(Optional.ofNullable(user));
 
-        User responseUser = (User) userService.loadUserByUsername(user.getUsername());
+        User responseUser = (User) userService.loadUserByUsername("test@gmail.com");
 
         assertNotNull(responseUser);
-        assertEquals(User.class, user.getClass());
+        assertEquals(User.class, responseUser.getClass());
         assertEquals(user.getName(), responseUser.getName());
         assertEquals(user.getEmail(), responseUser.getEmail());
         assertEquals(user.getPhone(), responseUser.getPhone());
@@ -289,7 +289,10 @@ class UserServiceTest {
 
         userService.addRole(RANDOM_UUID.toString(), userRoleInsertDTO);
 
+        assertFalse(user.getRoles().isEmpty());
+        assertEquals(2, user.getRoles().size());
         assertTrue(user.getRoles().contains(role));
+        assertTrue(user.getRoles().contains(differentRole));
         verify(userRepository, times(1)).findById(any(UUID.class));
         verify(roleRepository, times(1)).findByRoleNameCode(anyInt());
         verify(userRepository, times(1)).save(any(User.class));
@@ -331,6 +334,7 @@ class UserServiceTest {
 
         userService.deleteRole(RANDOM_UUID.toString(), userRoleInsertDTO);
 
+        assertTrue(user.getRoles().isEmpty());
         assertFalse(user.getRoles().contains(role));
         verify(userRepository, times(1)).findById(any(UUID.class));
         verify(roleRepository, times(1)).findByRoleNameCode(anyInt());
