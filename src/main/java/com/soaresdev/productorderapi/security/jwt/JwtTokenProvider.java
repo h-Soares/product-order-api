@@ -99,11 +99,6 @@ public class JwtTokenProvider {
         }
     }
 
-    public boolean isValidToken(String token) {
-        DecodedJWT decodedJWT = verifyAndDecodeToken(token);
-        return decodedJWT.getExpiresAtAsInstant().isAfter(Instant.now());
-    }
-
     public String fixRequestTokenFormat(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer "))
