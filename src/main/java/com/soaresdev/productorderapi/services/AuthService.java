@@ -1,6 +1,5 @@
 package com.soaresdev.productorderapi.services;
 
-import com.auth0.jwt.exceptions.InvalidClaimException;
 import com.soaresdev.productorderapi.dtos.security.LoginDTO;
 import com.soaresdev.productorderapi.dtos.security.RefreshDTO;
 import com.soaresdev.productorderapi.dtos.security.TokenDTO;
@@ -48,8 +47,6 @@ public class AuthService {
         String email = refreshDTO.getEmail();
         String refreshToken = refreshDTO.getRefreshToken();
 
-        if(!jwtTokenProvider.isRefreshToken(refreshToken))
-            throw new InvalidClaimException("Invalid or expired token");
         if(!userRepository.existsByEmail(email))
             throw new EntityNotFoundException("User not found");
         if(!jwtTokenProvider.getEmailByToken(refreshToken).equals(email))

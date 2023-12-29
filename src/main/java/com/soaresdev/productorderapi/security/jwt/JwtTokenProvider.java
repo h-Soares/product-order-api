@@ -44,6 +44,9 @@ public class JwtTokenProvider {
     }
 
     public TokenDTO createTokenWithRefreshToken(String refreshToken) {
+            if(!isRefreshToken(refreshToken))
+                throw new InvalidClaimException("Invalid or expired token");
+
             DecodedJWT decodedJWT = verifyAndDecodeToken(refreshToken);
             String email = decodedJWT.getSubject();
             List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
