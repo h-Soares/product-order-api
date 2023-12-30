@@ -34,10 +34,10 @@ import static org.mockito.Mockito.*;
 class JwtTokenProviderTest {
 
     @InjectMocks
-    JwtTokenProvider jwtTokenProvider;
+    private JwtTokenProvider jwtTokenProvider;
 
     @Mock
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
     private static final String EMAIL = "testing@gmail.com";
     private static final List<String> ROLES = Collections.singletonList(RoleName.ROLE_USER.toString());
