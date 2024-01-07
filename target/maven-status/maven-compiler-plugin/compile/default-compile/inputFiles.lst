@@ -53,6 +53,7 @@ C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api\s
 C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api\src\main\java\com\soaresdev\productorderapi\security\jwt\JwtConfigurer.java
 C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api\src\main\java\com\soaresdev\productorderapi\repositories\CategoryRepository.java
 C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api\src\main\java\com\soaresdev\productorderapi\services\CategoryService.java
+C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api\src\main\java\com\soaresdev\productorderapi\utils\Utils.java
 C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api\src\main\java\com\soaresdev\productorderapi\dtos\OrderDTO.java
 C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api\src\main\java\com\soaresdev\productorderapi\entities\OrderItem.java
 C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api\src\main\java\com\soaresdev\productorderapi\exceptions\AlreadyPaidException.java
