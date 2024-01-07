@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Authorization")
 public class AuthController {
     @Autowired
-    AuthService authService;
+    private AuthService authService;
 
     @Operation(description = "Login in server", method = "POST")
     @ApiResponses(value = {
