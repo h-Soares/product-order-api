@@ -82,7 +82,7 @@ public class UserController {
     })
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-    @DeleteMapping("/{uuid}")
+    @DeleteMapping(value = "/{uuid}", produces = {"application/json", "application/xml"})
     public ResponseEntity<Void> deleteByUUID(@PathVariable String uuid) {
         userService.deleteByUUID(uuid);
         return ResponseEntity.noContent().build();
@@ -113,7 +113,7 @@ public class UserController {
     })
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/{uuid}/roles")
+    @PostMapping(value = "/{uuid}/roles", produces = {"application/json", "application/xml"})
     public ResponseEntity<Void> addRole(@PathVariable String uuid, @RequestBody @Valid UserRoleInsertDTO userRoleInsertDTO) {
         userService.addRole(uuid, userRoleInsertDTO);
         return ResponseEntity.noContent().build();
@@ -128,7 +128,7 @@ public class UserController {
     })
     @SecurityRequirement(name = "bearerAuth")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/{uuid}/roles")
+    @DeleteMapping(value = "/{uuid}/roles", produces = {"application/json", "application/xml"})
     public ResponseEntity<Void> deleteRole(@PathVariable String uuid, @RequestBody @Valid UserRoleInsertDTO userRoleInsertDTO) {
         userService.deleteRole(uuid, userRoleInsertDTO);
         return ResponseEntity.noContent().build();
