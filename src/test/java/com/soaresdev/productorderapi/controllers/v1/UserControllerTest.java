@@ -199,7 +199,7 @@ class UserControllerTest {
 
     @Test
     @WithAnonymousUser
-    void shouldInsertUserAsJsonAndReturn200() throws Exception {
+    void shouldInsertUserAsJsonAndReturn201() throws Exception {
         when(userService.insert(any(UserInsertDTO.class))).thenReturn(validUserDTO);
 
         mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_JSON).
@@ -222,7 +222,7 @@ class UserControllerTest {
 
     @Test
     @WithAnonymousUser
-    void shouldInsertUserAsXmlAndReturn200() throws Exception {
+    void shouldInsertUserAsXmlAndReturn201() throws Exception {
         when(userService.insert(any(UserInsertDTO.class))).thenReturn(validUserDTO);
 
         mvc.perform(post(URL_PATH).contentType(MediaType.APPLICATION_XML).
