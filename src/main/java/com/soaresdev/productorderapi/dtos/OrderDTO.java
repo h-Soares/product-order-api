@@ -90,6 +90,10 @@ public class OrderDTO implements Serializable {
         return total;
     }
 
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
     public PaymentDTO getPaymentDTO() {
         return paymentDTO;
     }
