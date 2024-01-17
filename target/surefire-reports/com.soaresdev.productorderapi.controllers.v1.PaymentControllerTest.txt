@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.soaresdev.productorderapi.controllers.v1.PaymentControllerTest
+-------------------------------------------------------------------------------
+Tests run: 25, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.487 s - in com.soaresdev.productorderapi.controllers.v1.PaymentControllerTest
