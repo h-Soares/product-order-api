@@ -77,10 +77,10 @@ class JwtTokenProviderTest {
                 tokenDTO.getExpiration()).toHours());
         assertNotNull(tokenDTO.getAccessToken());
         assertEquals(String.class, tokenDTO.getAccessToken().getClass());
-        assertFalse(tokenDTO.getAccessToken().isEmpty());
+        assertFalse(tokenDTO.getAccessToken().isBlank());
         assertNotNull(tokenDTO.getRefreshToken());
         assertEquals(String.class, tokenDTO.getRefreshToken().getClass());
-        assertFalse(tokenDTO.getRefreshToken().isEmpty());
+        assertFalse(tokenDTO.getRefreshToken().isBlank());
     }
 
     @Test
@@ -100,10 +100,10 @@ class JwtTokenProviderTest {
                 newTokenDTO.getExpiration()).toHours());
         assertNotNull(newTokenDTO.getAccessToken());
         assertEquals(String.class, newTokenDTO.getAccessToken().getClass());
-        assertFalse(newTokenDTO.getAccessToken().isEmpty());
+        assertFalse(newTokenDTO.getAccessToken().isBlank());
         assertNotNull(newTokenDTO.getRefreshToken());
         assertEquals(String.class, newTokenDTO.getRefreshToken().getClass());
-        assertFalse(newTokenDTO.getRefreshToken().isEmpty());
+        assertFalse(newTokenDTO.getRefreshToken().isBlank());
     }
 
     @Test
