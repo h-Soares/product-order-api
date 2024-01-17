@@ -67,8 +67,10 @@ class AuthServiceTest {
         assertEquals(Instant.class, response.getExpiration().getClass());
         assertNotNull(response.getAccessToken());
         assertEquals(String.class, response.getAccessToken().getClass());
+        assertFalse(response.getAccessToken().isBlank());
         assertNotNull(response.getRefreshToken());
         assertEquals(String.class, response.getRefreshToken().getClass());
+        assertFalse(response.getRefreshToken().isBlank());
         verify(authenticationManager, times(1)).
                 authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(jwtTokenProvider, times(1)).createToken(anyString(), anyList());
@@ -123,8 +125,10 @@ class AuthServiceTest {
         assertEquals(Instant.class, response.getExpiration().getClass());
         assertNotNull(response.getAccessToken());
         assertEquals(String.class, response.getAccessToken().getClass());
+        assertFalse(response.getAccessToken().isBlank());
         assertNotNull(response.getRefreshToken());
         assertEquals(String.class, response.getRefreshToken().getClass());
+        assertFalse(response.getRefreshToken().isBlank());
         verify(userRepository, times(1)).existsByEmail(anyString());
         verify(jwtTokenProvider, times(1)).getEmailByToken(anyString());
         verify(jwtTokenProvider, times(1)).
