@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.924" tests="49" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.751" tests="49" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="BR"/>
     <property name="sun.boot.library.path" value="C:\Users\hiago\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.4.8-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\hiago\AppData\Local\Temp\surefire12524978024316378953\surefirebooter-20240116214107521_3.jar C:\Users\hiago\AppData\Local\Temp\surefire12524978024316378953 2024-01-16T21-41-07_322-jvmRun1 surefire-20240116214107521_1tmp surefire_0-20240116214107521_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\hiago\AppData\Local\Temp\surefire15840938008596071253\surefirebooter-20240201222037172_3.jar C:\Users\hiago\AppData\Local\Temp\surefire15840938008596071253 2024-02-01T22-20-37_054-jvmRun1 surefire-20240201222037172_1tmp surefire_0-20240201222037172_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api\target\test-classes;C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api\target\classes;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.1.0\spring-boot-starter-data-jpa-3.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.1.0\spring-boot-starter-aop-3.1.0.jar;C:\Users\hiago\.m2\repository\org\aspectj\aspectjweaver\1.9.19\aspectjweaver-1.9.19.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.1.0\spring-boot-starter-jdbc-3.1.0.jar;C:\Users\hiago\.m2\repository\com\zaxxer\HikariCP\5.0.1\HikariCP-5.0.1.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-jdbc\6.0.9\spring-jdbc-6.0.9.jar;C:\Users\hiago\.m2\repository\org\hibernate\orm\hibernate-core\6.2.2.Final\hibernate-core-6.2.2.Final.jar;C:\Users\hiago\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\hiago\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\hiago\.m2\repository\org\jboss\logging\jboss-logging\3.5.0.Final\jboss-logging-3.5.0.Final.jar;C:\Users\hiago\.m2\repository\org\hibernate\common\hibernate-commons-annotations\6.0.6.Final\hibernate-commons-annotations-6.0.6.Final.jar;C:\Users\hiago\.m2\repository\io\smallrye\jandex\3.0.5\jandex-3.0.5.jar;C:\Users\hiago\.m2\repository\com\fasterxml\classmate\1.5.1\classmate-1.5.1.jar;C:\Users\hiago\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.2\jaxb-runtime-4.0.2.jar;C:\Users\hiago\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.2\jaxb-core-4.0.2.jar;C:\Users\hiago\.m2\repository\org\eclipse\angus\angus-activation\2.0.0\angus-activation-2.0.0.jar;C:\Users\hiago\.m2\repository\org\glassfish\jaxb\txw2\4.0.2\txw2-4.0.2.jar;C:\Users\hiago\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.1\istack-commons-runtime-4.1.1.jar;C:\Users\hiago\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\hiago\.m2\repository\org\antlr\antlr4-runtime\4.10.1\antlr4-runtime-4.10.1.jar;C:\Users\hiago\.m2\repository\org\springframework\data\spring-data-jpa\3.1.0\spring-data-jpa-3.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\data\spring-data-commons\3.1.0\spring-data-commons-3.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-orm\6.0.9\spring-orm-6.0.9.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-context\6.0.9\spring-context-6.0.9.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-tx\6.0.9\spring-tx-6.0.9.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-beans\6.0.9\spring-beans-6.0.9.jar;C:\Users\hiago\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\hiago\.m2\repository\org\slf4j\slf4j-api\2.0.7\slf4j-api-2.0.7.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-aspects\6.0.9\spring-aspects-6.0.9.jar;C:\Users\hiago\.m2\repository\com\h2database\h2\2.1.214\h2-2.1.214.jar;C:\Users\hiago\.m2\repository\org\postgresql\postgresql\42.6.0\postgresql-42.6.0.jar;C:\Users\hiago\.m2\repository\org\checkerframework\checker-qual\3.31.0\checker-qual-3.31.0.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.1.0\spring-boot-starter-web-3.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter\3.1.0\spring-boot-starter-3.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot\3.1.0\spring-boot-3.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.1.0\spring-boot-autoconfigure-3.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.1.0\spring-boot-starter-logging-3.1.0.jar;C:\Users\hiago\.m2\repository\ch\qos\logback\logback-classic\1.4.7\logback-classic-1.4.7.jar;C:\Users\hiago\.m2\repository\ch\qos\logback\logback-core\1.4.7\logback-core-1.4.7.jar;C:\Users\hiago\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.20.0\log4j-to-slf4j-2.20.0.jar;C:\Users\hiago\.m2\repository\org\apache\logging\log4j\log4j-api\2.20.0\log4j-api-2.20.0.jar;C:\Users\hiago\.m2\repository\org\slf4j\jul-to-slf4j\2.0.7\jul-to-slf4j-2.0.7.jar;C:\Users\hiago\.m2\repository\org\yaml\snakeyaml\1.33\snakeyaml-1.33.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.1.0\spring-boot-starter-json-3.1.0.jar;C:\Users\hiago\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.15.0\jackson-datatype-jdk8-2.15.0.jar;C:\Users\hiago\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.15.0\jackson-module-parameter-names-2.15.0.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.1.0\spring-boot-starter-tomcat-3.1.0.jar;C:\Users\hiago\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.8\tomcat-embed-core-10.1.8.jar;C:\Users\hiago\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.8\tomcat-embed-websocket-10.1.8.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-web\6.0.9\spring-web-6.0.9.jar;C:\Users\hiago\.m2\repository\io\micrometer\micrometer-observation\1.11.0\micrometer-observation-1.11.0.jar;C:\Users\hiago\.m2\repository\io\micrometer\micrometer-commons\1.11.0\micrometer-commons-1.11.0.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-webmvc\6.0.9\spring-webmvc-6.0.9.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-expression\6.0.9\spring-expression-6.0.9.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.1.0\spring-boot-starter-test-3.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-test\3.1.0\spring-boot-test-3.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.1.0\spring-boot-test-autoconfigure-3.1.0.jar;C:\Users\hiago\.m2\repository\com\jayway\jsonpath\json-path\2.8.0\json-path-2.8.0.jar;C:\Users\hiago\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.0\jakarta.xml.bind-api-4.0.0.jar;C:\Users\hiago\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.2\jakarta.activation-api-2.1.2.jar;C:\Users\hiago\.m2\repository\net\minidev\json-smart\2.4.10\json-smart-2.4.10.jar;C:\Users\hiago\.m2\repository\net\minidev\accessors-smart\2.4.9\accessors-smart-2.4.9.jar;C:\Users\hiago\.m2\repository\org\ow2\asm\asm\9.3\asm-9.3.jar;C:\Users\hiago\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\hiago\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\hiago\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.3\junit-jupiter-5.9.3.jar;C:\Users\hiago\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\hiago\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\hiago\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\hiago\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\hiago\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\hiago\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\hiago\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\hiago\.m2\repository\org\mockito\mockito-junit-jupiter\5.3.1\mockito-junit-jupiter-5.3.1.jar;C:\Users\hiago\.m2\repository\org\skyscreamer\jsonassert\1.5.1\jsonassert-1.5.1.jar;C:\Users\hiago\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-core\6.0.9\spring-core-6.0.9.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-jcl\6.0.9\spring-jcl-6.0.9.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-test\6.0.9\spring-test-6.0.9.jar;C:\Users\hiago\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\hiago\.m2\repository\org\springframework\security\spring-security-test\6.1.0\spring-security-test-6.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\security\spring-security-core\6.1.0\spring-security-core-6.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\security\spring-security-web\6.1.0\spring-security-web-6.1.0.jar;C:\Users\hiago\.m2\repository\org\mockito\mockito-core\5.5.0\mockito-core-5.5.0.jar;C:\Users\hiago\.m2\repository\net\bytebuddy\byte-buddy\1.14.4\byte-buddy-1.14.4.jar;C:\Users\hiago\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.4\byte-buddy-agent-1.14.4.jar;C:\Users\hiago\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter-security\3.1.0\spring-boot-starter-security-3.1.0.jar;C:\Users\hiago\.m2\repository\org\springframework\spring-aop\6.0.9\spring-aop-6.0.9.jar;C:\Users\hiago\.m2\repository\org\springframework\security\spring-security-config\6.1.0\spring-security-config-6.1.0.jar;C:\Users\hiago\.m2\repository\com\auth0\java-jwt\4.4.0\java-jwt-4.4.0.jar;C:\Users\hiago\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.0\jackson-databind-2.15.0.jar;C:\Users\hiago\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.0\jackson-datatype-jsr310-2.15.0.jar;C:\Users\hiago\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.0\jackson-annotations-2.15.0.jar;C:\Users\hiago\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.0\jackson-core-2.15.0.jar;C:\Users\hiago\.m2\repository\org\modelmapper\modelmapper\3.0.0\modelmapper-3.0.0.jar;C:\Users\hiago\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-ui\2.1.0\springdoc-openapi-starter-webmvc-ui-2.1.0.jar;C:\Users\hiago\.m2\repository\org\springdoc\springdoc-openapi-starter-webmvc-api\2.1.0\springdoc-openapi-starter-webmvc-api-2.1.0.jar;C:\Users\hiago\.m2\repository\org\springdoc\springdoc-openapi-starter-common\2.1.0\springdoc-openapi-starter-common-2.1.0.jar;C:\Users\hiago\.m2\repository\io\swagger\core\v3\swagger-core-jakarta\2.2.9\swagger-core-jakarta-2.2.9.jar;C:\Users\hiago\.m2\repository\org\apache\commons\commons-lang3\3.12.0\commons-lang3-3.12.0.jar;C:\Users\hiago\.m2\repository\io\swagger\core\v3\swagger-annotations-jakarta\2.2.9\swagger-annotations-jakarta-2.2.9.jar;C:\Users\hiago\.m2\repository\io\swagger\core\v3\swagger-models-jakarta\2.2.9\swagger-models-jakarta-2.2.9.jar;C:\Users\hiago\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.15.0\jackson-dataformat-yaml-2.15.0.jar;C:\Users\hiago\.m2\repository\org\webjars\swagger-ui\4.18.2\swagger-ui-4.18.2.jar;C:\Users\hiago\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.1.1\spring-boot-starter-validation-3.1.1.jar;C:\Users\hiago\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.8\tomcat-embed-el-10.1.8.jar;C:\Users\hiago\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.0.Final\hibernate-validator-8.0.0.Final.jar;C:\Users\hiago\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\hiago\.m2\repository\org\springframework\security\spring-security-crypto\6.1.0\spring-security-crypto-6.1.0.jar;C:\Users\hiago\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-xml\2.15.0\jackson-dataformat-xml-2.15.0.jar;C:\Users\hiago\.m2\repository\org\codehaus\woodstox\stax2-api\4.2.1\stax2-api-4.2.1.jar;C:\Users\hiago\.m2\repository\com\fasterxml\woodstox\woodstox-core\6.5.1\woodstox-core-6.5.1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="windows-1252"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\hiago\AppData\Local\Temp\surefire12524978024316378953\surefirebooter-20240116214107521_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\hiago\AppData\Local\Temp\surefire15840938008596071253\surefirebooter-20240201222037172_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.4+8"/>
@@ -51,20 +51,20 @@
     <property name="user.dir" value="C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="19304"/>
+    <property name="PID" value="11768"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="windows-1252"/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Users\hiago\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.4.8-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\MinGW\bin;C:\Program Files\swipl\bin;C:\apache-maven-3.9.0\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\hiago\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\hiago\AppData\Local\Programs\Python\Python312\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\hiago\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.4.8-hotspot\bin;C:\Users\hiago\AppData\Local\Microsoft\WindowsApps;C:\MinGW\bin;C:\Users\hiago\AppData\Local\Programs\Microsoft VS Code\bin;C:\apache-maven-3.9.0\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2022.3.2\bin;;C:\Program Files\PostgreSQL\15\bin;;."/>
+    <property name="java.library.path" value="C:\Users\hiago\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.4.8-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\MinGW\bin;C:\apache-maven-3.9.0\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\hiago\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\hiago\AppData\Local\Programs\Python\Python312\;C:\Users\hiago\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.4.8-hotspot\bin;C:\Users\hiago\AppData\Local\Microsoft\WindowsApps;C:\MinGW\bin;C:\Users\hiago\AppData\Local\Programs\Microsoft VS Code\bin;C:\apache-maven-3.9.0\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2022.3.2\bin;;C:\Program Files\PostgreSQL\15\bin;;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="java.vendor" value="Eclipse Adoptium"/>
     <property name="java.vm.version" value="17.0.4+8"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="shouldReturn402WhenIsAuthenticatedAndUpdateOrderToPaidButIsNotPaidInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.022">
-    <system-out><![CDATA[2024-01-16T21:41:15.182-03:00  INFO 19304 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.soaresdev.productorderapi.controllers.v1.OrderControllerTest]: OrderControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-01-16T21:41:15.188-03:00  INFO 19304 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.soaresdev.productorderapi.ProductOrderApiApplication for test class com.soaresdev.productorderapi.controllers.v1.OrderControllerTest
+  <testcase name="shouldReturn402WhenIsAuthenticatedAndUpdateOrderToPaidButIsNotPaidInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.017">
+    <system-out><![CDATA[2024-02-01T22:20:42.314-03:00  INFO 11768 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.soaresdev.productorderapi.controllers.v1.OrderControllerTest]: OrderControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-01T22:20:42.319-03:00  INFO 11768 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.soaresdev.productorderapi.ProductOrderApiApplication for test class com.soaresdev.productorderapi.controllers.v1.OrderControllerTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -74,13 +74,13 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.1.0)
 
-2024-01-16T21:41:15.210-03:00  INFO 19304 --- [           main] c.s.p.c.v1.OrderControllerTest           : Starting OrderControllerTest using Java 17.0.4 with PID 19304 (started by hiago in C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api)
-2024-01-16T21:41:15.211-03:00  INFO 19304 --- [           main] c.s.p.c.v1.OrderControllerTest           : The following 1 profile is active: "prod"
-2024-01-16T21:41:15.446-03:00  INFO 19304 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1e387974, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2a23c061, org.springframework.security.web.context.SecurityContextHolderFilter@798d8247, org.springframework.security.web.header.HeaderWriterFilter@1a13b5c1, org.springframework.security.web.authentication.logout.LogoutFilter@3941bdd7, com.soaresdev.productorderapi.security.jwt.JwtTokenFilter@7c6557da, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@41623694, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@46d83ec4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@642b2176, org.springframework.security.web.session.SessionManagementFilter@1b6e32ee, org.springframework.security.web.access.ExceptionTranslationFilter@20331c8e, org.springframework.security.web.access.intercept.AuthorizationFilter@6e6ec71f]
-2024-01-16T21:41:15.491-03:00  INFO 19304 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2024-01-16T21:41:15.491-03:00  INFO 19304 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2024-01-16T21:41:15.492-03:00  INFO 19304 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2024-01-16T21:41:15.496-03:00  INFO 19304 --- [           main] c.s.p.c.v1.OrderControllerTest           : Started OrderControllerTest in 0.304 seconds (process running for 7.79)
+2024-02-01T22:20:42.341-03:00  INFO 11768 --- [           main] c.s.p.c.v1.OrderControllerTest           : Starting OrderControllerTest using Java 17.0.4 with PID 11768 (started by hiago in C:\Users\hiago\OneDrive\Documentos\Programacao\Projetos JAVA\product-order-api)
+2024-02-01T22:20:42.341-03:00  INFO 11768 --- [           main] c.s.p.c.v1.OrderControllerTest           : The following 1 profile is active: "prod"
+2024-02-01T22:20:42.548-03:00  INFO 11768 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@46d83ec4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2ccb8db3, org.springframework.security.web.context.SecurityContextHolderFilter@4778c085, org.springframework.security.web.header.HeaderWriterFilter@1a899fcd, org.springframework.security.web.authentication.logout.LogoutFilter@1b6e32ee, com.soaresdev.productorderapi.security.jwt.JwtTokenFilter@3941bdd7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@76929266, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@20331c8e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@69c7eafd, org.springframework.security.web.session.SessionManagementFilter@14a5d7ee, org.springframework.security.web.access.ExceptionTranslationFilter@2e93f91d, org.springframework.security.web.access.intercept.AuthorizationFilter@41623694]
+2024-02-01T22:20:42.590-03:00  INFO 11768 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-02-01T22:20:42.590-03:00  INFO 11768 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-02-01T22:20:42.590-03:00  INFO 11768 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-02-01T22:20:42.598-03:00  INFO 11768 --- [           main] c.s.p.c.v1.OrderControllerTest           : Started OrderControllerTest in 0.276 seconds (process running for 5.31)
 
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -114,13 +114,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.514219300Z","status":402,"error":"NotPaidException","message":"Not paid yet","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
+             Body = {"timestamp":"2024-02-02T01:20:42.613679400Z","status":402,"error":"NotPaidException","message":"Not paid yet","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenIsNotAuthenticatedInFindOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
+  <testcase name="shouldReturn403WhenIsNotAuthenticatedInFindOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.004">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = GET
@@ -159,7 +159,7 @@ MockHttpServletResponse:
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenIsNotAuthenticatedInAddItemInOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
+  <testcase name="shouldReturn403WhenIsNotAuthenticatedInAddItemInOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = POST
@@ -198,7 +198,7 @@ MockHttpServletResponse:
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn400WhenSendInvalidOrderItemInDeleteItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.012">
+  <testcase name="shouldReturn400WhenSendInvalidOrderItemInDeleteItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.009">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = DELETE
@@ -232,13 +232,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.547552300Z","status":400,"errors":["product_id: Invalid product uuid"],"path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.639310100Z","status":400,"errors":["product_id: Invalid product uuid"],"path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn400WhenSendInvalidOrderInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.013">
+  <testcase name="shouldReturn400WhenSendInvalidOrderInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -272,13 +272,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.564502600Z","status":400,"errors":["client_id: Invalid client uuid","orderStatus: Order status can not be null"],"path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
+             Body = {"timestamp":"2024-02-02T01:20:42.647953900Z","status":400,"errors":["client_id: Invalid client uuid","orderStatus: Order status can not be null"],"path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldInsertOrderAsJsonAndReturn201WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.023">
+  <testcase name="shouldInsertOrderAsJsonAndReturn201WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.017">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = POST
@@ -312,13 +312,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Location:"http://localhost/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.570633600Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.570633600Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}
+             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.653035600Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.653035600Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}
     Forwarded URL = null
    Redirected URL = http://localhost/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenIsAuthenticatedAndUpdateOrderToWaitingPaymentButIsPaidInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
+  <testcase name="shouldReturn403WhenIsAuthenticatedAndUpdateOrderToWaitingPaymentButIsPaidInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -352,13 +352,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.598698500Z","status":403,"error":"AlreadyPaidException","message":"Already paid, unable to update order status to WAITING_PAYMENT","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
+             Body = {"timestamp":"2024-02-02T01:20:42.674699900Z","status":403,"error":"AlreadyPaidException","message":"Already paid, unable to update order status to WAITING_PAYMENT","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderNotFoundInUpdateItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.016">
+  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderNotFoundInUpdateItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.01">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -392,13 +392,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.616075500Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.685857800Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenIsAuthenticatedAndUpdateItemFromAPaidOrderInUpdateItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.009">
+  <testcase name="shouldReturn403WhenIsAuthenticatedAndUpdateItemFromAPaidOrderInUpdateItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.008">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -432,13 +432,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.627422400Z","status":403,"error":"AlreadyPaidException","message":"Already paid, unable to do changes in this order item","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.695406100Z","status":403,"error":"AlreadyPaidException","message":"Already paid, unable to do changes in this order item","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenIsNotAuthenticatedInFindAllOrders" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.004">
+  <testcase name="shouldReturn403WhenIsNotAuthenticatedInFindAllOrders" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.003">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = GET
@@ -477,7 +477,7 @@ MockHttpServletResponse:
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenNotAdminAndDifferentUsersInInsertOrder" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
+  <testcase name="shouldReturn403WhenNotAdminAndDifferentUsersInInsertOrder" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = POST
@@ -511,13 +511,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.644996500Z","status":403,"error":"AccessDeniedException","message":"Access denied","path":"/v1/orders"}
+             Body = {"timestamp":"2024-02-02T01:20:42.709115900Z","status":403,"error":"AccessDeniedException","message":"Access denied","path":"/v1/orders"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldUpdateItemFromOrderByUUIDAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.008">
+  <testcase name="shouldUpdateItemFromOrderByUUIDAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -551,13 +551,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.650215800Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.650215800Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}
+             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.714126400Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.714126400Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn400WhenSendInvalidOrderItemInUpdateItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
+  <testcase name="shouldReturn400WhenSendInvalidOrderItemInUpdateItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -591,13 +591,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.663085900Z","status":400,"errors":["product_id: Invalid product uuid","quantity: Quantity must be greater than zero"],"path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.725839800Z","status":400,"errors":["product_id: Invalid product uuid","quantity: Quantity must be greater than zero"],"path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldFindOrderByUUIDAsXmlAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.057">
+  <testcase name="shouldFindOrderByUUIDAsXmlAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.035">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = GET
@@ -631,13 +631,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/xml", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/xml
-             Body = <OrderDTO><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><moment>2024-01-17T00:41:15.669845000Z</moment><orderStatus>PAID</orderStatus><total>1</total><client><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><email>testing@gmail.com</email><phone>14784568714</phone></client><payment><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><order_id>31bcfb33-d97d-4aec-b16b-71fda9194b79</order_id><moment>2024-01-17T00:41:15.669845000Z</moment><paymentType>PIX</paymentType><amount>1</amount></payment><items><items><quantity>1</quantity><productPriceRecord>1</productPriceRecord><subTotal>1</subTotal><product><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><description>Testing</description><price>1</price><imgUrl>https://testing.com</imgUrl><categories><categories><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name></categories></categories></product></items></items></OrderDTO>
+             Body = <OrderDTO><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><moment>2024-02-02T01:20:42.731299100Z</moment><orderStatus>PAID</orderStatus><total>1</total><client><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><email>testing@gmail.com</email><phone>14784568714</phone></client><payment><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><order_id>31bcfb33-d97d-4aec-b16b-71fda9194b79</order_id><moment>2024-02-02T01:20:42.731299100Z</moment><paymentType>PIX</paymentType><amount>1</amount></payment><items><items><quantity>1</quantity><productPriceRecord>1</productPriceRecord><subTotal>1</subTotal><product><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><description>Testing</description><price>1</price><imgUrl>https://testing.com</imgUrl><categories><categories><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name></categories></categories></product></items></items></OrderDTO>
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldInsertOrderAsXmlAndReturn201WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.039">
+  <testcase name="shouldInsertOrderAsXmlAndReturn201WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.026">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = POST
@@ -671,13 +671,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Location:"http://localhost/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79", Content-Type:"application/xml", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/xml
-             Body = <OrderDTO><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><moment>2024-01-17T00:41:15.728976700Z</moment><orderStatus>PAID</orderStatus><total>1</total><client><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><email>testing@gmail.com</email><phone>14784568714</phone></client><payment><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><order_id>31bcfb33-d97d-4aec-b16b-71fda9194b79</order_id><moment>2024-01-17T00:41:15.728976700Z</moment><paymentType>PIX</paymentType><amount>1</amount></payment><items><items><quantity>1</quantity><productPriceRecord>1</productPriceRecord><subTotal>1</subTotal><product><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><description>Testing</description><price>1</price><imgUrl>https://testing.com</imgUrl><categories><categories><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name></categories></categories></product></items></items></OrderDTO>
+             Body = <OrderDTO><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><moment>2024-02-02T01:20:42.767667800Z</moment><orderStatus>PAID</orderStatus><total>1</total><client><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><email>testing@gmail.com</email><phone>14784568714</phone></client><payment><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><order_id>31bcfb33-d97d-4aec-b16b-71fda9194b79</order_id><moment>2024-02-02T01:20:42.767667800Z</moment><paymentType>PIX</paymentType><amount>1</amount></payment><items><items><quantity>1</quantity><productPriceRecord>1</productPriceRecord><subTotal>1</subTotal><product><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><description>Testing</description><price>1</price><imgUrl>https://testing.com</imgUrl><categories><categories><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name></categories></categories></product></items></items></OrderDTO>
     Forwarded URL = null
    Redirected URL = http://localhost/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenIsAuthenticatedAndUserNotFoundInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.008">
+  <testcase name="shouldReturn404WhenIsAuthenticatedAndUserNotFoundInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -711,7 +711,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.774671500Z","status":404,"error":"EntityNotFoundException","message":"Client not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
+             Body = {"timestamp":"2024-02-02T01:20:42.798018800Z","status":404,"error":"EntityNotFoundException","message":"Client not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -790,13 +790,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.791675200Z","status":403,"error":"AlreadyPaidException","message":"Already paid, unable to do changes in this order item","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.811041900Z","status":403,"error":"AlreadyPaidException","message":"Already paid, unable to do changes in this order item","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderNotFoundInFindOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
+  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderNotFoundInFindOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.004">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = GET
@@ -830,13 +830,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.800921000Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
+             Body = {"timestamp":"2024-02-02T01:20:42.818040100Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldDeleteItemFromOrderByUUIDAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
+  <testcase name="shouldDeleteItemFromOrderByUUIDAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = DELETE
@@ -870,13 +870,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.807268400Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.807268400Z","paymentType":"PIX","amount":1},"items":[]}
+             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.822282900Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.822282900Z","paymentType":"PIX","amount":1},"items":[]}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenIsAuthenticatedAndUserNotFoundInInsertOrder" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
+  <testcase name="shouldReturn404WhenIsAuthenticatedAndUserNotFoundInInsertOrder" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = POST
@@ -910,13 +910,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.821287800Z","status":404,"error":"EntityNotFoundException","message":"Client not found","path":"/v1/orders"}
+             Body = {"timestamp":"2024-02-02T01:20:42.833268500Z","status":404,"error":"EntityNotFoundException","message":"Client not found","path":"/v1/orders"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenIsAuthenticatedAndProductNotFoundInDeleteItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
+  <testcase name="shouldReturn404WhenIsAuthenticatedAndProductNotFoundInDeleteItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = DELETE
@@ -950,13 +950,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.828959900Z","status":404,"error":"EntityNotFoundException","message":"Product not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.840042300Z","status":404,"error":"EntityNotFoundException","message":"Product not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldUpdateOrderAsJsonByUUIDAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.008">
+  <testcase name="shouldUpdateOrderAsJsonByUUIDAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -990,7 +990,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.835278300Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.835278300Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}
+             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.844668600Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.844668600Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -1035,7 +1035,7 @@ MockHttpServletResponse:
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenIsNotAuthenticatedInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.004">
+  <testcase name="shouldReturn403WhenIsNotAuthenticatedInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.003">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -1074,7 +1074,7 @@ MockHttpServletResponse:
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderNotFoundInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
+  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderNotFoundInUpdateOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -1108,13 +1108,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.857188400Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
+             Body = {"timestamp":"2024-02-02T01:20:42.865910300Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldAddItemInOrderByUUIDAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.008">
+  <testcase name="shouldAddItemInOrderByUUIDAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = POST
@@ -1148,13 +1148,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.862462100Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.862462100Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}
+             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.869911100Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.869911100Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenNotAdminAndDifferentUsersInDeleteItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
+  <testcase name="shouldReturn403WhenNotAdminAndDifferentUsersInDeleteItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = DELETE
@@ -1188,13 +1188,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.876014700Z","status":403,"error":"AccessDeniedException","message":"Access denied","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.882888200Z","status":403,"error":"AccessDeniedException","message":"Access denied","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldDeleteOrderByUUIDAndReturn204WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
+  <testcase name="shouldDeleteOrderByUUIDAndReturn204WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = DELETE
@@ -1268,7 +1268,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.892372000Z","status":404,"error":"EntityNotFoundException","message":"Product not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.896395200Z","status":404,"error":"EntityNotFoundException","message":"Product not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -1308,13 +1308,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.900724700Z","status":404,"error":"EntityNotFoundException","message":"Product not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.903504500Z","status":404,"error":"EntityNotFoundException","message":"Product not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn400WhenSendInvalidOrderItemInAddItemInOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
+  <testcase name="shouldReturn400WhenSendInvalidOrderItemInAddItemInOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = POST
@@ -1348,13 +1348,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.909998300Z","status":400,"errors":["product_id: Invalid product uuid","quantity: Quantity must be greater than zero"],"path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.909981300Z","status":400,"errors":["product_id: Invalid product uuid","quantity: Quantity must be greater than zero"],"path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldUpdateOrderAsXmlByUUIDAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.036">
+  <testcase name="shouldUpdateOrderAsXmlByUUIDAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.025">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -1388,13 +1388,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/xml", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/xml
-             Body = <OrderDTO><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><moment>2024-01-17T00:41:15.915999600Z</moment><orderStatus>PAID</orderStatus><total>1</total><client><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><email>testing@gmail.com</email><phone>14784568714</phone></client><payment><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><order_id>31bcfb33-d97d-4aec-b16b-71fda9194b79</order_id><moment>2024-01-17T00:41:15.915999600Z</moment><paymentType>PIX</paymentType><amount>1</amount></payment><items><items><quantity>1</quantity><productPriceRecord>1</productPriceRecord><subTotal>1</subTotal><product><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><description>Testing</description><price>1</price><imgUrl>https://testing.com</imgUrl><categories><categories><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name></categories></categories></product></items></items></OrderDTO>
+             Body = <OrderDTO><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><moment>2024-02-02T01:20:42.914987500Z</moment><orderStatus>PAID</orderStatus><total>1</total><client><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><email>testing@gmail.com</email><phone>14784568714</phone></client><payment><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><order_id>31bcfb33-d97d-4aec-b16b-71fda9194b79</order_id><moment>2024-02-02T01:20:42.914987500Z</moment><paymentType>PIX</paymentType><amount>1</amount></payment><items><items><quantity>1</quantity><productPriceRecord>1</productPriceRecord><subTotal>1</subTotal><product><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><description>Testing</description><price>1</price><imgUrl>https://testing.com</imgUrl><categories><categories><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name></categories></categories></product></items></items></OrderDTO>
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldFindAllOrdersAsXmlAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.033">
+  <testcase name="shouldFindAllOrdersAsXmlAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.031">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = GET
@@ -1428,13 +1428,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/xml", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/xml
-             Body = <PageImpl><content><content><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><moment>2024-01-17T00:41:15.954375500Z</moment><orderStatus>PAID</orderStatus><total>1</total><client><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><email>testing@gmail.com</email><phone>14784568714</phone></client><payment><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><order_id>31bcfb33-d97d-4aec-b16b-71fda9194b79</order_id><moment>2024-01-17T00:41:15.954375500Z</moment><paymentType>PIX</paymentType><amount>1</amount></payment><items><items><quantity>1</quantity><productPriceRecord>1</productPriceRecord><subTotal>1</subTotal><product><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><description>Testing</description><price>1</price><imgUrl>https://testing.com</imgUrl><categories><categories><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name></categories></categories></product></items></items></content></content><pageable>INSTANCE</pageable><totalElements>1</totalElements><totalPages>1</totalPages><last>true</last><size>1</size><number>0</number><sort><empty>true</empty><sorted>false</sorted><unsorted>true</unsorted></sort><numberOfElements>1</numberOfElements><first>true</first><empty>false</empty></PageImpl>
+             Body = <PageImpl><content><content><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><moment>2024-02-02T01:20:42.941784800Z</moment><orderStatus>PAID</orderStatus><total>1</total><client><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><email>testing@gmail.com</email><phone>14784568714</phone></client><payment><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><order_id>31bcfb33-d97d-4aec-b16b-71fda9194b79</order_id><moment>2024-02-02T01:20:42.941784800Z</moment><paymentType>PIX</paymentType><amount>1</amount></payment><items><items><quantity>1</quantity><productPriceRecord>1</productPriceRecord><subTotal>1</subTotal><product><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name><description>Testing</description><price>1</price><imgUrl>https://testing.com</imgUrl><categories><categories><id>31bcfb33-d97d-4aec-b16b-71fda9194b79</id><name>Testing</name></categories></categories></product></items></items></content></content><pageable>INSTANCE</pageable><last>true</last><totalPages>1</totalPages><totalElements>1</totalElements><size>1</size><number>0</number><sort><empty>true</empty><unsorted>true</unsorted><sorted>false</sorted></sort><first>true</first><numberOfElements>1</numberOfElements><empty>false</empty></PageImpl>
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderItemNotFoundInDeleteItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
+  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderItemNotFoundInDeleteItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = DELETE
@@ -1468,13 +1468,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:15.991979300Z","status":404,"error":"EntityNotFoundException","message":"Order item not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.975393000Z","status":404,"error":"EntityNotFoundException","message":"Order item not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldFindAllOrdersAsJsonAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.009">
+  <testcase name="shouldFindAllOrdersAsJsonAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = GET
@@ -1508,7 +1508,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"content":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.997227600Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:15.997227600Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}],"pageable":"INSTANCE","totalElements":1,"totalPages":1,"last":true,"size":1,"number":0,"sort":{"empty":true,"sorted":false,"unsorted":true},"numberOfElements":1,"first":true,"empty":false}
+             Body = {"content":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.979427400Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:42.979427400Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}],"pageable":"INSTANCE","last":true,"totalPages":1,"totalElements":1,"size":1,"number":0,"sort":{"empty":true,"unsorted":true,"sorted":false},"first":true,"numberOfElements":1,"empty":false}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -1548,13 +1548,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:16.012505500Z","status":403,"error":"AccessDeniedException","message":"Access denied","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:42.991221700Z","status":403,"error":"AccessDeniedException","message":"Access denied","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenNotAdminOrManagerAndDifferentUsersInFindOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
+  <testcase name="shouldReturn403WhenNotAdminOrManagerAndDifferentUsersInFindOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = GET
@@ -1588,13 +1588,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:16.018841900Z","status":403,"error":"AccessDeniedException","message":"Access denied","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
+             Body = {"timestamp":"2024-02-02T01:20:42.996742100Z","status":403,"error":"AccessDeniedException","message":"Access denied","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderNotFoundInAddItemInOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
+  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderNotFoundInAddItemInOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.004">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = POST
@@ -1628,13 +1628,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:16.026778900Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:43.003874500Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenNotAdminAndDifferentUsersInUpdateItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.007">
+  <testcase name="shouldReturn403WhenNotAdminAndDifferentUsersInUpdateItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.004">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -1668,13 +1668,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:16.037391300Z","status":403,"error":"AccessDeniedException","message":"Access denied","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:43.010923600Z","status":403,"error":"AccessDeniedException","message":"Access denied","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenIsNotAuthenticatedInDeleteOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.004">
+  <testcase name="shouldReturn403WhenIsNotAuthenticatedInDeleteOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.002">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = DELETE
@@ -1747,7 +1747,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:16.052365800Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
+             Body = {"timestamp":"2024-02-02T01:20:43.021650800Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -1787,13 +1787,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:16.059913200Z","status":402,"error":"NotPaidException","message":"Not paid yet","path":"/v1/orders"}
+             Body = {"timestamp":"2024-02-02T01:20:43.028388800Z","status":402,"error":"NotPaidException","message":"Not paid yet","path":"/v1/orders"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn403WhenIsNotAuthenticatedInInsertOrder" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.004">
+  <testcase name="shouldReturn403WhenIsNotAuthenticatedInInsertOrder" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.002">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = POST
@@ -1832,7 +1832,7 @@ MockHttpServletResponse:
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderItemNotFoundInUpdateItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
+  <testcase name="shouldReturn404WhenIsAuthenticatedAndOrderItemNotFoundInUpdateItemFromOrderByUUID" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = PUT
@@ -1866,13 +1866,13 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:16.073407600Z","status":404,"error":"EntityNotFoundException","message":"Order item not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:43.038632300Z","status":404,"error":"EntityNotFoundException","message":"Order item not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 ]]></system-out>
   </testcase>
-  <testcase name="shouldFindOrderByUUIDAsJsonAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.006">
+  <testcase name="shouldFindOrderByUUIDAsJsonAndReturn200WhenIsAuthenticated" classname="com.soaresdev.productorderapi.controllers.v1.OrderControllerTest" time="0.005">
     <system-out><![CDATA[
 MockHttpServletRequest:
       HTTP Method = GET
@@ -1906,7 +1906,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:16.077966100Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-01-17T00:41:16.077966100Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}
+             Body = {"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:43.041982300Z","orderStatus":"PAID","total":1,"client":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","email":"testing@gmail.com","phone":"14784568714"},"payment":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","order_id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","moment":"2024-02-02T01:20:43.041982300Z","paymentType":"PIX","amount":1},"items":[{"quantity":1,"productPriceRecord":1,"subTotal":1,"product":{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing","description":"Testing","price":1,"imgUrl":"https://testing.com","categories":[{"id":"31bcfb33-d97d-4aec-b16b-71fda9194b79","name":"Testing"}]}}]}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -1946,7 +1946,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:16.089153100Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:43.050575200Z","status":404,"error":"EntityNotFoundException","message":"Order not found","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -1986,7 +1986,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:16.095878300Z","status":400,"errors":["client_id: Invalid client uuid","orderStatus: Order status can not be null"],"path":"/v1/orders"}
+             Body = {"timestamp":"2024-02-02T01:20:43.056903000Z","status":400,"errors":["client_id: Invalid client uuid","orderStatus: Order status can not be null"],"path":"/v1/orders"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -2026,7 +2026,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2024-01-17T00:41:16.102850900Z","status":403,"error":"AlreadyPaidException","message":"Already paid, unable to do changes in this order item","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
+             Body = {"timestamp":"2024-02-02T01:20:43.062579800Z","status":403,"error":"AlreadyPaidException","message":"Already paid, unable to do changes in this order item","path":"/v1/orders/31bcfb33-d97d-4aec-b16b-71fda9194b79/items"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
