@@ -40,4 +40,16 @@ class RoleRepositoryTest {
 
         assertNull(roleFound);
     }
+
+    @Order(3)
+    @Test
+    void shouldExistsByRoleNameCode() {
+        assertTrue(roleRepository.existsByRoleNameCode(RoleName.ROLE_ADMIN.getCode()));
+    }
+
+    @Order(4)
+    @Test
+    void shouldNotExistsByRoleNameCode() {
+        assertFalse(roleRepository.existsByRoleNameCode(RoleName.ROLE_USER.getCode()));
+    }
 }
