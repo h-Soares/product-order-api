@@ -36,6 +36,7 @@ O **desenvolvimento inicial** da API se deu tomando como base o o workshop do cu
 * Testes com JUnit 5 e Mockito
 * PostgreSQL
 * Swagger
+* Docker
 
 ## 🔧 Instalação
 
@@ -65,5 +66,32 @@ mvn spring-boot:run -Dspring-boot.run.profiles=dev -Dspring-boot.run.jvmArgument
 ```
 A porta utilizada é a padrão: 8080.
 
-## Documentação e uso
+## 🐳 Docker
+Para utilizar a aplicação via Docker, siga os passos:
+1. Clone o repositório
+````bash
+git clone https://github.com/h-Soares/product-order-api.git
+````
+
+2. Navegue até `docker/variables.env` e configure as propriedades necessárias para o funcionamento da API.
+
+3. Inicializar os contêineres:
+
+(a aplicação roda na porta 8080 e o banco de dados na porta 5432)
+````bash
+docker-compose -f docker/docker-compose.yml up
+````
+
+## 🧪 Testes
+Para executar todos os testes:
+```bash
+mvn test
+```
+
+## 📖 Documentação com Swagger (OpenAPI)
+Com o projeto instalado, para acessar a documentação, vá até:
+
+`http://localhost:8080/swagger-ui/index.html`
+
+## 🚀 Deploy
 * https://product-order-api.onrender.com/swagger-ui/index.html
