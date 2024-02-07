@@ -80,7 +80,7 @@ cd product-order-api
 
 2. Navegue até `docker/variables.env` e configure as propriedades necessárias para o funcionamento da API.
 
-3. Inicializar os contêineres:
+3. No diretório do projeto (product-order-api), inicializar os contêineres:
 
 (a aplicação roda na porta 8080 e o banco de dados na porta 5432)
 ````bash
