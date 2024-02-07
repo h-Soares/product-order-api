@@ -58,7 +58,7 @@ O comando irá baixar todas as dependências do projeto e criar um diretório ta
 
 5. Execute a aplicação:
 ```bash
-mvn spring-boot:run -Dspring-boot.run.profiles=dev -Dspring-boot.run.jvmArguments="-DPOSTGRES_DB=SEU_BANCO -DPOSTGRES_USER=SEU_USER -DPOSTGRES_PASSWORD=SUA_SENHA -DSECRET_KEY=SUA_CHAVE"
+mvn spring-boot:run -Dspring-boot.run.profiles=dev -Dspring-boot.run.jvmArguments="-DPOSTGRES_DB=NOME_BANCO -DPOSTGRES_USER=SEU_USER -DPOSTGRES_PASSWORD=SUA_SENHA -DSECRET_KEY=SUA_CHAVE"
 ```
 A porta utilizada é a padrão: 8080.
 
