@@ -1,5 +1,8 @@
 # API Restful de pedidos e produtos
 
+[![Continuous Integration with GitHub Action](https://github.com/h-Soares/product-order-api/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/h-Soares/product-order-api/actions/workflows/continuous-integration.yml)
+[![Docker Hub Repo](https://img.shields.io/docker/pulls/hsoaress/product-order-api-img.svg)](https://hub.docker.com/repository/docker/hsoaress/product-order-api-img)
+
 ## 📌 Versão
 1.0.0
 
