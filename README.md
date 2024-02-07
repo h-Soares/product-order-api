@@ -73,6 +73,11 @@ Para utilizar a aplicação via Docker, siga os passos:
 git clone https://github.com/h-Soares/product-order-api.git
 ````
 
+2. Navegue até o diretório do projeto
+```bash
+cd product-order-api
+```
+
 2. Navegue até `docker/variables.env` e configure as propriedades necessárias para o funcionamento da API.
 
 3. Inicializar os contêineres:
