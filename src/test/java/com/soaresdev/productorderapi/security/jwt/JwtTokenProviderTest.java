@@ -6,10 +6,7 @@ import com.soaresdev.productorderapi.dtos.security.TokenDTO;
 import com.soaresdev.productorderapi.entities.User;
 import com.soaresdev.productorderapi.entities.enums.RoleName;
 import jakarta.servlet.http.HttpServletRequest;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -21,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Collections;
@@ -31,27 +29,35 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class JwtTokenProviderTest {
-
     @InjectMocks
     private JwtTokenProvider jwtTokenProvider;
 
     @Mock
     private UserDetailsService userDetailsService;
 
+    @Mock
+    private Clock clock;
+
     private static final String EMAIL = "testing@gmail.com";
     private static final List<String> ROLES = Collections.singletonList(RoleName.ROLE_USER.toString());
     private static final Long ACCESS_TOKEN_DURATION_IN_HOURS = 1L;
-    private static final String ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwicHVycG9zZSI6ImFjY2VzcyIsImlhdCI6MTcwMzgxNDUxNywiZXhwIjozMTU1Njg4OTg0NzEyMzE5OSwic3ViIjoidGVzdGluZ0BnbWFpbC5jb20iLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0L3Rlc3RpbmctY29udGV4dCJ9.hNCJaQjONSxfp9RYYogebqXpV2EpsQbeRIAt3kWbiT0";
-    private static final String REFRESH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwicHVycG9zZSI6InJlZnJlc2giLCJpYXQiOjE3MDM4MTQ1MTcsImV4cCI6MzE1NTY4ODk4NTU3NjMxOTksInN1YiI6InRlc3RpbmdAZ21haWwuY29tIn0.U492kjuZgtJeBtbyUbQox2V9D_JqKDT9XSXO4vNq8Bk";
     private static final String INVALID_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwicHVycG9zZSI6ImFjY2VzcyIsImlhdCI6MTcwMzgxNDUxNywiZXhwIjozMTU1Njg4OTg0NzEyMzIwMCwic3ViIjoidGVzdGluZ0BnbWFpbC5jb20iLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0L3Rlc3RpbmctY29udGV4dCJ9.jdHhbRRiNVKEJ0sx8Uy62Ju16kKpD62EF2cXbL5mlmo";
-    private static final String EXPIRED_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwicHVycG9zZSI6ImFjY2VzcyIsImlhdCI6MTcwMzg4Mjg2MSwiZXhwIjoxNzAzODgyODYyLCJzdWIiOiJ0ZXN0aW5nQGdtYWlsLmNvbSIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QvdGVzdGluZy1jb250ZXh0In0.nCcxcqTwhRRfByzRmSyEzBgx2JAWfShAHTgBxt-HpKQ";
-    private static final String EXPIRED_REFRESH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwicHVycG9zZSI6InJlZnJlc2giLCJpYXQiOjE3MDM4ODI4NjEsImV4cCI6MTcwMzg4Mjg2Mywic3ViIjoidGVzdGluZ0BnbWFpbC5jb20ifQ.tYlZIabswE16cpQA9t5T5SqPw9QocDtsoprri7n-3X8";
+    private static String ACCESS_TOKEN;
+    private static String REFRESH_TOKEN;
+    private static String EXPIRED_ACCESS_TOKEN;
+    private static String EXPIRED_REFRESH_TOKEN;
 
     @BeforeAll
     void setup() {
         MockitoAnnotations.openMocks(this);
+        jwtTokenProvider.setSecretKey("secret-key");
         jwtTokenProvider.init();
+        ACCESS_TOKEN = createAccessToken();
+        REFRESH_TOKEN = createRefreshToken();
+        EXPIRED_ACCESS_TOKEN = createExpiredAccessToken();
+        EXPIRED_REFRESH_TOKEN = createExpiredRefreshToken();
     }
 
     @BeforeEach
@@ -61,9 +67,11 @@ class JwtTokenProviderTest {
     }
 
     @Test
+    @Order(1)
     void shouldCreateToken() {
         mockServletRequestAttributes();
 
+        when(clock.instant()).thenReturn(Instant.now());
         TokenDTO tokenDTO = jwtTokenProvider.createToken(EMAIL, ROLES);
 
         assertNotNull(tokenDTO);
@@ -84,6 +92,7 @@ class JwtTokenProviderTest {
     }
 
     @Test
+    @Order(2)
     void shouldCreateTokenWithRefreshToken() {
         mockServletRequestAttributes();
 
@@ -268,5 +277,29 @@ class JwtTokenProviderTest {
         mockRequest.setContextPath("/testing-context");
         ServletRequestAttributes attrs = new ServletRequestAttributes(mockRequest);
         RequestContextHolder.setRequestAttributes(attrs);
+    }
+
+    private String createAccessToken() {
+        mockServletRequestAttributes();
+        when(clock.instant()).thenReturn(Instant.now());
+        return jwtTokenProvider.createToken(EMAIL, ROLES).getAccessToken();
+    }
+
+    private String createRefreshToken() {
+        mockServletRequestAttributes();
+        when(clock.instant()).thenReturn(Instant.now());
+        return jwtTokenProvider.createToken(EMAIL, ROLES).getRefreshToken();
+    }
+
+    private String createExpiredAccessToken() {
+        mockServletRequestAttributes();
+        when(clock.instant()).thenReturn(Instant.MIN);
+        return jwtTokenProvider.createToken(EMAIL, ROLES).getAccessToken();
+    }
+
+    private String createExpiredRefreshToken() {
+        mockServletRequestAttributes();
+        when(clock.instant()).thenReturn(Instant.MIN);
+        return jwtTokenProvider.createToken(EMAIL, ROLES).getRefreshToken();
     }
 }

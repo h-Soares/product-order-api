@@ -4,8 +4,6 @@ import com.soaresdev.productorderapi.dtos.insertDTOs.UserInsertDTO;
 import com.soaresdev.productorderapi.dtos.security.LoginDTO;
 import com.soaresdev.productorderapi.dtos.security.RefreshDTO;
 import com.soaresdev.productorderapi.dtos.security.TokenDTO;
-import com.soaresdev.productorderapi.entities.Role;
-import com.soaresdev.productorderapi.entities.enums.RoleName;
 import com.soaresdev.productorderapi.repositories.RoleRepository;
 import com.soaresdev.productorderapi.services.UserService;
 import org.junit.jupiter.api.*;
@@ -14,14 +12,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = com.soaresdev.productorderapi.ProductOrderApiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ActiveProfiles("test")
+@TestPropertySource("/test.properties")
 class AuthIT {
 
     @Autowired
@@ -37,7 +37,6 @@ class AuthIT {
 
     @BeforeAll
     void setup() {
-        roleRepository.save(new Role(RoleName.ROLE_USER.getCode()));
         userService.insert(new UserInsertDTO("Testing", "testing@email.com", "15457812345", "mypass123"));
     }
 

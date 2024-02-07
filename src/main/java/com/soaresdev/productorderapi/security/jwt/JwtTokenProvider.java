@@ -8,13 +8,14 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.soaresdev.productorderapi.dtos.security.TokenDTO;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Base64;
@@ -22,12 +23,16 @@ import java.util.List;
 
 @Service
 public class JwtTokenProvider {
-    private static String SECRET_KEY = System.getenv("SECRET_KEY");
+    private static String SECRET_KEY;
 
-    @Autowired
-    UserDetailsService userDetailsService;
-
+    private final UserDetailsService userDetailsService;
+    private final Clock clock;
     private Algorithm algorithm;
+
+    public JwtTokenProvider(UserDetailsService userDetailsService, Clock clock) {
+        this.userDetailsService = userDetailsService;
+        this.clock = clock;
+    }
 
     @PostConstruct
     protected void init() {
@@ -36,7 +41,7 @@ public class JwtTokenProvider {
     }
 
     public TokenDTO createToken(String email, List<String> roles) {
-        Instant creation = Instant.now();
+        Instant creation = Instant.now(clock);
         Instant expiration = creation.plus(Duration.ofHours(1));
         String accessToken = getAccessToken(email, roles, creation, expiration);
         String refreshToken = getRefreshToken(email, roles, creation);
@@ -124,5 +129,10 @@ public class JwtTokenProvider {
     public String getEmailByToken(String token) {
         DecodedJWT decodedJWT = verifyAndDecodeToken(token);
         return decodedJWT.getSubject();
+    }
+
+    @Value("${security.jwt.token.secret-key}")
+    public void setSecretKey(String secretKey) {
+        SECRET_KEY = secretKey;
     }
 }
