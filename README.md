@@ -22,8 +22,6 @@ O sistema permite realizar ações sobre usuários e pedidos, adicionar categori
 Utiliza validação de objetos e dos casos de uso, paginação, criptografia de senhas, otimização de consultas SQL para evitar o problema N + 1, versionamento da API, Content Negotiation para os formatos JSON e XML, autenticação com token JWT, verificação de roles e testes.
 
 
-O **desenvolvimento inicial** da API se deu tomando como base o o workshop do curso de Java - Programação Orientada a Objetos (UDEMY) do professor Nélio Alves.
-
 ## 🛠️ Tecnologias utilizadas
 * Maven
 * ModelMapper
