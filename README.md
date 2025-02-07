@@ -86,7 +86,7 @@ mvn test
 ## 📖 Documentação com Swagger (OpenAPI)
 Com o projeto instalado, para acessar a documentação, vá até:
 
-`http://localhost:8080/swagger-ui/index.html`
+`http://localhost:SUA_PORTA/swagger-ui/index.html`
 
-## 🚀 Deploy
+## 🚀 Deploy (FORA DO AR)
 * https://product-order-api.onrender.com/swagger-ui/index.html
