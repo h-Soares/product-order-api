@@ -66,23 +66,15 @@ A porta utilizada é a padrão: 8080.
 
 ## 🐳 Docker
 Para utilizar a aplicação via Docker, siga os passos:
-1. Clone o repositório
+1. Baixar a imagem
 ````bash
-git clone https://github.com/h-Soares/product-order-api.git
+docker pull hsoaress/product-order-api-img:latest
 ````
 
-2. Navegue até o diretório do projeto
-```bash
-cd product-order-api
-```
-
-2. Navegue até `docker/variables.env` e configure as propriedades necessárias para o funcionamento da API.
-
-3. No diretório do projeto (product-order-api), inicializar os contêineres:
-
-(a aplicação roda na porta 8080 e o banco de dados na porta 5432)
+2. Inicializar o contêiner, substituindo os campos
+(a aplicação roda na porta 8080)
 ````bash
-docker-compose -f docker/docker-compose.yml up
+docker run -p SUA_PORTA:8080 -e SECRET_KEY=SUA_CHAVE hsoaress/product-order-api-img:latest
 ````
 
 ## 🧪 Testes
