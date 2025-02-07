@@ -19,7 +19,7 @@ Esta é uma API Restful de pedidos e produtos que disponibiliza endpoints para r
 
 O sistema permite realizar ações sobre usuários e pedidos, adicionar categorias a produtos, adicionar items de produtos a um pedido, realizar pagamentos de pedidos, entre outros...
 
-Utiliza validação de objetos e dos casos de uso, paginação, criptografia de senhas, otimização de consultas SQL para evitar o problema N + 1, versionamento da API, Content Negotiation para os formatos JSON e XML, autenticação com token JWT, verificação de roles e testes.
+Utiliza validação de objetos e dos casos de uso, paginação, tratamento centralizado de erros, criptografia de senhas, otimização de consultas SQL para evitar o problema N + 1, versionamento da API, Content Negotiation para os formatos JSON e XML, autenticação com token JWT, verificação de roles e testes.
 
 
 ## 🛠️ Tecnologias utilizadas
