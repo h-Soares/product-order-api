@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ActiveProfiles("test")
-@TestPropertySource("/test.properties")
+@TestPropertySource("/application.properties")
 class AuthIT {
 
     @Autowired
