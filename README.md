@@ -19,7 +19,7 @@ Esta é uma API Restful de pedidos e produtos que disponibiliza endpoints para r
 
 O sistema permite realizar ações sobre usuários e pedidos, adicionar categorias a produtos, adicionar items de produtos a um pedido, realizar pagamentos de pedidos, entre outros...
 
-Utiliza validação de objetos e dos casos de uso, paginação, criptografia de senhas, otimização de consultas SQL para evitar o problema N + 1, versionamento da API, Content Negotiation para os formatos JSON e XML, autenticação com token JWT, verificação de roles e testes.
+Utiliza validação de objetos e dos casos de uso, paginação, tratamento centralizado de erros, criptografia de senhas, otimização de consultas SQL para evitar o problema N + 1, versionamento da API, Content Negotiation para os formatos JSON e XML, autenticação com token JWT, verificação de roles e testes.
 
 
 ## 🛠️ Tecnologias utilizadas
@@ -86,7 +86,7 @@ mvn test
 ## 📖 Documentação com Swagger (OpenAPI)
 Com o projeto instalado, para acessar a documentação, vá até:
 
-`http://localhost:8080/swagger-ui/index.html`
+`http://localhost:SUA_PORTA/swagger-ui/index.html`
 
-## 🚀 Deploy
+## 🚀 Deploy (FORA DO AR)
 * https://product-order-api.onrender.com/swagger-ui/index.html
